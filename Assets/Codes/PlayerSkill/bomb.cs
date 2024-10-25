@@ -30,7 +30,6 @@ public class Bomb : Player
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        Debug.Log(moveHorizontal);
 
         if (previewSkill1 && spawnedPrefab != null)
         {
@@ -58,7 +57,6 @@ public class Bomb : Player
         Collider previewCollider = Skill1Preview.GetComponent<Collider>();
         if (previewCollider != null)
         {
-            Debug.Log("aa");
             previewCollider.enabled = true; // ƒRƒŠƒWƒ‡ƒ“‚ðƒIƒ“‚É
         }
         StartCoroutine(DestroyPrefabAfterDelay(0.1f));

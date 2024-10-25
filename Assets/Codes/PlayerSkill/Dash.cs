@@ -79,7 +79,7 @@ public class Dash : Player
             C_extendCollider.SetActive(true);
         }
 
-        float radians = angle * Mathf.Deg2Rad;
+        float radians = L_angle * Mathf.Deg2Rad;
         // 力のベクトルを計算
         Vector3 force = new Vector3(Mathf.Cos(radians), 0, Mathf.Sin(radians)) * forceAmount;
 

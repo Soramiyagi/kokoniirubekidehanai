@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 500294801}
   - component: {fileID: 500294802}
   - component: {fileID: 500294803}
+  - component: {fileID: 500294804}
   m_Layer: 0
   m_Name: PlayerInputManager
   m_TagString: Untagged
@@ -264,7 +265,7 @@ MonoBehaviour:
   m_NotificationBehavior: 2
   m_MaxPlayerCount: 4
   m_AllowJoining: 1
-  m_JoinBehavior: 0
+  m_JoinBehavior: 2
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -322,6 +323,37 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &500294804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500294800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c10f9b09c98ee5b4e9e291f61d4ac8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerJoinInputAction:
+    m_Name: Player Join Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 34164931-d62d-4abb-b3d3-c66f1f049a20
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 6b1bbe11-4a63-4d0e-ae33-14da77542bec
+      m_Path: <Gamepad>/start
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Join Input
+      m_Flags: 0
+    m_Flags: 0
+  playerPrefab: {fileID: 8517858293528205469, guid: bfd07cdcd9451ad468e7b4c64ad7d6df, type: 3}
+  maxPlayerCount: 4
 --- !u!1 &1865550797
 GameObject:
   m_ObjectHideFlags: 0

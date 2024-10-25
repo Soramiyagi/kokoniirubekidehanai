@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Load_BattleScene : MonoBehaviour
 {
@@ -12,21 +13,31 @@ public class Load_BattleScene : MonoBehaviour
     {
         for (int i = 0; i < maxNum; i++)
         {
-            if (CharacterSelect_Save.P1_C == i)
+            if (CharacterSelect_Save.characterIndex[0] == i)
             {
-                Instantiate(obj[i], new Vector3(1, 2, 19), Quaternion.identity);
+                Debug.Log(CharacterSelect_Save.joinedDevices[0]);
+                PlayerInput.Instantiate(prefab: obj[i], pairWithDevice: CharacterSelect_Save.joinedDevices[0]).transform.position = new Vector3(1, 2, 19); ;
+
+                //Instantiate(obj[i], new Vector3(1, 2, 19), Quaternion.identity);
             }
-            if (CharacterSelect_Save.P2_C == i)
+            if (CharacterSelect_Save.characterIndex[1] == i)
             {
-                Instantiate(obj[i], new Vector3(19, 2, 19), Quaternion.identity);
+                Debug.Log(CharacterSelect_Save.joinedDevices[1]);
+                PlayerInput.Instantiate(prefab: obj[i], pairWithDevice: CharacterSelect_Save.joinedDevices[1]).transform.position = new Vector3(19, 2, 19); ;
+
+                //Instantiate(obj[i], new Vector3(19, 2, 19), Quaternion.identity);
             }
-            if (CharacterSelect_Save.P3_C == i)
+            if (CharacterSelect_Save.characterIndex[2] == i)
             {
-                Instantiate(obj[i], new Vector3(1, 2, 1), Quaternion.identity);
+                PlayerInput.Instantiate(prefab: obj[i], pairWithDevice: CharacterSelect_Save.joinedDevices[2]).transform.position = new Vector3(1, 2, 1); ;
+
+                //Instantiate(obj[i], new Vector3(1, 2, 1), Quaternion.identity);
             }
-            if (CharacterSelect_Save.P4_C == i)
+            if (CharacterSelect_Save.characterIndex[3] == i)
             {
-                Instantiate(obj[i], new Vector3(19, 2, 1), Quaternion.identity);
+                PlayerInput.Instantiate(prefab: obj[i], pairWithDevice: CharacterSelect_Save.joinedDevices[3]).transform.position = new Vector3(19, 2, 1); ;
+
+                //Instantiate(obj[i], new Vector3(19, 2, 1), Quaternion.identity);
             }
         }
     }

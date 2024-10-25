@@ -6,7 +6,7 @@
             "id": "2db09f5d-ca0d-40b1-a4e8-bc006dc8e075",
             "actions": [
                 {
-                    "name": "Move",
+                    "name": "L_Stick",
                     "type": "Value",
                     "id": "d9937188-8b2c-48d7-9e3e-e9ce29eaefa9",
                     "expectedControlType": "Vector2",
@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "RightStick",
+                    "name": "R_Stick",
                     "type": "Value",
                     "id": "4d3dae5d-d334-4f92-94e2-c43074db4bb0",
                     "expectedControlType": "Vector2",
@@ -76,17 +76,6 @@
                 },
                 {
                     "name": "",
-                    "id": "7f5241a0-f03d-43fc-b34e-f5c0166e89b6",
-                    "path": "<Keyboard>/z",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Skill1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "09edaa13-666b-4fee-a2b7-1c653ba23fba",
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
@@ -109,28 +98,6 @@
                 },
                 {
                     "name": "",
-                    "id": "ef663416-2f3f-4b81-ab02-41a51e520401",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Skill2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bd84225b-604b-4241-9d86-e66b58dad1da",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "cb72843f-f06a-427d-a4f6-f3d0d086580e",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -142,78 +109,12 @@
                 },
                 {
                     "name": "",
-                    "id": "337fff7d-a4bf-446c-9bc1-69169f400906",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "2D Vector",
-                    "id": "46ef68c0-5024-4446-b18f-e216b039a82b",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "3cd12eeb-0784-439c-b522-17c88d402cb4",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "e3ca5176-493a-4172-9187-ca56aca6c490",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "a5d6a887-bb6b-46ca-b4fa-cec35999d98b",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "71a412ff-3df5-429a-88ef-dffde64fd67c",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
                     "id": "ec86502e-b929-46a7-87d8-67741a42ea06",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "L_Stick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -224,7 +125,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightStick",
+                    "action": "R_Stick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -313,6 +214,134 @@
                     "processors": "",
                     "groups": "",
                     "action": "MenuSelect_DPad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Test",
+            "id": "1a039486-4111-4f2e-914e-dea51f590d75",
+            "actions": [
+                {
+                    "name": "L_Stick",
+                    "type": "Value",
+                    "id": "c4746e57-9ea8-43f3-91f1-e3b9c966587b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "R_Stick",
+                    "type": "Value",
+                    "id": "cc10bee9-ecf4-4fa1-a7bd-e92b1fdd71b4",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Attack_Skill",
+                    "type": "Button",
+                    "id": "f222cf81-469c-4313-97b3-78afa867f954",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Defense_Skill",
+                    "type": "Button",
+                    "id": "c13dfe3c-499c-44b0-9357-205a66fdb24b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SP_Skill1",
+                    "type": "Button",
+                    "id": "cd609857-50c9-4af1-bb41-04b1c93c16bb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SP_Skill2",
+                    "type": "Button",
+                    "id": "57b4c89f-4811-4f67-b9ae-aafee211d220",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b0d8b840-d540-4163-8a44-05fe2161ad74",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "L_Stick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b2e762a-b48c-4dc4-87e6-e74064653600",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "R_Stick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e9dcd2e-f062-458e-b8ef-aec6f0d4878c",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack_Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "46bfc07c-1a91-48a6-bf50-b19c47d731a2",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Defense_Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3825bc58-2742-4358-bcb2-464896bc918b",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SP_Skill1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be93fb8e-ea2e-4571-8b85-232310b4080b",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SP_Skill2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

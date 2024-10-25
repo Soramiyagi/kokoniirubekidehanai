@@ -14,10 +14,6 @@ public class Summon: Player
     protected override float Skill1CooldownTime { get; set; } = 4.0f; // スキル1のクールダウン
     protected override float Skill2CooldownTime { get; set; } = 9.0f; // スキル2のクールダウン
 
-    // プレハブを生成するための変数
-    public GameObject prefab; // プレハブの参照をインスペクタで設定
-    private GameObject spawnedPrefab; // 生成されたプレハブの参照
-
     //ET = EffectTime(効果時間)
     private float skill2_ET = 0;
     public float skill2_ET_Set = 0;
@@ -92,15 +88,5 @@ public class Summon: Player
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
         */
-    }
-
-    // 1秒後にプレハブを削除するためのコルーチン
-    private IEnumerator DestroyPrefabAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay); // 指定した秒数待機
-        if (spawnedPrefab != null)
-        {
-            Destroy(spawnedPrefab); // プレハブを削除
-        }
     }
 }

@@ -6,18 +6,13 @@ public class Gun : Player
 {
     public string characterName = "DefaultCharacter";
 
-    [SerializeField] private GameObject Bind, Grenade, Shaft;
+    [SerializeField] private GameObject Bind, Grenade;
 
     // スピードとジャンプ力、スキルのクールダウン時間を派生クラスで設定
     protected override float Speed { get; set; } = 2.0f; // スピード値
     protected override float JumpForce { get; set; } = 5.0f; // ジャンプ力
     protected override float Skill1CooldownTime { get; set; } = 4.0f; // スキル1のクールダウン
     protected override float Skill2CooldownTime { get; set; } = 9.0f; // スキル2のクールダウン
-
-    // プレハブを生成するための変数
-    public GameObject prefab; // プレハブの参照をインスペクタで設定
-    private GameObject spawnedPrefab; // 生成されたプレハブの参照
-
 
     // Start is called before the first frame update
     protected override void Start()
@@ -28,8 +23,6 @@ public class Gun : Player
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
-        Shaft.transform.rotation = Quaternion.Euler(0, -R_angle - 90, 0);
     }
 
     // スキル1が押された時の処理をオーバーライド
@@ -38,8 +31,10 @@ public class Gun : Player
         /*
         発動タイミングが押したときなら使おう
         */
+        Instantiate(Bind, this.transform.position, Quaternion.identity);
 
-        Shaft.SetActive(true);
+        canUseSkill1 = false;
+        StartCoroutine(Skill1Cooldown());
     }
 
     // スキル1を離したときの処理をオーバーライド
@@ -50,13 +45,6 @@ public class Gun : Player
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
         */
-
-        Shaft.SetActive(false);
-
-        Instantiate(Bind, this.transform.position, Quaternion.identity);
-
-        canUseSkill1 = false;
-        StartCoroutine(Skill1Cooldown());
     }
 
     // スキル2が押された時の処理をオーバーライド
@@ -65,8 +53,10 @@ public class Gun : Player
         /*
         発動タイミングが押したときなら使おう
         */
+        Instantiate(Grenade, this.transform.position, Quaternion.identity);
 
-        Shaft.SetActive(true);
+        canUseSkill2 = false;
+        StartCoroutine(Skill2Cooldown());
     }
 
     // スキル2を離したときの処理をオーバーライド
@@ -77,23 +67,5 @@ public class Gun : Player
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
         */
-
-        Shaft.SetActive(false);
-
-        Instantiate(Grenade, this.transform.position, Quaternion.identity);
-
-        canUseSkill2 = false;
-        StartCoroutine(Skill2Cooldown());
-    }
-
-    // 1秒後にプレハブを削除するためのコルーチン
-    private IEnumerator DestroyPrefabAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay); // 指定した秒数待機
-        if (spawnedPrefab != null)
-        {
-            Destroy(spawnedPrefab); // プレハブを削除
-
-        }
     }
 }

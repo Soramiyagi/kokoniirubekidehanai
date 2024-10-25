@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    bool fall;       //ブロックが落ちるフラグ
-    float fallSpeed;    //ブロックの落ちる速さ
+    private bool fall;       //ブロックが落ちるフラグ
+    private float fallSpeed;    //ブロックの落ちる速さ
 
     bool countDown;     //ブロックが落ちるまでのカウントを開始するフラグ
     float time;         //ブロックが落ちるまでの時間
@@ -85,7 +85,7 @@ public class Block : MonoBehaviour
                 renderer.material = caution;
             }
         }
-        if (collision.gameObject.CompareTag("Skill"))//Skillのコリジョン接触が起きた瞬間に床が落ちる
+        else if (collision.gameObject.CompareTag("Break"))//Breakのコリジョン接触が起きた瞬間に床が落ちる
         {
             fall = true;
             renderer.material = danger;

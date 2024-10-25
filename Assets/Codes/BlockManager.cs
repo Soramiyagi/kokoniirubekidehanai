@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlockManager : MonoBehaviour
 {
-    [SerializeField] GameObject block, flyStone;
+    [SerializeField] GameObject block;
 
     public int blockWidth, blockHeight;
     public float blockInterval = 0;   //ƒuƒƒbƒN“¯m‚Ì•
@@ -26,15 +26,11 @@ public class BlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void FixedUpdate()
     {
 
-    }
-
-    void FallCheck()
-    {
     }
 }

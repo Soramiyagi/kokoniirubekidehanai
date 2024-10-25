@@ -4,9 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Skill
   - Ground
   - Bind
+  - Break
+  - Fix
+  - DeadLine
   layers:
   - Default
   - TransparentFX

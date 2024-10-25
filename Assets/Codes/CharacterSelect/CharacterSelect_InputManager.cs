@@ -17,10 +17,10 @@ public class CharacterSelect_InputManager : MonoBehaviour
         playerNum = 0;
         readyNum = 0;
 
-        CharacterSelect_Save.P1_C = -1;
-        CharacterSelect_Save.P2_C = -1;
-        CharacterSelect_Save.P3_C = -1;
-        CharacterSelect_Save.P4_C = -1;
+        CharacterSelect_Save.characterIndex[0] = -1;
+        CharacterSelect_Save.characterIndex[1] = -1;
+        CharacterSelect_Save.characterIndex[2] = -1;
+        CharacterSelect_Save.characterIndex[3] = -1;
     }
 
     public void JoinPlayer()
@@ -94,13 +94,12 @@ public class CharacterSelect_InputManager : MonoBehaviour
             {
                 playerChoice[i] = -1;
             }
+
+            CharacterSelect_Save.characterIndex[i] = playerChoice[i];
         }
 
-        CharacterSelect_Save.P1_C = playerChoice[0];
-        CharacterSelect_Save.P2_C = playerChoice[1];
-        CharacterSelect_Save.P3_C = playerChoice[2];
-        CharacterSelect_Save.P4_C = playerChoice[3];
-        
+        //‘JˆÚæƒV[ƒ“‚Ì‘‚«Š·‚¦
         SceneManager.LoadScene("SampleScene");
+        //SceneManager.LoadScene("TestScene");
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 893566270491522442}
   m_Layer: 0
   m_Name: Skill2Preview
-  m_TagString: Skill
+  m_TagString: Break
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
