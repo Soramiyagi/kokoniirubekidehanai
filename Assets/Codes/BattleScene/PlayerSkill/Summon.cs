@@ -31,14 +31,16 @@ public class Summon: Player
         if (skill2_ET > 0)
         {
             skill2_ET = skill2_ET - Time.deltaTime;
+            Vector3 newPosition = this.transform.position;
+            if (this.transform.position.y <= 2.5f)
+            {
+                newPosition.y = 2.5f;
+            }
+            transform.position = newPosition;
         }
         else
         {
-            if (rb.useGravity == false)
-            {
-                rb.useGravity = true;
-                isGrounded = true;
-            }
+            isGrounded = true;
         }
     }
 
@@ -73,7 +75,6 @@ public class Summon: Player
         発動タイミングが押したときなら使おう
         */
         skill2_ET = skill2_ET_Set;
-        rb.useGravity = false;
         isGrounded = false;
 
         canUseSkill2 = false;

@@ -35,17 +35,24 @@ public class Dash : Player
         if (skill1_ET > 0)
         {
             skill1_ET = skill1_ET - Time.deltaTime;
+
+            Vector3 newPosition = this.transform.position;
+            float downStop = this.transform.position.y;
+            if (this.transform.position.y <= downStop)
+            {
+                newPosition.y = downStop;
+            }
+            transform.position = newPosition;
         }
         else
         {
-            if (canMoveInput == false && rb.useGravity == false)
+            if (canMoveInput == false)
             {
                 // オブジェクトの速度と角速度をゼロに設定
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
 
                 canMoveInput = true;
-                rb.useGravity = true;
 
                 extendCollider.SetActive(false);
                 C_extendCollider.SetActive(false);
@@ -69,7 +76,6 @@ public class Dash : Player
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.1f, this.transform.position.z);
         canMoveInput = false;
 
-        rb.useGravity = false;
         skill1_ET = skill1_ET_Set;
 
         extendCollider.SetActive(true);

@@ -57,7 +57,6 @@ public class Player : MonoBehaviour
 
     private StatusUI statusUI;
 
-
     // プロパティでフィールドを操作
     protected virtual float Speed
     {
@@ -168,7 +167,7 @@ public class Player : MonoBehaviour
             canMoveInput = false;
 
         }
-        else if(bindTime <= 0)
+        else if (bindTime <= 0)
         {
             canMoveInput = true;
         }
@@ -242,8 +241,11 @@ public class Player : MonoBehaviour
     // 移動メソッド
     protected void HandleMovement()
     {
-        Vector3 movement = new Vector3(LS_Horizontal, 0.0f, LS_Vertical);
-        transform.Translate(movement * Speed * Time.deltaTime, Space.World); // Speedを使用
+        if (canMoveInput == true)
+        {
+            Vector3 movement = new Vector3(LS_Horizontal, 0.0f, LS_Vertical);
+            transform.Translate(movement * Speed * Time.deltaTime, Space.World); // Speedを使用
+        }
     }
 
     // Jump処理
@@ -347,13 +349,14 @@ public class Player : MonoBehaviour
             }
             else if (stock < 1)
             {
-                this.gameObject.SetActive(false);
+                //this.gameObject.SetActive(false);
             }
 
             statusUI.StockMinus(playerNum, stock);
         }
         else if (collision.gameObject.CompareTag("Bind"))
         {
+            bindTime = bindTime_Set;
         }
     }
 }

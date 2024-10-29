@@ -6,7 +6,7 @@ public class Bomb : Player
 {
     public string characterName = "DefaultCharacter";
 
-    [SerializeField] private GameObject Skill1Preview;
+    [SerializeField] private GameObject Skill1Preview, Shaft;
 
     // スピードとジャンプ力、スキルのクールダウン時間を派生クラスで設定
     protected override float Speed { get; set; } = 2.0f; // スピード値
@@ -36,9 +36,9 @@ public class Bomb : Player
             // プレイヤーの位置に追従 (Y軸を-0.5してプレイヤーの下に置く)
             Vector3 followPosition = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z + 4);
             spawnedPrefab.transform.position = followPosition;
-            Debug.Log("Skill1 prefab is following the player.");
-
         }
+
+        Shaft.transform.rotation = Quaternion.Euler(0.0f, 90 - R_angle, 0.0f);
     }
 
     protected override void Skill1Push()
@@ -59,7 +59,7 @@ public class Bomb : Player
         {
             previewCollider.enabled = true; // コリジョンをオンに
         }
-        StartCoroutine(DestroyPrefabAfterDelay(0.1f));
+        StartCoroutine(DestroyPrefabAfterDelay(0.01f));
 
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
