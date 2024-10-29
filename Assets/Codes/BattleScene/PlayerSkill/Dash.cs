@@ -36,13 +36,12 @@ public class Dash : Player
         {
             skill1_ET = skill1_ET - Time.deltaTime;
 
-            Vector3 newPosition = this.transform.position;
             float downStop = this.transform.position.y;
-            if (this.transform.position.y <= downStop)
-            {
-                newPosition.y = downStop;
-            }
-            transform.position = newPosition;
+
+            float Pos_X = this.transform.position.x;
+            float Pos_Z = this.transform.position.z;
+
+            this.transform.position = new Vector3(Pos_X, downStop, Pos_Z);
         }
         else
         {

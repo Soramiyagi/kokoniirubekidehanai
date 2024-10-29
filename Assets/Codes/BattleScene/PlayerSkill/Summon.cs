@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Summon: Player
+public class Summon : Player
 {
     public string characterName = "DefaultCharacter";
 
@@ -18,6 +18,8 @@ public class Summon: Player
     private float skill2_ET = 0;
     public float skill2_ET_Set = 0;
 
+    private float downStop = 0;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -28,19 +30,20 @@ public class Summon: Player
     {
         base.FixedUpdate();
 
+        Debug.Log(this.transform.position);
+
         if (skill2_ET > 0)
         {
-            skill2_ET = skill2_ET - Time.deltaTime;
-            Vector3 newPosition = this.transform.position;
-            if (this.transform.position.y <= 2.5f)
-            {
-                newPosition.y = 2.5f;
-            }
-            transform.position = newPosition;
+            skill2_ET -= Time.deltaTime;
+
+            float Pos_X = this.transform.position.x;
+            float Pos_Z = this.transform.position.z;
+
+            this.transform.position = new Vector3(Pos_X, downStop, Pos_Z);
         }
         else
         {
-            isGrounded = true;
+            rb.useGravity = true;
         }
     }
 
@@ -76,6 +79,10 @@ public class Summon: Player
         */
         skill2_ET = skill2_ET_Set;
         isGrounded = false;
+
+        downStop = this.transform.position.y + 0.5f;
+
+        rb.useGravity = false;
 
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());

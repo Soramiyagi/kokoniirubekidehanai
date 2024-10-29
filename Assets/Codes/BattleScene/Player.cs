@@ -55,6 +55,9 @@ public class Player : MonoBehaviour
     public float bindTime_Set = 0;
     private float bindTime = 0;
 
+    //連続で死ぬことを防ぐため
+    private float deathInterval = 0;
+
     private StatusUI statusUI;
 
     // プロパティでフィールドを操作
@@ -170,6 +173,11 @@ public class Player : MonoBehaviour
         else if (bindTime <= 0)
         {
             canMoveInput = true;
+        }
+
+        if(deathInterval > 0)
+        {
+            deathInterval -= Time.deltaTime;
         }
     }
 
@@ -342,16 +350,19 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("DeadLine"))
         {
-            stock--;
-            if (stock >= 1)
+            if (deathInterval <= 0)
             {
-                floatTime = floatTime_Set;
+                stock--;
+                deathInterval = 1;
+                if (stock >= 1)
+                {
+                    floatTime = floatTime_Set;
+                }
+                else if (stock < 1)
+                {
+                    //this.gameObject.SetActive(false);
+                }
             }
-            else if (stock < 1)
-            {
-                //this.gameObject.SetActive(false);
-            }
-
             statusUI.StockMinus(playerNum, stock);
         }
         else if (collision.gameObject.CompareTag("Bind"))

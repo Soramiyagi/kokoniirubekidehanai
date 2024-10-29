@@ -8,6 +8,9 @@ public class DeadLine : MonoBehaviour
 
     Vector3 hitPos;
 
+    private float interval_set = 0.05f;
+    private float interval;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,19 +22,31 @@ public class DeadLine : MonoBehaviour
     {
 
     }
+    
+    void FixedUpdate()
+    {
+        if (interval > 0)
+        {
+            interval -= Time.deltaTime;
+        }
+    }
 
     // ’n–Ê‚ÉÚG‚µ‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚é
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //collision.contacts‚É•Û‘¶‚³‚ê‚Ä‚¢‚éÕ“Ëî•ñ‚ğ’²‚×‚é
-            foreach (ContactPoint hitPoint in collision.contacts)
+            if (interval <= 0)
             {
-                hitPos = hitPoint.point;   //Õ“ËêŠ‚ğæ“¾
-            }
+                //collision.contacts‚É•Û‘¶‚³‚ê‚Ä‚¢‚éÕ“Ëî•ñ‚ğ’²‚×‚é
+                foreach (ContactPoint hitPoint in collision.contacts)
+                {
+                    hitPos = hitPoint.point;   //Õ“ËêŠ‚ğæ“¾
+                    interval = interval_set;
+                }
 
-            Instantiate(FixSphere, hitPos, Quaternion.identity);
+                Instantiate(FixSphere, hitPos, Quaternion.identity);
+            }
         }
     }
 }

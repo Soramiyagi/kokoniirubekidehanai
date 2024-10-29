@@ -34,7 +34,7 @@ public class FixSphere : MonoBehaviour
             else if (scale >= effectRange)
             {
                 scale = 0;
-                Destroy(this);
+                Destroy(this.gameObject);
             }
 
             this.transform.localScale = new Vector3(scale, scale, scale);

@@ -87,7 +87,7 @@ public class Block : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("CountStart"))
         {
             if (countDown == false)
             {
