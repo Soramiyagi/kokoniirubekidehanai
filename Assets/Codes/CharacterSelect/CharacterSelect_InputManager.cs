@@ -100,6 +100,5 @@ public class CharacterSelect_InputManager : MonoBehaviour
 
         //‘JˆÚæƒV[ƒ“‚Ì‘‚«Š·‚¦
         SceneManager.LoadScene("SampleScene");
-        //SceneManager.LoadScene("TestScene");
     }
 }

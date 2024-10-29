@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    private bool fall;       //ブロックが落ちるフラグ
-    private float fallSpeed;    //ブロックの落ちる速さ
-
-    bool countDown;     //ブロックが落ちるまでのカウントを開始するフラグ
-    float time;         //ブロックが落ちるまでの時間
+    private bool countDown;     //ブロックが落ちるまでのカウントを開始するフラグ
+    private float time;         //ブロックが消えるまでの時間
+    private float scale;
 
     public float timeSet = 0;
-
-    Vector3 startPos;   //このブロックの初期位置
-    Vector3 currentPos; //このブロックの現在位置
+    private BoxCollider boxCol;
 
     //マテリアル関連
     [SerializeField] private Material safety, caution, danger;
@@ -22,9 +18,8 @@ public class Block : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startPos = this.transform.position;
         renderer = GetComponent<Renderer>();
-
+        boxCol = this.GetComponent<BoxCollider>();
         StateReset();
     }
 
@@ -44,34 +39,31 @@ public class Block : MonoBehaviour
             }
             else
             {
-                fall = true;
                 renderer.material = danger;
-            }
-        }
-        
 
-        //ブロック落下
-        if (fall == true)
-        {
-            currentPos.y -= fallSpeed * Time.deltaTime;
-            this.transform.position = currentPos;
+                if (scale > 0)
+                {
+                    scale = scale - Time.deltaTime * 0.5f;
+                    if (scale <= 0)
+                    {
+                        scale = 0;
+                        countDown = false;
+                        boxCol.isTrigger = true;
+                    }
+                }
 
-
-            if (currentPos.y < -20)
-            {
-                StateReset();
+                this.transform.localScale = new Vector3(scale, scale, scale);
             }
         }
     }
 
     void StateReset()
     {
-        fall = false;
-        fallSpeed = 3f;
         countDown = false;
         time = timeSet;
-        currentPos = startPos;
-        this.transform.position = currentPos;
+        scale = 1;
+        this.transform.localScale = new Vector3(scale, scale, scale);
+        boxCol.isTrigger = false;
         renderer.material = safety;
     }
 
@@ -79,7 +71,7 @@ public class Block : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))//Playerが床に接触すると一定時間経過後に床が落ちる
         {
-            if (fall == false)
+            if (countDown == false)
             {
                 countDown = true;
                 renderer.material = caution;
@@ -87,7 +79,8 @@ public class Block : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Break"))//Breakのコリジョン接触が起きた瞬間に床が落ちる
         {
-            fall = true;
+            countDown = true;
+            time = 0;
             renderer.material = danger;
         }
     }
@@ -96,11 +89,15 @@ public class Block : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (fall == false)
+            if (countDown == false)
             {
                 countDown = true;
                 renderer.material = caution;
             }
+        }
+        else if (other.gameObject.CompareTag("Fix"))
+        {
+            StateReset();
         }
     }
 }

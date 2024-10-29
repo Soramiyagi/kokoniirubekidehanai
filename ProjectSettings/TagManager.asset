@@ -9,6 +9,7 @@ TagManager:
   - Break
   - Fix
   - DeadLine
+  - Shield
   layers:
   - Default
   - TransparentFX

@@ -6,7 +6,7 @@ public class Gun : Player
 {
     public string characterName = "DefaultCharacter";
 
-    [SerializeField] private GameObject Bind, Grenade;
+    [SerializeField] private GameObject Shaft, BulletPoint, Bind, Grenade;
 
     // スピードとジャンプ力、スキルのクールダウン時間を派生クラスで設定
     protected override float Speed { get; set; } = 2.0f; // スピード値
@@ -23,6 +23,8 @@ public class Gun : Player
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+
+        Shaft.transform.rotation = Quaternion.Euler(0.0f, 90 - R_angle,0.0f);
     }
 
     // スキル1が押された時の処理をオーバーライド
@@ -31,7 +33,7 @@ public class Gun : Player
         /*
         発動タイミングが押したときなら使おう
         */
-        Instantiate(Bind, this.transform.position, Quaternion.identity);
+        Instantiate(Bind, BulletPoint.transform.position, Quaternion.Euler(0f, 90 - R_angle, 0f));
 
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
@@ -53,7 +55,7 @@ public class Gun : Player
         /*
         発動タイミングが押したときなら使おう
         */
-        Instantiate(Grenade, this.transform.position, Quaternion.identity);
+        Instantiate(Grenade, BulletPoint.transform.position, Quaternion.Euler(0f, 90 - R_angle, 0f));
 
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());

@@ -51,6 +51,10 @@ public class Player : MonoBehaviour
     public float floatTime_Set = 0;
     private float floatTime = 0;
 
+    //  ƒoƒCƒ“ƒh’e‚É“–‚½‚Á‚½Žž‚ÌS‘©ŽžŠÔ
+    public float bindTime_Set = 0;
+    private float bindTime = 0;
+
     private StatusUI statusUI;
 
 
@@ -157,6 +161,17 @@ public class Player : MonoBehaviour
             newPosition.y = 4;
             transform.position = newPosition;
         }
+
+        if (bindTime > 0)
+        {
+            bindTime -= Time.deltaTime;
+            canMoveInput = false;
+
+        }
+        else if(bindTime <= 0)
+        {
+            canMoveInput = true;
+        }
     }
 
     private void NameSet()
@@ -254,7 +269,7 @@ public class Player : MonoBehaviour
                 //‰Ÿ‚µ‚½Žž
                 Skill1Push();
             }
-            else if (Skill1.canceled && canUseSkill2 == true)
+            else if (Skill1.canceled && canUseSkill1 == true)
             {
                 //—£‚µ‚½Žž
                 Skill1Release();
@@ -325,17 +340,20 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("DeadLine"))
         {
-            if (stock > 0)
+            stock--;
+            if (stock >= 1)
             {
-                stock--;
                 floatTime = floatTime_Set;
             }
-            else if (stock <= 0)
+            else if (stock < 1)
             {
                 this.gameObject.SetActive(false);
             }
 
             statusUI.StockMinus(playerNum, stock);
+        }
+        else if (collision.gameObject.CompareTag("Bind"))
+        {
         }
     }
 }

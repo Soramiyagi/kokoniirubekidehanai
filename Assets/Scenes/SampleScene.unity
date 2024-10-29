@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ecd845bc756a7419044ad7eb19b7a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 6414752691340138724, guid: 3778f08504193dc46b78e4c19bb01b81, type: 3}
+  block: {fileID: 4317612491015589041, guid: bf4f4f4c1c2461a4faadc139928b8f82, type: 3}
   blockWidth: 20
   blockHeight: 20
   blockInterval: 1.05
@@ -425,6 +425,7 @@ GameObject:
   - component: {fileID: 1727021186}
   - component: {fileID: 1727021185}
   - component: {fileID: 1727021184}
+  - component: {fileID: 1727021188}
   m_Layer: 0
   m_Name: DeadLine
   m_TagString: DeadLine
@@ -518,6 +519,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1727021188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727021183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf6d06905fd01b54ab310037dab1ce34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FixSphere: {fileID: 417174588831832090, guid: 8bacbc68d1208884e8bbc99b584bef62, type: 3}
 --- !u!1 &1899622113
 GameObject:
   m_ObjectHideFlags: 0
