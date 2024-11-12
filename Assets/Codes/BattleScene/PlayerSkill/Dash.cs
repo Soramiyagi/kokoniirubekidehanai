@@ -16,6 +16,9 @@ public class Dash : Player
 
     public float forceAmount = 10f; // 加える力の大きさ(ダッシュの早さ)
 
+    public ParticleSystem skill1ParticleSystem;
+    public ParticleSystem skill2ParticleSystem;
+    public ParticleSystem skill2ParticleSystem2;
     //ET = EffectTime(効果時間)
     private float skill1_ET = 0;
     private float skill2_ET = 0;
@@ -76,7 +79,10 @@ public class Dash : Player
         canMoveInput = false;
 
         skill1_ET = skill1_ET_Set;
-
+        if (skill1ParticleSystem != null)
+        {
+            skill1ParticleSystem.Play();
+        }
         extendCollider.SetActive(true);
 
         if (skill2_ET > 0)
@@ -90,7 +96,7 @@ public class Dash : Player
 
         // 指定した角度方向に力を加える
         rb.AddForce(force, ForceMode.Impulse);
-
+        StartCoroutine(skill1DestroyPrefabAfterDelay(1f));
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
     }
@@ -105,13 +111,49 @@ public class Dash : Player
     {
         clones.SetActive(true);
         skill2_ET = skill2_ET_Set;
-
+        if (skill2ParticleSystem != null && skill2ParticleSystem2 != null)
+        {
+            skill2ParticleSystem.Play();
+            skill2ParticleSystem2.Play();
+        }
+        StartCoroutine(skill2DestroyPrefabAfterDelay(2f));
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
+ 
     }
+
+
+
 
     // スキル2を離したときの処理をオーバーライド
     protected override void Skill2Release()
     {
     }
+
+    private IEnumerator skill1DestroyPrefabAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); // 指定した秒数待機
+        if (skill1ParticleSystem != null)
+        {
+            skill1ParticleSystem.Stop();
+            skill1ParticleSystem.Clear();
+
+        }
+    }
+
+    private IEnumerator skill2DestroyPrefabAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); // 指定した秒数待機
+        if (skill2ParticleSystem != null)
+        {
+            skill2ParticleSystem.Stop();
+            skill2ParticleSystem.Clear();
+        }
+        if (skill2ParticleSystem2 != null)
+        {
+            skill2ParticleSystem2.Stop();
+            skill2ParticleSystem2.Clear();
+        }
+    }
+    
 }

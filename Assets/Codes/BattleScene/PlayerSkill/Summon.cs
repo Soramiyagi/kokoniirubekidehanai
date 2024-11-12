@@ -20,6 +20,8 @@ public class Summon : Player
 
     private float downStop = 0;
 
+    public ParticleSystem particleSystem;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -86,6 +88,8 @@ public class Summon : Player
 
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
+        PlayParticles();
+        StartCoroutine(DestroyPrefabAfterDelay(6f));
     }
 
     // スキル2を離したときの処理をオーバーライド
@@ -96,5 +100,31 @@ public class Summon : Player
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
         */
+    }
+
+    // パーティクルを再生するメソッド
+    public void PlayParticles()
+    {
+        if (particleSystem != null)
+        {
+            particleSystem.Play();
+
+        }
+    }
+
+    // パーティクルを停止するメソッド
+    public void StopParticles()
+    {
+        if (particleSystem != null)
+        {
+            particleSystem.Stop();
+            particleSystem.Clear();
+        }
+    }
+
+    private IEnumerator DestroyPrefabAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); // 指定した秒数待機
+        StopParticles();
     }
 }

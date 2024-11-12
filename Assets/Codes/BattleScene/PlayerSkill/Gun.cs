@@ -14,6 +14,7 @@ public class Gun : Player
     protected override float Skill1CooldownTime { get; set; } = 4.0f; // スキル1のクールダウン
     protected override float Skill2CooldownTime { get; set; } = 9.0f; // スキル2のクールダウン
 
+    public ParticleSystem particleSystem;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -57,8 +58,15 @@ public class Gun : Player
         */
         Instantiate(FixSphere, this.transform.position, Quaternion.identity);
 
+        // プレイヤーの位置にパーティクルを生成して再生
+        ParticleSystem particleInstance = Instantiate(particleSystem, this.transform.position, Quaternion.identity);
+        particleInstance.Play();
+
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
+
+        // 一定時間後にパーティクルを停止・削除
+        StartCoroutine(DestroyParticleAfterDelay(particleInstance, 1f));
     }
 
     // スキル2を離したときの処理をオーバーライド
@@ -69,5 +77,25 @@ public class Gun : Player
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
         */
+    }
+
+    // パーティクルを再生するメソッド
+    public void PlayParticles()
+    {
+        if (particleSystem != null)
+        {
+            particleSystem.Play();
+           
+        }
+    }
+
+
+
+    private IEnumerator DestroyParticleAfterDelay(ParticleSystem particleInstance, float delay)
+    {
+        yield return new WaitForSeconds(delay); // 指定した秒数待機
+        particleInstance.Stop();
+        particleInstance.Clear();
+        Destroy(particleInstance.gameObject); // パーティクルオブジェクトを削除
     }
 }
