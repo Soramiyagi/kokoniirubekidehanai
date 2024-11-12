@@ -6,6 +6,7 @@ using TMPro;
 
 public class CharacterSelect_InputManager : MonoBehaviour
 {
+    [SerializeField] private GameObject LoadClient;
     public TextMeshProUGUI[] c_text = new TextMeshProUGUI[4];
 
     private int playerNum;
@@ -98,7 +99,6 @@ public class CharacterSelect_InputManager : MonoBehaviour
             CharacterSelect_Save.characterIndex[i] = playerChoice[i];
         }
 
-        //‘JˆÚæƒV[ƒ“‚Ì‘‚«Š·‚¦
-        SceneManager.LoadScene("SampleScene");
+        LoadClient.GetComponent<LoadClient>().LoadStart();
     }
 }
