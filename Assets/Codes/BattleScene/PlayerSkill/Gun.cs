@@ -15,10 +15,13 @@ public class Gun : Player
     protected override float Skill2CooldownTime { get; set; } = 9.0f; // スキル2のクールダウン
 
     public ParticleSystem particleSystem;
+    private Animator animator;//アニメーションをGetComponentする変数
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        animator = GetComponent<Animator>();
+        animator.SetBool("walking", true);//walkingをtureにする
     }
 
     protected override void FixedUpdate()
