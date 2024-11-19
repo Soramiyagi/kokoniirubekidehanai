@@ -12,6 +12,8 @@ TagManager:
   - Shield
   - Bullet
   - CountStart
+  - FxTemporaire
+  - FirstStopGround
   layers:
   - Default
   - TransparentFX

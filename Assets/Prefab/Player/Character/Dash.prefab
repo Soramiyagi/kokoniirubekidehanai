@@ -636,6 +636,7 @@ MonoBehaviour:
   skill2CooldownTime: 10
   floatTime_Set: 4
   bindTime_Set: 1
+  statusObj: {fileID: 3577742063162212954, guid: 4a5ab18ae8d24234a9c86c82a517c80f, type: 3}
   characterName: DefaultCharacter
   clones: {fileID: 6002414418573710541}
   extendCollider: {fileID: 8138823493506646013}

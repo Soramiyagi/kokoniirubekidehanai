@@ -58,7 +58,12 @@ public class Player : MonoBehaviour
     //連続で死ぬことを防ぐため
     private float deathInterval = 0;
 
-    private StatusUI statusUI;
+    //ステータス用
+    [SerializeField] private GameObject statusObj;
+    private Status statusScript;
+
+    //ゲームマネージャーへのアクセス用
+    private GameManager gameManager;
 
     // プロパティでフィールドを操作
     protected virtual float Speed
@@ -95,7 +100,7 @@ public class Player : MonoBehaviour
         R_Stick = GetComponent<PlayerInput>().actions["R_Stick"];
 
         rb = GetComponent<Rigidbody>();
-        NameSet();
+        FirstSet();
 
 
         lineRenderer = this.GetComponent<LineRenderer>();
@@ -181,7 +186,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void NameSet()
+    private void FirstSet()
     {
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
         // 名前が一致するオブジェクトが存在するかチェック
@@ -211,16 +216,20 @@ public class Player : MonoBehaviour
             {
                 exist[3] = true;
             }
-            else if (obj.name == "StatusUI")
+            else if (obj.name == "GameManager")
             {
-                statusUI = obj.GetComponent<StatusUI>();
+                gameManager = obj.GetComponent<GameManager>();
             }
         }
+
+        GameObject newObject = Instantiate(statusObj);
+        statusScript = newObject.GetComponent<Status>();
 
         if (exist[0] == false)
         {
             this.name = "Player1";
             playerNum = 1;
+            statusScript.FirstSet(playerNum);
             return;
         }
 
@@ -228,6 +237,7 @@ public class Player : MonoBehaviour
         {
             this.name = "Player2";
             playerNum = 2;
+            statusScript.FirstSet(playerNum);
             return;
         }
 
@@ -235,6 +245,7 @@ public class Player : MonoBehaviour
         {
             this.name = "Player3";
             playerNum = 3;
+            statusScript.FirstSet(playerNum);
             return;
         }
 
@@ -242,6 +253,7 @@ public class Player : MonoBehaviour
         {
             this.name = "Player4";
             playerNum = 4;
+            statusScript.FirstSet(playerNum);
             return;
         }
     }
@@ -341,7 +353,7 @@ public class Player : MonoBehaviour
         Debug.Log("Skill 2 ready!");
     }
 
-    // 地面に接触したときに呼ばれる
+    // 何かに接触したときに呼ばれる
     protected virtual void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -354,20 +366,39 @@ public class Player : MonoBehaviour
             {
                 stock--;
                 deathInterval = 1;
+                statusScript.StockMinus(stock);
                 if (stock >= 1)
                 {
                     floatTime = floatTime_Set;
                 }
                 else if (stock < 1)
                 {
-                    //this.gameObject.SetActive(false);
+                    gameManager.Retire(playerNum);
+                    Destroy(this.gameObject);
                 }
             }
-            statusUI.StockMinus(playerNum, stock);
         }
         else if (collision.gameObject.CompareTag("Bind"))
         {
             bindTime = bindTime_Set;
+        }
+    }
+
+    // 何かに接触している間呼ばれる
+    protected virtual void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("FirstStopGround"))
+        {
+            canMoveInput = false;
+        }
+    }
+
+    // 接触している何かから離れた時に呼ばれる
+    protected virtual void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("FirstStopGround"))
+        {
+            canMoveInput = true;
         }
     }
 }
