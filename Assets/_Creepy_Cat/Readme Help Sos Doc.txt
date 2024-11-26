@@ -1,12 +1,13 @@
 Thanks to download the kit :) It is a free kit that you can use for free
 or shareware products.
 
+--------------------------------
 The only thing you CAN'T do is :
 --------------------------------
 Re-sale my datas or models made with my kit datas on any other assetstore shop!
 
-What the packages?:
-The new version of the kit is the HD version : 3D Scifi Kit Starter Kit_HD_BUILT IN
+Where the old packages:
+Inside: 3D Scifi Kit Starter Kit_BUILT IN.unitypackage
 
 Here is my other store:
 https://assetstore.unity.com/publishers/9029
