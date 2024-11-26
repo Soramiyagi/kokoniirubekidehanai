@@ -13,7 +13,7 @@ TagManager:
   - Bullet
   - CountStart
   - FxTemporaire
-  - FirstStopGround
+  - SystemStopBreak
   layers:
   - Default
   - TransparentFX

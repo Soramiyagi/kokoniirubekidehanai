@@ -311,30 +311,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c757a920-7e35-452f-b0ba-1a500d93ceb0
     m_ActionName: UI/MenuSelect_LStick[/XInputControllerWindows/leftStick,/SwitchProControllerHID/leftStick]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c4746e57-9ea8-43f3-91f1-e3b9c966587b
-    m_ActionName: Test/L_Stick[/XInputControllerWindows/leftStick,/SwitchProControllerHID/leftStick]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: cc10bee9-ecf4-4fa1-a7bd-e92b1fdd71b4
-    m_ActionName: Test/R_Stick[/XInputControllerWindows/rightStick,/SwitchProControllerHID/rightStick]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f222cf81-469c-4313-97b3-78afa867f954
-    m_ActionName: Test/Attack_Skill[/XInputControllerWindows/rightTrigger,/SwitchProControllerHID/rightTrigger]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c13dfe3c-499c-44b0-9357-205a66fdb24b
-    m_ActionName: Test/Defense_Skill[/XInputControllerWindows/leftTrigger,/SwitchProControllerHID/leftTrigger]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: cd609857-50c9-4af1-bb41-04b1c93c16bb
-    m_ActionName: Test/SP_Skill1[/XInputControllerWindows/rightShoulder,/SwitchProControllerHID/rightShoulder]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 57b4c89f-4811-4f67-b9ae-aafee211d220
-    m_ActionName: Test/SP_Skill2[/XInputControllerWindows/leftShoulder,/SwitchProControllerHID/leftShoulder]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
@@ -354,7 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   num_text: {fileID: 7926109893248942965}
   c_text: {fileID: 5903489426032562124}
-  maxNum: 4
+  maxNum: 5
   interval_set: 0.2
   L_StickDeadzone: 0.3
 --- !u!1 &5976631137599954011

@@ -95,6 +95,12 @@ public class Block : MonoBehaviour
                 renderer.material = caution;
             }
         }
+        else if (other.gameObject.CompareTag("Break"))
+        {
+            countDown = true;
+            time = 0;
+            renderer.material = danger;
+        }
         else if (other.gameObject.CompareTag("Fix"))
         {
             StateReset();

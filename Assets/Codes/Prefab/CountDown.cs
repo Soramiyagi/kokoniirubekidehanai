@@ -31,9 +31,12 @@ public class CountDown : MonoBehaviour
         if (time > 0)
         {
             time -= Time.deltaTime;
-            CountDownText.text = time.ToString("F0");
+            if (time > 1)
+            {
+                CountDownText.text = time.ToString("F0");
+            }
         }
-        else if(time <= 0)
+        else if (time <= 0)
         {
             gameManager.GameStart();
             CountDownText.fontSize = 200f;

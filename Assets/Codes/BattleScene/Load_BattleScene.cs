@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class Load_BattleScene : MonoBehaviour
 {
     [SerializeField] private GameObject[] obj;
-    [SerializeField] private int maxNum;    //総キャラクター数
     [SerializeField] private BattleCamera battleCamera;
 
     private GameObject[] targetObj = new GameObject[4];
@@ -14,7 +13,7 @@ public class Load_BattleScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < maxNum; i++)
+        for (int i = 0; i < obj.Length; i++)
         {
             if (CharacterSelect_Save.characterIndex[0] == i)
             {
@@ -43,11 +42,5 @@ public class Load_BattleScene : MonoBehaviour
         }
 
         battleCamera.FirstSet(targetObj);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
