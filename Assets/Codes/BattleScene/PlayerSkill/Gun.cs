@@ -9,13 +9,13 @@ public class Gun : Player
     [SerializeField] private GameObject Shaft, BulletPoint, Bind, FixSphere;
 
     public ParticleSystem particleSystem;
-    private Animator animator;//アニメーションをGetComponentする変数
+   // private Animator animator;//アニメーションをGetComponentする変数
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        animator = GetComponent<Animator>();
-        animator.SetBool("walking", true);//walkingをtureにする
+        //animator = GetComponent<Animator>();
+        //animator.SetBool("walking", true);//walkingをtureにする
     }
 
     protected override void FixedUpdate()
