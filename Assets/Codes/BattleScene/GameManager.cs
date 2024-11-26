@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject LoadClient_ToCharacterSelect;
     [SerializeField] private GameObject Timer, FirstStopGrounds, CountdownObj;
     private Timer timerScript;
     private FirstStopGrounds FSGsScript;
@@ -23,10 +24,11 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            restPlayer[i] = true;
+            restPlayer[i] = false;
         }
 
         timerScript = Instantiate(Timer, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity).GetComponent<Timer>();
+        timerScript.gameManager = this.GetComponent<GameManager>();
         timerScript.TimerSet(limitTime_set);
         FSGsScript = Instantiate(FirstStopGrounds, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity).GetComponent<FirstStopGrounds>();
         countDownScript = Instantiate(CountdownObj, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity).GetComponent<CountDown>();
@@ -56,7 +58,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(finishCount == 1)
+        if (finishCount == 0 || finishCount == 1)
         {
             Finish();
         }
@@ -68,9 +70,9 @@ public class GameManager : MonoBehaviour
         FSGsScript.FSG_Delete();
     }
 
-    private void Finish()
+    public void Finish()
     {
         //ゲーム終了の処理
-        Debug.Log("ゲームセット");
+        LoadClient_ToCharacterSelect.GetComponent<LoadClient>().LoadStart();
     }
 }

@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class ShootStars : MonoBehaviour
 {
-    [SerializeField] private GameObject EndPoint, MiddlePoint;
+    [SerializeField] private GameObject StartPoint, EndPoint, MiddlePoint;
     
     public float speed = 0; 
     private float t;
-    private Vector3 activatePos, movePos;
-    private Vector3 endPos, middlePos;
+    private Vector3 startPos, endPos, middlePos, movePos;
+
+    void OnEnable()
+    {
+        t = 0.0f;
+
+        startPos = StartPoint.transform.position;
+        this.transform.position = startPos;
+        endPos = EndPoint.transform.position;
+        middlePos = MiddlePoint.transform.position;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        t = 0.0f;
-
-        activatePos = this.transform.position;
-        endPos = EndPoint.transform.position;
-        middlePos = MiddlePoint.transform.position;
     }
 
     // Update is called once per frame
@@ -33,24 +37,23 @@ public class ShootStars : MonoBehaviour
 
         if (t < 1.0)
         {
-            movePos = CalculateBezierPoint(t, activatePos, middlePos, endPos);
+            movePos = CalculateBezierPoint(t, startPos, middlePos, endPos);
         }
         else if (t >= 1.0f)
         {
             // tを1.0にクランプしない
 
-            if (t >= 1.15f)
+            if (t >= 1.25f)
             {
-                Destroy(this.gameObject);
+                this.gameObject.SetActive(false);
             }
             else
             {
                 // tが1を超えた場合の位置を計算
-                movePos = CalculateBezierPoint(1.0f, activatePos, middlePos, endPos) + (t - 1.0f) * (endPos - middlePos);
+                movePos = CalculateBezierPoint(1.0f, startPos, middlePos, endPos) + (t - 1.0f) * (endPos - middlePos);
             }
         }
 
-        movePos = CalculateBezierPoint(t, activatePos, middlePos, endPos);
         this.transform.position = movePos;
     }
 

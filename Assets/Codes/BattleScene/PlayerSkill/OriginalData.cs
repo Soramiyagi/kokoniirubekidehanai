@@ -16,6 +16,7 @@ public class OriginalData : Player
     public GameObject prefab; // プレハブの参照をインスペクタで設定
     private GameObject spawnedPrefab; // 生成されたプレハブの参照
 
+    private bool skill1PushCheck, skill2PushCheck = false;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -35,6 +36,10 @@ public class OriginalData : Player
         発動タイミングが押したときなら使おう
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
+        StartCoroutine(Skill1DuringAnima(true));
+
+        //リリース時に発動するスキルなら必要
+        Skill1PushCheck = true;
         */
     }
 
@@ -45,6 +50,14 @@ public class OriginalData : Player
         発動タイミングが離したときなら使おう
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
+        StartCoroutine(Skill1DuringAnima(false));
+
+        //リリース時に発動するスキルなら必要
+        if (Skill1PushCheck == true)
+        {
+            //スキル処理の記述
+            Skill1PushCheck = false;
+        }
         */
     }
 
@@ -54,7 +67,11 @@ public class OriginalData : Player
         /*
         発動タイミングが押したときなら使おう
         canUseSkill2 = false;
-        StartCoroutine(Skill2Cooldown()); 
+        StartCoroutine(Skill2Cooldown());
+        StartCoroutine(Skill2DuringAnima(true));
+
+        //リリース時に発動するスキルなら必要
+        Skill2PushCheck = true;
         */
     }
 
@@ -65,6 +82,14 @@ public class OriginalData : Player
         発動タイミングが離したときなら使おう
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
+        StartCoroutine(Skill2DuringAnima(false));
+        
+        //リリース時に発動するスキルなら必要
+        if (Skill2PushCheck == true)
+        {
+            //スキル処理の記述
+            Skill2PushCheck = false;
+        }
         */
     }
 

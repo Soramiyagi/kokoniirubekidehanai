@@ -8,13 +8,6 @@ public class Bomb : Player
 
     [SerializeField] private GameObject Skill1Preview, Shaft;
 
-    // スピードとジャンプ力、スキルのクールダウン時間を派生クラスで設定
-    protected override float Speed { get; set; } = 2.0f; // スピード値
-    protected override float JumpForce { get; set; } = 5.0f; // ジャンプ力
-    protected override float Skill1CooldownTime { get; set; } = 4.0f; // スキル1のクールダウン
-    protected override float Skill2CooldownTime { get; set; } = 9.0f; // スキル2のクールダウン
-
-
     public ParticleSystem skill1ParticleSystem;
     public ParticleSystem skill2ParticleSystem;
     // プレハブを生成するための変数
@@ -22,6 +15,8 @@ public class Bomb : Player
     private GameObject spawnedPrefab; // 生成されたプレハブの参照
 
     private bool previewSkill1 = false; // skill1のプレビューのためのフラグ
+
+    private bool skill1PushCheck, skill2PushCheck = false;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -48,6 +43,7 @@ public class Bomb : Player
 
     protected override void Skill1Push()
     {
+        skill1PushCheck = true;
         Skill1Preview.SetActive(true);
         Collider previewCollider = Skill1Preview.GetComponent<Collider>();
         if (previewCollider != null)
@@ -59,31 +55,39 @@ public class Bomb : Player
 
     protected override void Skill1Release()
     {
-        Collider previewCollider = Skill1Preview.GetComponent<Collider>();
-        if (previewCollider != null)
+        if (skill1PushCheck == true)
         {
-            previewCollider.enabled = true; // コリジョンをオンに
+            Collider previewCollider = Skill1Preview.GetComponent<Collider>();
+            if (previewCollider != null)
+            {
+                previewCollider.enabled = true; // コリジョンをオンに
+            }
+            // 生成されたパーティクルインスタンスを再生
+            if (skill1ParticleSystem != null)
+            {
+                skill1ParticleSystem.Play();
+            }
+            StartCoroutine(Skill1DestroyPrefabAndParticlesAfterDelay(0.1f, 1f));
+
+            skill1PushCheck = false;
+
+            canUseSkill1 = false;
+            StartCoroutine(Skill1Cooldown());
+            StartCoroutine(Skill1DuringAnima(false));
         }
-        // 生成されたパーティクルインスタンスを再生
-        if (skill1ParticleSystem != null)
-         {
-             skill1ParticleSystem.Play();
-         }
-        StartCoroutine(Skill1DestroyPrefabAndParticlesAfterDelay(0.1f,1f));
-
-
-        canUseSkill1 = false;
-        StartCoroutine(Skill1Cooldown());
     }
 
     // スキル2が押されている間の処理をオーバーライド
     protected override void Skill2Push()
     {
+        skill2PushCheck = true;
         if (spawnedPrefab == null)
         {
             // プレイヤーの位置からY軸を-0.5した位置にプレハブを生成
             Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
             spawnedPrefab = Instantiate(skill2Prehub, spawnPosition, Quaternion.identity);
+
+            StartCoroutine(Skill2DuringAnima(true));
 
             // コリジョンをオフにする処理
             Collider prefabCollider = spawnedPrefab.GetComponent<Collider>();
@@ -91,44 +95,45 @@ public class Bomb : Player
             {
                 prefabCollider.enabled = false; // コリジョンをオフに
             }
-
-
-            Debug.Log("Bomb is charging Skill 2! Prefab instantiated at adjusted position.");
         }
-
     }
 
     // スキル2を発動する処理をオーバーライド
     protected override void Skill2Release()
     {
-        if (spawnedPrefab != null)
+        if (skill2PushCheck == true)
         {
-            // プレハブをその位置に固定し、コリジョンをオンにする
-            Collider prefabCollider = spawnedPrefab.GetComponent<Collider>();
-            if (prefabCollider != null)
+            if (spawnedPrefab != null)
             {
-                prefabCollider.enabled = true; // コリジョンをオンに
+                // プレハブをその位置に固定し、コリジョンをオンにする
+                Collider prefabCollider = spawnedPrefab.GetComponent<Collider>();
+                if (prefabCollider != null)
+                {
+                    prefabCollider.enabled = true; // コリジョンをオンに
+                }
+
+                // パーティクルを生成して再生
+                if (skill2ParticleSystem != null)
+                {
+                    // パーティクルシステムを生成
+                    ParticleSystem particleInstance = Instantiate(skill2ParticleSystem, spawnedPrefab.transform.position, Quaternion.identity);
+                    particleInstance.Play(); // パーティクルを再生
+
+
+                }
+
+                // プレハブの削除処理
+                StartCoroutine(Skill2DestroyPrefabAndParticlesAfterDelay(1f, 2f));
             }
 
-            // パーティクルを生成して再生
-            if (skill2ParticleSystem != null)
-            {
-                // パーティクルシステムを生成
-                ParticleSystem particleInstance = Instantiate(skill2ParticleSystem, spawnedPrefab.transform.position, Quaternion.identity);
-                particleInstance.Play(); // パーティクルを再生
+            skill2PushCheck = false;
 
-              
-            }
-
-            // プレハブの削除処理
-            StartCoroutine(Skill2DestroyPrefabAndParticlesAfterDelay(1f,2f));
+            // クールダウン処理
+            canUseSkill2 = false;
+            StartCoroutine(Skill2Cooldown());
+            StartCoroutine(Skill2DuringAnima(false));
         }
-
-        // クールダウン処理
-        canUseSkill2 = false;
-        StartCoroutine(Skill2Cooldown());
     }
-
 
     private IEnumerator Skill1DestroyPrefabAndParticlesAfterDelay(float delay,float delay2)
     {
@@ -159,13 +164,10 @@ public class Bomb : Player
         yield return new WaitForSeconds(delay2);
         if (skill2ParticleSystem != null)
         {
-
             skill2ParticleSystem.Stop(); // パーティクル停止
             skill2ParticleSystem.Clear(); // パーティクルをクリア
             skill2ParticleSystem.transform.SetParent(transform, true); // プレイヤーの子オブジェクトに戻す
             skill2ParticleSystem.transform.localPosition = Vector3.zero; // 元の位置に戻す（必要に応じて調整）
-
         }
-        
     }
 }

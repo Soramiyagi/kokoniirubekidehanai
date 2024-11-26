@@ -10,6 +10,8 @@ public class BattleCamera : MonoBehaviour
     //全ての対象の中心点の座標
     private Vector3 centerPoint;
 
+    private Camera camera;
+
     //元となる位置
     public float pos_x, pos_y, pos_z;
 
@@ -37,6 +39,8 @@ public class BattleCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        camera = this.GetComponent<Camera>(); 
+        camera.enabled = false;
     }
 
     void FixedUpdate()
@@ -49,7 +53,8 @@ public class BattleCamera : MonoBehaviour
 
     public void FirstSet(GameObject[] players)
     {
-        targetObj = players;
+        targetObj = players; 
+        camera.enabled = true;
     }
 
     //中心点の算出(全てのキャラの座標の中の一番上下左右のポイントの中心点)

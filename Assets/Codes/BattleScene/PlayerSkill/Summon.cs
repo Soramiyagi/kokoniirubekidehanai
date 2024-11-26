@@ -8,12 +8,6 @@ public class Summon : Player
 
     [SerializeField] private GameObject wanderer;
 
-    // スピードとジャンプ力、スキルのクールダウン時間を派生クラスで設定
-    protected override float Speed { get; set; } = 2.0f; // スピード値
-    protected override float JumpForce { get; set; } = 5.0f; // ジャンプ力
-    protected override float Skill1CooldownTime { get; set; } = 4.0f; // スキル1のクールダウン
-    protected override float Skill2CooldownTime { get; set; } = 9.0f; // スキル2のクールダウン
-
     //ET = EffectTime(効果時間)
     private float skill2_ET = 0;
     public float skill2_ET_Set = 0;
@@ -60,7 +54,8 @@ public class Summon : Player
 
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
-        
+        StartCoroutine(Skill1DuringAnima(true));
+
     }
 
     // スキル1を離したときの処理をオーバーライド
@@ -70,6 +65,7 @@ public class Summon : Player
         発動タイミングが離したときなら使おう
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
+        StartCoroutine(Skill1DuringAnima(false));
         */
     }
 
@@ -87,8 +83,9 @@ public class Summon : Player
         rb.useGravity = false;
 
         canUseSkill2 = false;
-        StartCoroutine(Skill2Cooldown());
         PlayParticles();
+        StartCoroutine(Skill2Cooldown());
+        StartCoroutine(Skill2DuringAnima(true));
         StartCoroutine(DestroyPrefabAfterDelay(6f));
     }
 
@@ -99,6 +96,7 @@ public class Summon : Player
         発動タイミングが離したときなら使おう
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
+        StartCoroutine(Skill2DuringAnima(false));
         */
     }
 
@@ -108,7 +106,6 @@ public class Summon : Player
         if (particleSystem != null)
         {
             particleSystem.Play();
-
         }
     }
 

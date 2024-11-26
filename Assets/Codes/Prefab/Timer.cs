@@ -6,6 +6,7 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI TimeText;
+    public GameManager gameManager;
 
     private bool timeStop = true;
     private float time;
@@ -39,6 +40,6 @@ public class Timer : MonoBehaviour
 
     void TimeLimit()
     {
-        Debug.Log("ŠÔØ‚ê");
+        gameManager.Finish();
     }
 }

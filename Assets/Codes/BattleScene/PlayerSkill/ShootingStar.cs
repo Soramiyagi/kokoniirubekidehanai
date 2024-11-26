@@ -4,25 +4,21 @@ using UnityEngine;
 
 public class ShootingStar : Player
 {
-    [SerializeField] private GameObject ShootStars, CrushStars, Shaft, BulletPoint;
+    [SerializeField] private GameObject Shaft;
 
     public string characterName = "DefaultCharacter";
-
-    // スピードとジャンプ力、スキルのクールダウン時間を派生クラスで設定
-    protected override float Speed { get; set; } = 2.0f; // スピード値
-    protected override float JumpForce { get; set; } = 5.0f; // ジャンプ力
-    protected override float Skill1CooldownTime { get; set; } = 4.0f; // スキル1のクールダウン
-    protected override float Skill2CooldownTime { get; set; } = 9.0f; // スキル2のクールダウン
 
     // プレハブを生成するための変数
     public GameObject prefab; // プレハブの参照をインスペクタで設定
     private GameObject spawnedPrefab; // 生成されたプレハブの参照
 
+    private ShootingStar_SkillManager SSS;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        SSS = this.GetComponent<ShootingStar_SkillManager>();
     }
 
     protected override void FixedUpdate()
@@ -37,16 +33,13 @@ public class ShootingStar : Player
     {
         /*
         発動タイミングが押したときなら使おう
-        canUseSkill1 = false;
-        StartCoroutine(Skill1Cooldown());
         */
 
-        Debug.Log(BulletPoint.transform.position);
-
-        Instantiate(ShootStars, BulletPoint.transform.position, Quaternion.Euler(0f, 90 - R_angle, 0f));
+        SSS.UseSkill1();
 
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
+        StartCoroutine(Skill1DuringAnima(true));
     }
 
     // スキル1を離したときの処理をオーバーライド
@@ -56,6 +49,7 @@ public class ShootingStar : Player
         発動タイミングが離したときなら使おう
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
+        StartCoroutine(Skill1DuringAnima(false));
         */
     }
 
@@ -64,14 +58,13 @@ public class ShootingStar : Player
     {
         /*
         発動タイミングが押したときなら使おう
-        canUseSkill2 = false;
-        StartCoroutine(Skill2Cooldown()); 
         */
 
-        Instantiate(CrushStars, BulletPoint.transform.position, Quaternion.identity);
+        SSS.UseSkill2();
 
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
+        StartCoroutine(Skill2DuringAnima(true));
     }
 
     // スキル2を離したときの処理をオーバーライド
@@ -81,6 +74,7 @@ public class ShootingStar : Player
         発動タイミングが離したときなら使おう
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
+        StartCoroutine(Skill2DuringAnima(false));
         */
     }
 

@@ -11,10 +11,14 @@ public class Player : MonoBehaviour
     //このキャラを操作している人が何Pか
     private int playerNum = 0;
 
-    // スピードとジャンプ力をプロパティ化して派生クラスで設定可能に
+    // パラメーターをプロパティ化して派生クラスで設定可能に
     [SerializeField] private int stock = 3;
     [SerializeField] private float speed = 2.0f;
     [SerializeField] private float jumpForce = 5.0f;
+
+    //死んだ時の復帰時間中の移動速度を上げるときに使用
+    //ここに元々のspeedを一時的に保存する
+    private float speedTemp = 0;
 
     protected bool isGrounded;
     protected Rigidbody rb;
@@ -22,6 +26,13 @@ public class Player : MonoBehaviour
     // スキル1とスキル2のクールダウン時間 (フィールドをシリアライズ)
     [SerializeField] private float skill1CooldownTime = 5.0f;
     [SerializeField] private float skill2CooldownTime = 7.0f;
+
+    //スキル使用時のアニメーション中に操作を受け付けなくなる時間
+    [SerializeField] private float skill1AT_Push = 1.0f;
+    [SerializeField] private float skill1AT_Release = 1.0f;
+    [SerializeField] private float skill2AT_Push = 1.0f;
+    [SerializeField] private float skill2AT_Release = 1.0f;
+    protected bool duringAnima = false;
 
     //Lスティックの座標を表す
     protected Vector2 LS_Input;
@@ -42,7 +53,7 @@ public class Player : MonoBehaviour
     protected bool canUseSkill2 = true;
 
     //一時的に入力禁止にしたい際に使用するフラグ
-    protected bool canMoveInput = true;
+    protected bool canMoveInput = false;
 
     private InputAction L_Stick;
     private InputAction R_Stick;
@@ -64,6 +75,13 @@ public class Player : MonoBehaviour
 
     //ゲームマネージャーへのアクセス用
     private GameManager gameManager;
+
+    //スキルのゲージ
+    [SerializeField] private GameObject GaugeObj;
+    private Gauge gaugeScript;
+
+    //ゲームの進行による操作不能フラグ
+    protected bool systemStop = true;
 
     // プロパティでフィールドを操作
     protected virtual float Speed
@@ -99,11 +117,7 @@ public class Player : MonoBehaviour
         L_Stick = GetComponent<PlayerInput>().actions["L_Stick"];
         R_Stick = GetComponent<PlayerInput>().actions["R_Stick"];
 
-        rb = GetComponent<Rigidbody>();
         FirstSet();
-
-
-        lineRenderer = this.GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -142,52 +156,78 @@ public class Player : MonoBehaviour
     // 移動処理
     protected virtual void FixedUpdate()
     {
-        HandleMovement();
-
-        //向き計算
-        pointB = new Vector3(LS_Horizontal, 0, LS_Vertical);
-        pointC = new Vector3(RS_Horizontal, 0, RS_Vertical);
-        // ベクトルの計算
-        Vector3 direction = pointB - pointA;
-        Vector3 R_direction = pointC - pointA;
-        // 角度を計算
-        L_angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
-        R_angle = Mathf.Atan2(R_direction.z, R_direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
-
-        Quaternion targetRotation = Quaternion.Euler(0, -L_angle + 90, 0);
-        this.transform.rotation = targetRotation;
-
-
-        lineRenderer.SetPosition(0, this.transform.position);
-        lineRenderer.SetPosition(1, this.transform.position + pointC * 5);
-
-        if (floatTime > 0)
+        if (systemStop == false)
         {
-            floatTime -= Time.deltaTime;
-            Vector3 newPosition = this.transform.position;
-            newPosition.y = 4;
-            transform.position = newPosition;
-        }
+            HandleMovement();
 
-        if (bindTime > 0)
-        {
-            bindTime -= Time.deltaTime;
-            canMoveInput = false;
+            //向き計算
+            pointB = new Vector3(LS_Horizontal, 0, LS_Vertical);
+            pointC = new Vector3(RS_Horizontal, 0, RS_Vertical);
+            // ベクトルの計算
+            Vector3 direction = pointB - pointA;
+            Vector3 R_direction = pointC - pointA;
+            // 角度を計算
+            L_angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
+            R_angle = Mathf.Atan2(R_direction.z, R_direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
 
-        }
-        else if (bindTime <= 0)
-        {
-            canMoveInput = true;
-        }
+            Quaternion targetRotation = Quaternion.Euler(0, -L_angle + 90, 0);
+            this.transform.rotation = targetRotation;
 
-        if(deathInterval > 0)
-        {
-            deathInterval -= Time.deltaTime;
+
+            lineRenderer.SetPosition(0, this.transform.position);
+            lineRenderer.SetPosition(1, this.transform.position + pointC * 5);
+
+            if (floatTime > 0)
+            {
+                speed = 8f;
+                floatTime -= Time.deltaTime;
+                Vector3 newPosition = this.transform.position;
+                newPosition.y = 4;
+                transform.position = newPosition;
+                canUseSkill1 = false;
+                canUseSkill2 = false;
+
+                if (floatTime <= 0)
+                {
+                    speed = speedTemp;
+                    canUseSkill1 = true;
+                    canUseSkill2 = true;
+                }
+            }
+
+            if (bindTime > 0)
+            {
+                bindTime -= Time.deltaTime;
+                canMoveInput = false;
+            }
+            else if (bindTime <= 0)
+            {
+                if (duringAnima == true)
+                {
+                    canMoveInput = false;
+                }
+                else if (duringAnima == false)
+                {
+                    canMoveInput = true;
+                }
+            }
+
+            if (deathInterval > 0)
+            {
+                deathInterval -= Time.deltaTime;
+            }
+
+            GaugeObj.transform.rotation = Quaternion.Euler(new Vector3(90, 0, 0));
         }
     }
 
     private void FirstSet()
     {
+        speedTemp = speed;
+
+        lineRenderer = this.GetComponent<LineRenderer>();
+        rb = GetComponent<Rigidbody>();
+
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
         // 名前が一致するオブジェクトが存在するかチェック
 
@@ -224,6 +264,9 @@ public class Player : MonoBehaviour
 
         GameObject newObject = Instantiate(statusObj);
         statusScript = newObject.GetComponent<Status>();
+
+        gaugeScript = GaugeObj.GetComponent<Gauge>();
+        gaugeScript.FirstSet(skill1CooldownTime, skill2CooldownTime);
 
         if (exist[0] == false)
         {
@@ -340,17 +383,53 @@ public class Player : MonoBehaviour
     // スキル1のクールダウン処理
     protected virtual IEnumerator Skill1Cooldown()
     {
+        gaugeScript.SkillUse(1);
         yield return new WaitForSeconds(Skill1CooldownTime);
         canUseSkill1 = true;
-        Debug.Log("Skill 1 ready!");
     }
 
     // スキル2のクールダウン処理
     protected virtual IEnumerator Skill2Cooldown()
     {
+        gaugeScript.SkillUse(2);
         yield return new WaitForSeconds(Skill2CooldownTime);
         canUseSkill2 = true;
-        Debug.Log("Skill 2 ready!");
+    }
+
+    // スキル1のアニメ中の処理
+    // pushがtrueなら押されたとき、pushがfalseなら離されたとき
+    protected virtual IEnumerator Skill1DuringAnima(bool push)
+    {
+        duringAnima = true;
+
+        if (push == true)
+        {
+            yield return new WaitForSeconds(skill1AT_Push);
+        }
+        else if (push == false)
+        {
+            yield return new WaitForSeconds(skill1AT_Release);
+        }
+
+        duringAnima = false;
+    }
+
+    // スキル2のアニメ中の処理
+    // pushがtrueなら押されたとき、pushがfalseなら離されたとき
+    protected virtual IEnumerator Skill2DuringAnima(bool push)
+    {
+        duringAnima = true;
+
+        if (push == true)
+        {
+            yield return new WaitForSeconds(skill2AT_Push);
+        }
+        else if (push == false)
+        {
+            yield return new WaitForSeconds(skill2AT_Release);
+        }
+
+        duringAnima = false;
     }
 
     // 何かに接触したときに呼ばれる
@@ -367,8 +446,20 @@ public class Player : MonoBehaviour
                 stock--;
                 deathInterval = 1;
                 statusScript.StockMinus(stock);
+
+                StopCoroutine("Skill1Cooldown");
+                StopCoroutine("Skill2Cooldown");
+                StopCoroutine("Skill1DuringAnima");
+                StopCoroutine("Skill2DuringAnima");
+
+                gaugeScript.SkillGaugeReset();
+
                 if (stock >= 1)
                 {
+                    bindTime = 0;
+                    duringAnima = false;
+                    canUseSkill1 = true;
+                    canUseSkill2 = true;
                     floatTime = floatTime_Set;
                 }
                 else if (stock < 1)
@@ -384,21 +475,21 @@ public class Player : MonoBehaviour
         }
     }
 
-    // 何かに接触している間呼ばれる
-    protected virtual void OnCollisionStay(Collision collision)
+    // 何かに接触したときに呼ばれる
+    protected virtual void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("FirstStopGround"))
+        if (other.gameObject.CompareTag("Bind"))
         {
-            canMoveInput = false;
+            bindTime = bindTime_Set;
         }
     }
 
-    // 接触している何かから離れた時に呼ばれる
-    protected virtual void OnCollisionExit(Collision collision)
+    // 何かに接触し続けるときに呼ばれる
+    protected virtual void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.CompareTag("FirstStopGround"))
+        if (other.gameObject.CompareTag("SystemStopBreak"))
         {
-            canMoveInput = true;
+            systemStop = false;
         }
     }
 }

@@ -26,7 +26,6 @@ public class Status : MonoBehaviour
 
         if (playerNum == 1)
         {
-            Debug.Log("AAA");
             name.text = "Player1";
             StatusFrame.transform.position = new Vector3(-310, 140, 0);
         }

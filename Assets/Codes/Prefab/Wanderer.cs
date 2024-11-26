@@ -17,6 +17,24 @@ public class Wanderer : MonoBehaviour
 
         speed_x = Random.Range(-4f, 4f);
         speed_y = Random.Range(-4f, 4f);
+
+        if(speed_x <= 0)
+        {
+            speed_x = -4.0f;
+        }
+        else if (speed_x > 0)
+        {
+            speed_x = 4.0f;
+        }
+
+        if (speed_y <= 0)
+        {
+            speed_y = -4.0f;
+        }
+        else if (speed_y > 0)
+        {
+            speed_y = 4.0f;
+        }
     }
 
     // Update is called once per frame

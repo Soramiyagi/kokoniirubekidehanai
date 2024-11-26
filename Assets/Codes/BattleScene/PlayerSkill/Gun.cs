@@ -8,12 +8,6 @@ public class Gun : Player
 
     [SerializeField] private GameObject Shaft, BulletPoint, Bind, FixSphere;
 
-    // スピードとジャンプ力、スキルのクールダウン時間を派生クラスで設定
-    protected override float Speed { get; set; } = 2.0f; // スピード値
-    protected override float JumpForce { get; set; } = 5.0f; // ジャンプ力
-    protected override float Skill1CooldownTime { get; set; } = 4.0f; // スキル1のクールダウン
-    protected override float Skill2CooldownTime { get; set; } = 9.0f; // スキル2のクールダウン
-
     public ParticleSystem particleSystem;
     private Animator animator;//アニメーションをGetComponentする変数
     // Start is called before the first frame update
@@ -41,6 +35,7 @@ public class Gun : Player
 
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
+        StartCoroutine(Skill1DuringAnima(true));
     }
 
     // スキル1を離したときの処理をオーバーライド
@@ -50,6 +45,7 @@ public class Gun : Player
         発動タイミングが離したときなら使おう
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
+        StartCoroutine(Skill1DuringAnima(false));
         */
     }
 
@@ -67,6 +63,7 @@ public class Gun : Player
 
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
+        StartCoroutine(Skill2DuringAnima(true));
 
         // 一定時間後にパーティクルを停止・削除
         StartCoroutine(DestroyParticleAfterDelay(particleInstance, 1f));
@@ -79,6 +76,7 @@ public class Gun : Player
         発動タイミングが離したときなら使おう
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
+        StartCoroutine(Skill2DuringAnima(false));
         */
     }
 
@@ -88,7 +86,6 @@ public class Gun : Player
         if (particleSystem != null)
         {
             particleSystem.Play();
-           
         }
     }
 
