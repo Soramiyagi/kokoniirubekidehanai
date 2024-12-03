@@ -56648,10 +56648,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj:
-  - {fileID: 4746341752903393084, guid: 1fdc2de601bf04e4ba7ac8ab7a041e6e, type: 3}
-  - {fileID: 8076285214372003584, guid: 1760157f69f1ad844b1abb5ceccd491a, type: 3}
+  - {fileID: 879187707445915428, guid: fdfb3d5f544201740925bfb71624b58e, type: 3}
+  - {fileID: 2038400410366373315, guid: 94ec5610ee8968e4dbe1b0fb27d1355d, type: 3}
   - {fileID: 1120204271773741191, guid: 572f59dea48a14f488c5dbbd07ed23a0, type: 3}
-  - {fileID: 805848111212218091, guid: eb96053d75359a24a8308919e0000426, type: 3}
+  - {fileID: 8339739883308227646, guid: 3958a11cedc51b94992459064d7214dc, type: 3}
   - {fileID: 4746341752903393084, guid: db3d7cf140f13de47a111cdac0cdd183, type: 3}
   battleCamera: {fileID: 1044552812}
 --- !u!4 &1899622115
