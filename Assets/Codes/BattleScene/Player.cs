@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
         {
             if (L_Stick.ReadValue<Vector2>() == Vector2.zero)
             {
-                LS_Input = Vector2.zero;
+                speed = 0;
             }
 
             if (R_Stick.ReadValue<Vector2>() == Vector2.zero)
@@ -137,6 +137,7 @@ public class Player : MonoBehaviour
 
             if (L_Stick.ReadValue<Vector2>() != Vector2.zero)
             {
+                speed = speedTemp;
                 LS_Input = L_Stick.ReadValue<Vector2>();
             }
 
@@ -202,14 +203,7 @@ public class Player : MonoBehaviour
             }
             else if (bindTime <= 0)
             {
-                if (duringAnima == true)
-                {
-                    canMoveInput = false;
-                }
-                else if (duringAnima == false)
-                {
-                    canMoveInput = true;
-                }
+                canMoveInput = true;
             }
 
             if (deathInterval > 0)
@@ -324,20 +318,30 @@ public class Player : MonoBehaviour
         }
     }
 
+    private bool skill1InputStop = false;
+    private bool skill2InputStop = false;
+
     //Skill1処理
     public void OnSkill1(InputAction.CallbackContext Skill1)
     {
-        if (canMoveInput == true)
+        if (skill1InputStop == false)
         {
-            if (Skill1.started && canUseSkill1 == true)
+            if (canMoveInput == true)
             {
-                //押した時
-                Skill1Push();
-            }
-            else if (Skill1.canceled && canUseSkill1 == true)
-            {
-                //離した時
-                Skill1Release();
+                if (Skill1.started && canUseSkill1 == true)
+                {
+                    // 押した時
+                    Skill1Push();
+                    StartCoroutine(Skill1InputManager());
+                    skill1InputStop = true;
+                }
+                else if (Skill1.canceled && canUseSkill1 == true)
+                {
+                    // 離した時
+                    Skill1Release();
+                    StartCoroutine(Skill1InputManager());
+                    skill1InputStop = true;
+                }
             }
         }
     }
@@ -345,17 +349,26 @@ public class Player : MonoBehaviour
     //Skill2処理
     public void OnSkill2(InputAction.CallbackContext Skill2)
     {
-        if (canMoveInput == true)
+        if (skill2InputStop == false)
         {
-            if (Skill2.started && canUseSkill2 == true)
+            if (canMoveInput == true)
             {
-                //押した時
-                Skill2Push();
-            }
-            else if (Skill2.canceled && canUseSkill2 == true)
-            {
-                //離した時
-                Skill2Release();
+                if (Skill2.started && canUseSkill2 == true)
+                {
+                    //押した時
+                    Debug.Log("AAA");
+                    Skill2Push();
+                    skill2InputStop = true;
+                    StartCoroutine(Skill2InputManager());
+                }
+                else if (Skill2.canceled && canUseSkill2 == true)
+                {
+                    //離した時
+                    Debug.Log("BBB");
+                    Skill2Release();
+                    skill2InputStop = true;
+                    StartCoroutine(Skill2InputManager());
+                }
             }
         }
     }
@@ -380,7 +393,21 @@ public class Player : MonoBehaviour
     {
     }
 
-    // スキル1のクールダウン処理
+    // スキル1の多重入力の防止
+    protected virtual IEnumerator Skill1InputManager()
+    {
+        yield return new WaitForSeconds(0.5f);
+        skill1InputStop = false;
+    }
+
+    // スキル2の多重入力の防止
+    protected virtual IEnumerator Skill2InputManager()
+    {
+        yield return new WaitForSeconds(0.5f);
+        skill2InputStop = false;
+    }
+
+    // スキル1の入力
     protected virtual IEnumerator Skill1Cooldown()
     {
         gaugeScript.SkillUse(1);
@@ -402,6 +429,8 @@ public class Player : MonoBehaviour
     {
         duringAnima = true;
 
+        speed = 0;
+
         if (push == true)
         {
             yield return new WaitForSeconds(skill1AT_Push);
@@ -412,6 +441,7 @@ public class Player : MonoBehaviour
         }
 
         duringAnima = false;
+        speed = speedTemp;
     }
 
     // スキル2のアニメ中の処理
@@ -419,6 +449,8 @@ public class Player : MonoBehaviour
     protected virtual IEnumerator Skill2DuringAnima(bool push)
     {
         duringAnima = true;
+
+        speed = 0;
 
         if (push == true)
         {
@@ -430,6 +462,7 @@ public class Player : MonoBehaviour
         }
 
         duringAnima = false;
+        speed = speedTemp;
     }
 
     // 何かに接触したときに呼ばれる
