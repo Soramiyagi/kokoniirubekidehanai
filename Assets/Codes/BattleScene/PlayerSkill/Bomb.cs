@@ -18,6 +18,8 @@ public class Bomb : Player
 
     private bool skill1PushCheck, skill2PushCheck = false;
 
+    private float movementThreshold = 0.001f;
+
     private Animator animator;//アニメーションをGetComponentする変数
 
     // 前フレームの位置を記録する変数
@@ -44,8 +46,11 @@ public class Bomb : Player
             spawnedPrefab.transform.position = followPosition;
         }
 
+        float distanceMoved = Vector3.Distance(transform.position, previousPosition);
         Shaft.transform.rotation = Quaternion.Euler(0.0f, 90 - R_angle, 0.0f);
-        if (transform.position != previousPosition)
+
+        // 移動距離が閾値を超えたらwalkingをtrueにする
+        if (distanceMoved > movementThreshold)
         {
             animator.SetBool("walking", true);
         }
@@ -59,7 +64,7 @@ public class Bomb : Player
 
     protected override void Skill1Push()
     {
-        animator.SetTrigger("skill1");//walkingをtureにする
+        //walkingをtureにする
         skill1PushCheck = true;
         Skill1Preview.SetActive(true);
         Collider previewCollider = Skill1Preview.GetComponent<Collider>();
@@ -72,8 +77,10 @@ public class Bomb : Player
 
     protected override void Skill1Release()
     {
+
         if (skill1PushCheck == true)
         {
+            animator.SetTrigger("skill1");
             Collider previewCollider = Skill1Preview.GetComponent<Collider>();
             if (previewCollider != null)
             {

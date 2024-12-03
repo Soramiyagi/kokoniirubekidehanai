@@ -21,11 +21,14 @@ public class Dash : Player
     //ET = EffectTime(効果時間)
     private float skill2_ET = 0;
     public float skill2_ET_Set = 0;
-
+    private Vector3 previousPosition;
+    private Animator animator;//アニメーションをGetComponentする変数
+    private float movementThreshold = 0.001f;
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        animator = GetComponent<Animator>();
     }
 
     protected override void FixedUpdate()
@@ -65,11 +68,25 @@ public class Dash : Player
                 C_extendCollider.SetActive(false);
             }
         }
+        float distanceMoved = Vector3.Distance(transform.position, previousPosition);
+
+        // 移動距離が閾値を超えたらwalkingをtrueにする
+        if (distanceMoved > movementThreshold)
+        {
+            animator.SetBool("walking", true);
+        }
+        else
+        {
+            animator.SetBool("walking", false);
+        }
+
+        previousPosition = transform.position;
     }
 
     // スキル1が押された時の処理をオーバーライド
     protected override void Skill1Push()
     {
+        animator.SetTrigger("skill1");
         dashTime = 0;
         if (skill1ParticleSystem != null)
         {
@@ -114,6 +131,7 @@ public class Dash : Player
     // スキル2が押された時の処理をオーバーライド
     protected override void Skill2Push()
     {
+        animator.SetTrigger("skill2");
         clones.SetActive(true);
         skill2_ET = skill2_ET_Set;
         if (skill2ParticleSystem != null && skill2ParticleSystem2 != null)
