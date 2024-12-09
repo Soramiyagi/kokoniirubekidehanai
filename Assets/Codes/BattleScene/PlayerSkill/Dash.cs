@@ -9,6 +9,8 @@ public class Dash : Player
     [SerializeField] private GameObject clones, extendCollider, C_extendCollider;
     [SerializeField] private GameObject EndPoint;
 
+    [HideInInspector] public bool walkingFlag = false, skill1Flag = false, skill2Flag = false;
+
     public float dashSpeed;
     private Vector3 currentPos, endPos;
 
@@ -74,10 +76,12 @@ public class Dash : Player
         if (distanceMoved > movementThreshold)
         {
             animator.SetBool("walking", true);
+            walkingFlag = true;
         }
         else
         {
             animator.SetBool("walking", false);
+            walkingFlag = false;
         }
 
         previousPosition = transform.position;
@@ -87,6 +91,8 @@ public class Dash : Player
     protected override void Skill1Push()
     {
         animator.SetTrigger("skill1");
+        skill1Flag = true;
+        StartCoroutine(CloneSkill1());
         dashTime = 0;
         if (skill1ParticleSystem != null)
         {
@@ -132,6 +138,8 @@ public class Dash : Player
     protected override void Skill2Push()
     {
         animator.SetTrigger("skill2");
+        skill2Flag = true;
+        StartCoroutine(CloneSkill2());
         clones.SetActive(true);
         skill2_ET = skill2_ET_Set;
         if (skill2ParticleSystem != null && skill2ParticleSystem2 != null)
@@ -172,6 +180,7 @@ public class Dash : Player
         {
             skill1ParticleSystem.Stop();
             skill1ParticleSystem.Clear();
+     
 
         }
     }
@@ -183,6 +192,7 @@ public class Dash : Player
         {
             skill2ParticleSystem.Stop();
             skill2ParticleSystem.Clear();
+      
         }
         if (skill2ParticleSystem2 != null)
         {
@@ -190,5 +200,16 @@ public class Dash : Player
             skill2ParticleSystem2.Clear();
         }
     }
-    
+
+    private IEnumerator CloneSkill1()
+    {
+        yield return null;
+        skill1Flag = false;
+    }
+    private IEnumerator CloneSkill2()
+    {
+        yield return null;
+        skill2Flag = false;
+    }
+
 }

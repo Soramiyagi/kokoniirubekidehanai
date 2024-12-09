@@ -15,11 +15,14 @@ public class Summon : Player
     private float downStop = 0;
 
     public ParticleSystem particleSystem;
-
+    private Vector3 previousPosition;
+    private Animator animator;//アニメーションをGetComponentする変数
+    private float movementThreshold = 0.001f;
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        animator = GetComponent<Animator>();
     }
 
     protected override void FixedUpdate()
@@ -41,6 +44,18 @@ public class Summon : Player
         {
             rb.useGravity = true;
         }
+        float distanceMoved = Vector3.Distance(transform.position, previousPosition);
+
+        // 移動距離が閾値を超えたらwalkingをtrueにする
+        if (distanceMoved > movementThreshold)
+        {
+            animator.SetBool("walking", true);
+        }
+        else
+        {
+            animator.SetBool("walking", false);          
+        }
+        previousPosition = transform.position;
     }
 
     // スキル1が押された時の処理をオーバーライド
@@ -49,7 +64,7 @@ public class Summon : Player
         /*
         発動タイミングが押したときなら使おう
         */
-
+        animator.SetTrigger("skill1");
         Instantiate(wanderer, this.transform.position, Quaternion.identity);
 
         canUseSkill1 = false;
@@ -75,10 +90,11 @@ public class Summon : Player
         /*
         発動タイミングが押したときなら使おう
         */
+        animator.SetBool("skill2", true);
         skill2_ET = skill2_ET_Set;
         isGrounded = false;
 
-        downStop = this.transform.position.y + 0.5f;
+        downStop = this.transform.position.y + 1f;
 
         rb.useGravity = false;
 
@@ -123,5 +139,6 @@ public class Summon : Player
     {
         yield return new WaitForSeconds(delay); // 指定した秒数待機
         StopParticles();
+        animator.SetBool("skill2", false);
     }
 }
