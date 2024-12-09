@@ -13,19 +13,37 @@ public class ShootingStar : Player
     private GameObject spawnedPrefab; // 生成されたプレハブの参照
 
     private ShootingStar_SkillManager SSS;
+    private Animator animator;//アニメーションをGetComponentする変数
+    private float movementThreshold = 0.001f;
+    private Vector3 previousPosition;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         SSS = this.GetComponent<ShootingStar_SkillManager>();
+        animator = GetComponent<Animator>();
     }
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
         Shaft.transform.rotation = Quaternion.Euler(0.0f, 90 - R_angle, 0.0f);
+        float distanceMoved = Vector3.Distance(transform.position, previousPosition);
+
+        // 移動距離が閾値を超えたらwalkingをtrueにする
+        if (distanceMoved > movementThreshold)
+        {
+            animator.SetBool("walking", true);
+           
+        }
+        else
+        {
+            animator.SetBool("walking", false);
+           
+        }
+
+        previousPosition = transform.position;
     }
 
     // スキル1が押された時の処理をオーバーライド
@@ -34,7 +52,7 @@ public class ShootingStar : Player
         /*
         発動タイミングが押したときなら使おう
         */
-
+        animator.SetTrigger("skill1");
         SSS.UseSkill1();
 
         canUseSkill1 = false;
@@ -59,7 +77,7 @@ public class ShootingStar : Player
         /*
         発動タイミングが押したときなら使おう
         */
-
+        animator.SetTrigger("skill2");
         SSS.UseSkill2();
 
         canUseSkill2 = false;
