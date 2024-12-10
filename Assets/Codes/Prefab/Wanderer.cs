@@ -15,6 +15,7 @@ public class Wanderer : MonoBehaviour
 
         time = time_set;
 
+        float angle = transform.eulerAngles.y;
         speed_x = Random.Range(-4f, 4f);
         speed_y = Random.Range(-4f, 4f);
 

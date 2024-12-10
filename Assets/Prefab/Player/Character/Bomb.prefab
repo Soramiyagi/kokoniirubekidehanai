@@ -286,15 +286,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11a60420cb52134fa8854cde0a397d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FixSphere: {fileID: 417174588831832090, guid: 8bacbc68d1208884e8bbc99b584bef62, type: 3}
   stock: 3
   speed: 2.5
   jumpForce: 5
   skill1CooldownTime: 5
   skill2CooldownTime: 7
   skill1AT_Push: 0
-  skill1AT_Release: 0.8
   skill2AT_Push: 0.4
-  skill2AT_Release: 0.8
   floatTime_Set: 4
   bindTime_Set: 1
   statusObj: {fileID: 3577742063162212954, guid: 4a5ab18ae8d24234a9c86c82a517c80f, type: 3}
@@ -304,6 +303,7 @@ MonoBehaviour:
   Shaft: {fileID: 862291337267368953}
   skill1ParticleSystem: {fileID: 2477277833666773796}
   skill2ParticleSystem: {fileID: 261976096559183834}
+  skill1Prehub: {fileID: 0}
   skill2Prehub: {fileID: 8012514600807043988, guid: cb3f9503b8d944c41b51535421c5c83c, type: 3}
 --- !u!120 &-939366130412217164
 LineRenderer:

@@ -106,26 +106,7 @@ public class Dash : Player
 
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
-        StartCoroutine(Skill1DuringAnima(true));
-    }
-
-    // スキル1を離したときの処理をオーバーライド
-    protected override void Skill1Release()
-    {
-        /*
-        発動タイミングが離したときなら使おう
-        canUseSkill1 = false;
-        duringAnima = true;
-        StartCoroutine(Skill1Cooldown());
-        StartCoroutine(Skill1DuringAnima(false));
-
-        //リリース時に発動するスキルなら必要
-        if (Skill1PushCheck == true)
-        {
-            //スキル処理の記述
-            Skill1PushCheck = false;
-        }
-        */
+        StartCoroutine(Skill1DuringAnima());
     }
 
     // スキル2が押された時の処理をオーバーライド
@@ -143,26 +124,7 @@ public class Dash : Player
 
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
-        StartCoroutine(Skill2DuringAnima(true));
-    }
-
-    // スキル2を離したときの処理をオーバーライド
-    protected override void Skill2Release()
-    {
-        /*
-        発動タイミングが離したときなら使おう
-        canUseSkill2 = false;
-        duringAnima = true;
-        StartCoroutine(Skill2Cooldown());
-        StartCoroutine(Skill2DuringAnima(false));
-
-        //リリース時に発動するスキルなら必要
-        if (Skill2PushCheck == true)
-        {
-            //スキル処理の記述
-            Skill2PushCheck = false;
-        }
-        */
+        StartCoroutine(Skill2DuringAnima());
     }
 
     private IEnumerator skill1DestroyPrefabAfterDelay(float delay)

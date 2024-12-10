@@ -17,12 +17,6 @@ public class FixSphere : MonoBehaviour
         this.transform.localScale = new Vector3(scale, scale, scale);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void FixedUpdate()
     {
         if (effect == true)
