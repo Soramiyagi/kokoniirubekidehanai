@@ -6,17 +6,18 @@ public class Bomb : Player
 {
     public string characterName = "DefaultCharacter";
 
-    [SerializeField] private GameObject Skill1Preview, Shaft;
+    [SerializeField] private GameObject Skill1Preview;
 
     public ParticleSystem skill1ParticleSystem;
     public ParticleSystem skill2ParticleSystem;
+
     // プレハブを生成するための変数
+    public GameObject skill1Prehub; // スキル1のプレハブ
     public GameObject skill2Prehub; // スキル2のプレハブ
     private GameObject spawnedPrefab; // 生成されたプレハブの参照
 
     private bool previewSkill1 = false; // skill1のプレビューのためのフラグ
-
-    private bool skill1PushCheck, skill2PushCheck = false;
+    private bool skill2Check = false;
 
     private float movementThreshold = 0.001f;
 
@@ -47,7 +48,6 @@ public class Bomb : Player
         }
 
         float distanceMoved = Vector3.Distance(transform.position, previousPosition);
-        Shaft.transform.rotation = Quaternion.Euler(0.0f, 90 - R_angle, 0.0f);
 
         // 移動距離が閾値を超えたらwalkingをtrueにする
         if (distanceMoved > movementThreshold)
@@ -65,68 +65,47 @@ public class Bomb : Player
     protected override void Skill1Push()
     {
         //walkingをtureにする
-        skill1PushCheck = true;
         Skill1Preview.SetActive(true);
-        Collider previewCollider = Skill1Preview.GetComponent<Collider>();
-        if (previewCollider != null)
+        
+        animator.SetTrigger("skill1");
+
+        // 生成されたパーティクルインスタンスを再生
+        if (skill1ParticleSystem != null)
         {
-            previewCollider.enabled = false; // コリジョンをオフに
+            skill1ParticleSystem.Play();
         }
-    }
+        StartCoroutine(Skill1DestroyPrefabAndParticlesAfterDelay(0.1f, 1f));
 
-
-    protected override void Skill1Release()
-    {
-
-        if (skill1PushCheck == true)
-        {
-            animator.SetTrigger("skill1");
-            Collider previewCollider = Skill1Preview.GetComponent<Collider>();
-            if (previewCollider != null)
-            {
-                previewCollider.enabled = true; // コリジョンをオンに
-            }
-            // 生成されたパーティクルインスタンスを再生
-            if (skill1ParticleSystem != null)
-            {
-                skill1ParticleSystem.Play();
-            }
-            StartCoroutine(Skill1DestroyPrefabAndParticlesAfterDelay(0.1f, 1f));
-
-            skill1PushCheck = false;
-
-            canUseSkill1 = false;
-            StartCoroutine(Skill1Cooldown());
-            StartCoroutine(Skill1DuringAnima(false));
-        }
+        canUseSkill1 = false;
+        StartCoroutine(Skill1Cooldown());
+        StartCoroutine(Skill1DuringAnima());
     }
 
     // スキル2が押されている間の処理をオーバーライド
     protected override void Skill2Push()
     {
-        animator.SetTrigger("skill2Put");
-        skill2PushCheck = true;
-        if (spawnedPrefab == null)
+        if (skill2Check == false)
         {
-            // プレイヤーの位置からY軸を-0.5した位置にプレハブを生成
-            Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y , transform.position.z);
-            spawnedPrefab = Instantiate(skill2Prehub, spawnPosition, Quaternion.identity);
-
-            StartCoroutine(Skill2DuringAnima(true));
-
-            // コリジョンをオフにする処理
-            Collider prefabCollider = spawnedPrefab.GetComponent<Collider>();
-            if (prefabCollider != null)
+            if (spawnedPrefab == null)
             {
-                prefabCollider.enabled = false; // コリジョンをオフに
+                animator.SetTrigger("skill2Put");
+                // プレイヤーの位置からY軸を-0.5した位置にプレハブを生成
+                Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                spawnedPrefab = Instantiate(skill2Prehub, spawnPosition, Quaternion.identity);
+
+                StartCoroutine(Skill2DuringAnima());
+
+                // コリジョンをオフにする処理
+                Collider prefabCollider = spawnedPrefab.GetComponent<Collider>();
+                if (prefabCollider != null)
+                {
+                    prefabCollider.enabled = false; // コリジョンをオフに
+                }
+
+                skill2Check = true;
             }
         }
-    }
-
-    // スキル2を発動する処理をオーバーライド
-    protected override void Skill2Release()
-    {
-        if (skill2PushCheck == true)
+        else if (skill2Check == true)
         {
             if (spawnedPrefab != null)
             {
@@ -152,33 +131,27 @@ public class Bomb : Player
                 StartCoroutine(Skill2DestroyPrefabAndParticlesAfterDelay(1f, 2f));
             }
 
-            skill2PushCheck = false;
-
             // クールダウン処理
             canUseSkill2 = false;
             StartCoroutine(Skill2Cooldown());
-            StartCoroutine(Skill2DuringAnima(false));
+            StartCoroutine(Skill2DuringAnima());
+
+            skill2Check = false;
         }
     }
 
     private IEnumerator Skill1DestroyPrefabAndParticlesAfterDelay(float delay,float delay2)
     {
         yield return new WaitForSeconds(delay); // 指定した秒数待機
-        Collider previewCollider = Skill1Preview.GetComponent<Collider>();
-        if (previewCollider != null)
-        {
-            previewCollider.enabled = false; // コリジョンをオフに
-        }
+        Skill1Preview.SetActive(false);
         yield return new WaitForSeconds(delay2); // 指定した秒数待機
         if (skill1ParticleSystem != null)
         {
-
             skill1ParticleSystem.Stop();
             skill1ParticleSystem.Clear();
-
         }
-        Skill1Preview.SetActive(false);
     }
+
     // 1秒後にプレハブを削除するためのコルーチン
     private IEnumerator Skill2DestroyPrefabAndParticlesAfterDelay(float delay,float delay2)
     {

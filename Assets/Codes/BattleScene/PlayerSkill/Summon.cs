@@ -29,8 +29,6 @@ public class Summon : Player
     {
         base.FixedUpdate();
 
-        Debug.Log(this.transform.position);
-
         if (skill2_ET > 0)
         {
             skill2_ET -= Time.deltaTime;
@@ -64,24 +62,19 @@ public class Summon : Player
         /*
         発動タイミングが押したときなら使おう
         */
+<<<<<<< HEAD
         animator.SetTrigger("skill1");
+=======
+
+        // 現在のオブジェクトの位置と回転角度を使って新しいオブジェクトを生成
+>>>>>>> origin/main
         Instantiate(wanderer, this.transform.position, Quaternion.identity);
 
+
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
-        StartCoroutine(Skill1DuringAnima(true));
+        StartCoroutine(Skill1DuringAnima());
 
-    }
-
-    // スキル1を離したときの処理をオーバーライド
-    protected override void Skill1Release()
-    {
-        /*
-        発動タイミングが離したときなら使おう
-        canUseSkill1 = false;
-        StartCoroutine(Skill1Cooldown());
-        StartCoroutine(Skill1DuringAnima(false));
-        */
     }
 
     // スキル2が押された時の処理をオーバーライド
@@ -101,19 +94,8 @@ public class Summon : Player
         canUseSkill2 = false;
         PlayParticles();
         StartCoroutine(Skill2Cooldown());
-        StartCoroutine(Skill2DuringAnima(true));
+        StartCoroutine(Skill2DuringAnima());
         StartCoroutine(DestroyPrefabAfterDelay(6f));
-    }
-
-    // スキル2を離したときの処理をオーバーライド
-    protected override void Skill2Release()
-    {
-        /*
-        発動タイミングが離したときなら使おう
-        canUseSkill2 = false;
-        StartCoroutine(Skill2Cooldown());
-        StartCoroutine(Skill2DuringAnima(false));
-        */
     }
 
     // パーティクルを再生するメソッド

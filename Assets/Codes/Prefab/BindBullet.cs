@@ -13,12 +13,6 @@ public class BindBullet : MonoBehaviour
         time = 10f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void FixedUpdate()
     {
         if (time > 0)

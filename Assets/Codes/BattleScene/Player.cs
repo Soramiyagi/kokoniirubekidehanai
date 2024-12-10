@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private GameObject FixSphere;
+
     //視覚情報関連
     private LineRenderer lineRenderer;
 
@@ -20,6 +22,10 @@ public class Player : MonoBehaviour
     //ここに元々のspeedを一時的に保存する
     private float speedTemp = 0;
 
+    //Lスティックを傾けているかどうか
+    private int L_Stick_Inclination = 0;
+    private int R_Stick_Inclination = 0;
+
     protected bool isGrounded;
     protected Rigidbody rb;
 
@@ -29,9 +35,7 @@ public class Player : MonoBehaviour
 
     //スキル使用時のアニメーション中に操作を受け付けなくなる時間
     [SerializeField] private float skill1AT_Push = 1.0f;
-    [SerializeField] private float skill1AT_Release = 1.0f;
     [SerializeField] private float skill2AT_Push = 1.0f;
-    [SerializeField] private float skill2AT_Release = 1.0f;
     protected bool duringAnima = false;
 
     //Lスティックの座標を表す
@@ -68,6 +72,9 @@ public class Player : MonoBehaviour
 
     //連続で死ぬことを防ぐため
     private float deathInterval = 0;
+
+    //連続でジャンプするのを防ぐため
+    private float jumpInterval = 0;
 
     //ステータス用
     [SerializeField] private GameObject statusObj;
@@ -127,22 +134,24 @@ public class Player : MonoBehaviour
         {
             if (L_Stick.ReadValue<Vector2>() == Vector2.zero)
             {
-                speed = 0;
+                L_Stick_Inclination = 0;
             }
 
             if (R_Stick.ReadValue<Vector2>() == Vector2.zero)
             {
+                R_Stick_Inclination = 0;
                 RS_Input = Vector2.zero;
             }
 
             if (L_Stick.ReadValue<Vector2>() != Vector2.zero)
             {
-                speed = speedTemp;
+                L_Stick_Inclination = 1;
                 LS_Input = L_Stick.ReadValue<Vector2>();
             }
 
             if (R_Stick.ReadValue<Vector2>() != Vector2.zero)
             {
+                R_Stick_Inclination = 1;
                 RS_Input = R_Stick.ReadValue<Vector2>();
             }
 
@@ -171,9 +180,11 @@ public class Player : MonoBehaviour
             L_angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
             R_angle = Mathf.Atan2(R_direction.z, R_direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
 
-            Quaternion targetRotation = Quaternion.Euler(0, -L_angle + 90, 0);
-            this.transform.rotation = targetRotation;
-
+            if (speed > 0)
+            {
+                Quaternion targetRotation = Quaternion.Euler(0, -L_angle + 90, 0);
+                this.transform.rotation = targetRotation;
+            }
 
             lineRenderer.SetPosition(0, this.transform.position);
             lineRenderer.SetPosition(1, this.transform.position + pointC * 5);
@@ -262,6 +273,18 @@ public class Player : MonoBehaviour
         gaugeScript = GaugeObj.GetComponent<Gauge>();
         gaugeScript.FirstSet(skill1CooldownTime, skill2CooldownTime);
 
+        // プレイヤー番号に応じて名前とステータスを設定
+        for (int i = 0; i < 4; i++)
+        {
+            if (!exist[i])
+            {
+                this.name = "Player" + (i + 1);
+                playerNum = i + 1;
+                statusScript.FirstSet(playerNum);
+                return;
+            }
+        }
+        /*
         if (exist[0] == false)
         {
             this.name = "Player1";
@@ -293,6 +316,7 @@ public class Player : MonoBehaviour
             statusScript.FirstSet(playerNum);
             return;
         }
+        */
     }
 
     // 移動メソッド
@@ -301,7 +325,7 @@ public class Player : MonoBehaviour
         if (canMoveInput == true)
         {
             Vector3 movement = new Vector3(LS_Horizontal, 0.0f, LS_Vertical);
-            transform.Translate(movement * Speed * Time.deltaTime, Space.World); // Speedを使用
+            transform.Translate(movement * Speed * L_Stick_Inclination * Time.deltaTime, Space.World); // Speedを使用
         }
     }
 
@@ -331,14 +355,13 @@ public class Player : MonoBehaviour
                 if (Skill1.started && canUseSkill1 == true)
                 {
                     // 押した時
+                    
+                    if (R_Stick_Inclination > 0)
+                    {
+                        this.transform.rotation = Quaternion.Euler(0, -R_angle + 90, 0);
+                    }
+
                     Skill1Push();
-                    StartCoroutine(Skill1InputManager());
-                    skill1InputStop = true;
-                }
-                else if (Skill1.canceled && canUseSkill1 == true)
-                {
-                    // 離した時
-                    Skill1Release();
                     StartCoroutine(Skill1InputManager());
                     skill1InputStop = true;
                 }
@@ -356,16 +379,13 @@ public class Player : MonoBehaviour
                 if (Skill2.started && canUseSkill2 == true)
                 {
                     //押した時
-                    Debug.Log("AAA");
+                    
+                    if (R_Stick_Inclination > 0)
+                    {
+                        this.transform.rotation = Quaternion.Euler(0, -R_angle + 90, 0);
+                    }
+
                     Skill2Push();
-                    skill2InputStop = true;
-                    StartCoroutine(Skill2InputManager());
-                }
-                else if (Skill2.canceled && canUseSkill2 == true)
-                {
-                    //離した時
-                    Debug.Log("BBB");
-                    Skill2Release();
                     skill2InputStop = true;
                     StartCoroutine(Skill2InputManager());
                 }
@@ -378,18 +398,8 @@ public class Player : MonoBehaviour
     {
     }
 
-    // スキル1が離された時の処理
-    protected virtual void Skill1Release()
-    {
-    }
-
     // スキル2が押された時の処理
     protected virtual void Skill2Push()
-    {
-    }
-
-    // スキル2が離された時の処理
-    protected virtual void Skill2Release()
     {
     }
 
@@ -424,42 +434,26 @@ public class Player : MonoBehaviour
     }
 
     // スキル1のアニメ中の処理
-    // pushがtrueなら押されたとき、pushがfalseなら離されたとき
-    protected virtual IEnumerator Skill1DuringAnima(bool push)
+    protected virtual IEnumerator Skill1DuringAnima()
     {
         duringAnima = true;
 
         speed = 0;
 
-        if (push == true)
-        {
-            yield return new WaitForSeconds(skill1AT_Push);
-        }
-        else if (push == false)
-        {
-            yield return new WaitForSeconds(skill1AT_Release);
-        }
+        yield return new WaitForSeconds(skill1AT_Push);
 
         duringAnima = false;
         speed = speedTemp;
     }
 
     // スキル2のアニメ中の処理
-    // pushがtrueなら押されたとき、pushがfalseなら離されたとき
-    protected virtual IEnumerator Skill2DuringAnima(bool push)
+    protected virtual IEnumerator Skill2DuringAnima()
     {
         duringAnima = true;
 
         speed = 0;
 
-        if (push == true)
-        {
-            yield return new WaitForSeconds(skill2AT_Push);
-        }
-        else if (push == false)
-        {
-            yield return new WaitForSeconds(skill2AT_Release);
-        }
+        yield return new WaitForSeconds(skill2AT_Push);
 
         duringAnima = false;
         speed = speedTemp;
@@ -470,7 +464,8 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true;
+            jumpInterval = 0.1f;
+            StartCoroutine(JumpInterval());
         }
         else if (collision.gameObject.CompareTag("DeadLine"))
         {
@@ -486,6 +481,8 @@ public class Player : MonoBehaviour
                 StopCoroutine("Skill2DuringAnima");
 
                 gaugeScript.SkillGaugeReset();
+
+                Instantiate(FixSphere, this.transform.position, Quaternion.identity);
 
                 if (stock >= 1)
                 {
@@ -523,6 +520,19 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("SystemStopBreak"))
         {
             systemStop = false;
+        }
+    }
+    private IEnumerator JumpInterval()
+    {
+        while (jumpInterval > 0)
+        {
+            jumpInterval -= Time.deltaTime;
+            yield return null;
+        }
+
+        if(jumpInterval <= 0)
+        {
+            isGrounded = true;
         }
     }
 }

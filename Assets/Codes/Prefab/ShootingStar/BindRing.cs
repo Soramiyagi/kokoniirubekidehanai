@@ -16,6 +16,8 @@ public class BindRing : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        this.transform.localScale = new Vector3(time + 1, 1, time + 1);
+
         if (time < effectRange)
         {
             time += effectRange * Time.deltaTime * speed;
@@ -25,7 +27,5 @@ public class BindRing : MonoBehaviour
             this.transform.localScale = new Vector3(1, 1, 1);
             this.gameObject.SetActive(false);
         }
-
-        this.transform.localScale = new Vector3(time + 1, 1, time + 1);
     }
 }
