@@ -62,12 +62,8 @@ public class Summon : Player
         /*
         発動タイミングが押したときなら使おう
         */
-<<<<<<< HEAD
-        animator.SetTrigger("skill1");
-=======
 
-        // 現在のオブジェクトの位置と回転角度を使って新しいオブジェクトを生成
->>>>>>> origin/main
+        animator.SetTrigger("skill1");
         Instantiate(wanderer, this.transform.position, Quaternion.identity);
 
 

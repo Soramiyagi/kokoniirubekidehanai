@@ -26,8 +26,7 @@ public class ShootingStar : Player
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-<<<<<<< HEAD
-        Shaft.transform.rotation = Quaternion.Euler(0.0f, 90 - R_angle, 0.0f);
+
         float distanceMoved = Vector3.Distance(transform.position, previousPosition);
 
         // 移動距離が閾値を超えたらwalkingをtrueにする
@@ -43,8 +42,7 @@ public class ShootingStar : Player
         }
 
         previousPosition = transform.position;
-=======
->>>>>>> origin/main
+
     }
 
     // スキル1が押された時の処理をオーバーライド
