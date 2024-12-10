@@ -56636,9 +56636,9 @@ MonoBehaviour:
   obj:
   - {fileID: 879187707445915428, guid: fdfb3d5f544201740925bfb71624b58e, type: 3}
   - {fileID: 2038400410366373315, guid: 94ec5610ee8968e4dbe1b0fb27d1355d, type: 3}
-  - {fileID: 1120204271773741191, guid: 572f59dea48a14f488c5dbbd07ed23a0, type: 3}
+  - {fileID: 8682818182661790140, guid: a1d80ed5d86a30b478d8da242145f323, type: 3}
   - {fileID: 8339739883308227646, guid: 3958a11cedc51b94992459064d7214dc, type: 3}
-  - {fileID: 4746341752903393084, guid: db3d7cf140f13de47a111cdac0cdd183, type: 3}
+  - {fileID: 3993987057734841094, guid: 20c481cd039e9bb4589b3f55cc379938, type: 3}
   battleCamera: {fileID: 1044552812}
 --- !u!4 &1899622115
 Transform:
