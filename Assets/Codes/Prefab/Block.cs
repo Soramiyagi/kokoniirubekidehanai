@@ -51,12 +51,18 @@ public class Block : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Break")) // Breakのコリジョン接触が起きた瞬間に床が落ちる
         {
+<<<<<<< HEAD
             if (countdownCoroutine == null) // コルーチンが実行中でない場合のみ開始
             {
                 countdownCoroutine = StartCoroutine(Countdown()); // コルーチンを開始
                 time = 0;
                 renderer.material = danger;
             }
+=======
+            countdownCoroutine = StartCoroutine(Countdown()); // コルーチンを開始
+            time = 0;
+            renderer.material = danger;
+>>>>>>> feature-animation-Soramiyagi
         }
     }
 
@@ -72,9 +78,18 @@ public class Block : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Break"))
         {
+<<<<<<< HEAD
             countdownCoroutine = StartCoroutine(Countdown()); // コルーチンを開始
             time = 0;
             renderer.material = danger;
+=======
+            if (countdownCoroutine == null) // コルーチンが実行中でない場合のみ開始
+            {
+                countdownCoroutine = StartCoroutine(Countdown()); // コルーチンを開始
+                time = 0;
+                renderer.material = danger;
+            }
+>>>>>>> feature-animation-Soramiyagi
         }
         else if (other.gameObject.CompareTag("Fix"))
         {
@@ -94,7 +109,11 @@ public class Block : MonoBehaviour
 
         while (scale > 0)
         {
+<<<<<<< HEAD
             scale -= Time.deltaTime * 0.5f;
+=======
+            scale -= Time.deltaTime * 0.75f;
+>>>>>>> feature-animation-Soramiyagi
 
             if (scale <= 0)
             {

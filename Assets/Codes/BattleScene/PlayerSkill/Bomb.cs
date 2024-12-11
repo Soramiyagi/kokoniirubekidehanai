@@ -17,8 +17,14 @@ public class Bomb : Player
     private GameObject spawnedPrefab; // 生成されたプレハブの参照
 
     private bool previewSkill1 = false; // skill1のプレビューのためのフラグ
+<<<<<<< HEAD
     private bool skill2Check = false;
 
+=======
+
+    private bool skill2StateCheck = false;
+    
+>>>>>>> feature-animation-Soramiyagi
     private float movementThreshold = 0.001f;
 
     private Animator animator;//アニメーションをGetComponentする変数
@@ -64,11 +70,16 @@ public class Bomb : Player
 
     protected override void Skill1Push()
     {
+<<<<<<< HEAD
         //walkingをtureにする
         Skill1Preview.SetActive(true);
         
         animator.SetTrigger("skill1");
 
+=======
+        animator.SetTrigger("skill1");
+        Skill1Preview.SetActive(true);
+>>>>>>> feature-animation-Soramiyagi
         // 生成されたパーティクルインスタンスを再生
         if (skill1ParticleSystem != null)
         {
@@ -84,11 +95,19 @@ public class Bomb : Player
     // スキル2が押されている間の処理をオーバーライド
     protected override void Skill2Push()
     {
+<<<<<<< HEAD
         if (skill2Check == false)
         {
             if (spawnedPrefab == null)
             {
                 animator.SetTrigger("skill2Put");
+=======
+        if (skill2StateCheck == false)
+        {
+            animator.SetTrigger("skill2Put");
+            if (spawnedPrefab == null)
+            {
+>>>>>>> feature-animation-Soramiyagi
                 // プレイヤーの位置からY軸を-0.5した位置にプレハブを生成
                 Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                 spawnedPrefab = Instantiate(skill2Prehub, spawnPosition, Quaternion.identity);
@@ -101,11 +120,18 @@ public class Bomb : Player
                 {
                     prefabCollider.enabled = false; // コリジョンをオフに
                 }
+<<<<<<< HEAD
 
                 skill2Check = true;
             }
         }
         else if (skill2Check == true)
+=======
+            }
+            skill2StateCheck = true;
+        }
+        else if (skill2StateCheck == true)
+>>>>>>> feature-animation-Soramiyagi
         {
             if (spawnedPrefab != null)
             {
@@ -123,27 +149,37 @@ public class Bomb : Player
                     // パーティクルシステムを生成
                     ParticleSystem particleInstance = Instantiate(skill2ParticleSystem, spawnedPrefab.transform.position, Quaternion.identity);
                     particleInstance.Play(); // パーティクルを再生
-
-
                 }
 
                 // プレハブの削除処理
                 StartCoroutine(Skill2DestroyPrefabAndParticlesAfterDelay(1f, 2f));
             }
 
+<<<<<<< HEAD
+=======
+            skill2StateCheck = false;
+
+>>>>>>> feature-animation-Soramiyagi
             // クールダウン処理
             canUseSkill2 = false;
             StartCoroutine(Skill2Cooldown());
             StartCoroutine(Skill2DuringAnima());
+<<<<<<< HEAD
 
             skill2Check = false;
+=======
+>>>>>>> feature-animation-Soramiyagi
         }
     }
 
     private IEnumerator Skill1DestroyPrefabAndParticlesAfterDelay(float delay,float delay2)
     {
         yield return new WaitForSeconds(delay); // 指定した秒数待機
+<<<<<<< HEAD
         Skill1Preview.SetActive(false);
+=======
+        Collider previewCollider = Skill1Preview.GetComponent<Collider>();
+>>>>>>> feature-animation-Soramiyagi
         yield return new WaitForSeconds(delay2); // 指定した秒数待機
         if (skill1ParticleSystem != null)
         {

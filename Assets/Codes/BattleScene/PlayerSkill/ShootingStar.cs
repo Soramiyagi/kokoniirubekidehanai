@@ -26,7 +26,10 @@ public class ShootingStar : Player
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+<<<<<<< HEAD
 
+=======
+>>>>>>> feature-animation-Soramiyagi
         float distanceMoved = Vector3.Distance(transform.position, previousPosition);
 
         // ˆÚ“®‹——£‚ªè‡’l‚ð’´‚¦‚½‚çwalking‚ðtrue‚É‚·‚é

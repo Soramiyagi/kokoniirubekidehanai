@@ -1,37 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2712687799021813328
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7833974267463123248}
-  m_Layer: 0
-  m_Name: Shaft
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7833974267463123248
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2712687799021813328}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.53, y: 0.49, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2256872982028432981}
-  m_Father: {fileID: 4334343822448961980}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2699825939895541881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -394,7 +362,7 @@ PrefabInstance:
       addedObject: {fileID: 5724977216007837725}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b501e63461b1a14c95d33bfb1a07868, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7833974267463123248}
+      addedObject: {fileID: 2256872982028432981}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b501e63461b1a14c95d33bfb1a07868, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2171350094865480200}
@@ -677,20 +645,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f778ce5e5829be4bb3dfd310ef7d3da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FixSphere: {fileID: 417174588831832090, guid: 8bacbc68d1208884e8bbc99b584bef62, type: 3}
   stock: 3
   speed: 2.5
   jumpForce: 5
   skill1CooldownTime: 5
   skill2CooldownTime: 10
   skill1AT_Push: 0.5
-  skill1AT_Release: 0
   skill2AT_Push: 0.5
-  skill2AT_Release: 0
   floatTime_Set: 4
   bindTime_Set: 1.5
   statusObj: {fileID: 3577742063162212954, guid: 4a5ab18ae8d24234a9c86c82a517c80f, type: 3}
   GaugeObj: {fileID: 7215185773010422828}
-  Shaft: {fileID: 2712687799021813328}
   characterName: DefaultCharacter
   prefab: {fileID: 0}
 --- !u!114 &8934322545134203320
@@ -717,7 +683,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3993987057734841094}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3595540d6663310448b8e39450a9058e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -742,7 +708,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 7833974267463123248}
+    m_TransformParent: {fileID: 4334343822448961980}
     m_Modifications:
     - target: {fileID: 555093371604373204, guid: 4b796784a6fce17408c6ec8b4f41d1e2, type: 3}
       propertyPath: m_Parameters.widthMultiplier
@@ -786,11 +752,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4986995301351335408, guid: 4b796784a6fce17408c6ec8b4f41d1e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4986995301351335408, guid: 4b796784a6fce17408c6ec8b4f41d1e2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4986995301351335408, guid: 4b796784a6fce17408c6ec8b4f41d1e2, type: 3}
       propertyPath: m_LocalRotation.w

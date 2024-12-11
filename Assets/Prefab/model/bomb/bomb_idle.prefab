@@ -1,38 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1046810418441979303
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7860256477919864331}
-  m_Layer: 0
-  m_Name: Shaft
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7860256477919864331
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1046810418441979303}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8485607347592587808}
-  - {fileID: 6002850471756522266}
-  m_Father: {fileID: 8799339704388179799}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &534469788700980721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -313,7 +280,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 7860256477919864331}
+    m_TransformParent: {fileID: 8799339704388179799}
     m_Modifications:
     - target: {fileID: 1314945738539566, guid: 32c9fd11a72259d45aa26ae41c34c5aa, type: 3}
       propertyPath: m_Name
@@ -321,15 +288,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4825948614923682, guid: 32c9fd11a72259d45aa26ae41c34c5aa, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4825948614923682, guid: 32c9fd11a72259d45aa26ae41c34c5aa, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4825948614923682, guid: 32c9fd11a72259d45aa26ae41c34c5aa, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.8
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4825948614923682, guid: 32c9fd11a72259d45aa26ae41c34c5aa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -341,7 +308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4825948614923682, guid: 32c9fd11a72259d45aa26ae41c34c5aa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4825948614923682, guid: 32c9fd11a72259d45aa26ae41c34c5aa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -349,15 +316,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4825948614923682, guid: 32c9fd11a72259d45aa26ae41c34c5aa, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4825948614923682, guid: 32c9fd11a72259d45aa26ae41c34c5aa, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4825948614923682, guid: 32c9fd11a72259d45aa26ae41c34c5aa, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4825948614923682, guid: 32c9fd11a72259d45aa26ae41c34c5aa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -500,19 +467,31 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 7860256477919864331}
+    m_TransformParent: {fileID: 8799339704388179799}
     m_Modifications:
+    - target: {fileID: 1290676142643906499, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1290676142643906499, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1290676142643906499, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1290676142643906499, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1290676142643906499, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.25
+      value: -0.125
       objectReference: {fileID: 0}
     - target: {fileID: 1290676142643906499, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1290676142643906499, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -662,7 +641,10 @@ PrefabInstance:
       addedObject: {fileID: 4095062359118654534}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8b63a67f02041ee4ea8183d67502b0e7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7860256477919864331}
+      addedObject: {fileID: 8485607347592587808}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8b63a67f02041ee4ea8183d67502b0e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6002850471756522266}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8b63a67f02041ee4ea8183d67502b0e7, type: 3}
       insertIndex: -1
@@ -697,22 +679,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11a60420cb52134fa8854cde0a397d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FixSphere: {fileID: 0}
   stock: 3
   speed: 2
   jumpForce: 5
   skill1CooldownTime: 5
   skill2CooldownTime: 7
-  skill1AT_Push: 1
-  skill1AT_Release: 1
+  skill1AT_Push: 1.5
   skill2AT_Push: 1
-  skill2AT_Release: 1
-  floatTime_Set: 0
-  bindTime_Set: 0
+  floatTime_Set: 4
+  bindTime_Set: 1.5
   statusObj: {fileID: 3577742063162212954, guid: 4a5ab18ae8d24234a9c86c82a517c80f, type: 3}
   GaugeObj: {fileID: 1357406829745270987}
   characterName: DefaultCharacter
   Skill1Preview: {fileID: 8695393513866463213, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
-  Shaft: {fileID: 1046810418441979303}
   skill1ParticleSystem: {fileID: 5881670821714347212}
   skill2ParticleSystem: {fileID: 4095062359118654535}
   skill2Prehub: {fileID: 8012514600807043988, guid: cb3f9503b8d944c41b51535421c5c83c, type: 3}
