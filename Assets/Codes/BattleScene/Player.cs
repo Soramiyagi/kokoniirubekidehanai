@@ -74,20 +74,12 @@ public class Player : MonoBehaviour
     //連続で死ぬことを防ぐため
     private float deathInterval = 0;
 
-<<<<<<< HEAD
-    //連続でジャンプするのを防ぐため
-    private float jumpInterval = 0;
-=======
     //連続でジャンプすることを防ぐため
     private bool jumpInterval = false;
 
     //連続の入力を防ぐため
     private bool skill1InputStop = false;
     private bool skill2InputStop = false;
-
-    private float L_Stick_Inclination;
-    private float R_Stick_Inclination;
->>>>>>> feature-animation-Soramiyagi
 
     //ステータス用
     [SerializeField] private GameObject statusObj;
@@ -289,7 +281,8 @@ public class Player : MonoBehaviour
         gaugeScript = GaugeObj.GetComponent<Gauge>();
         gaugeScript.FirstSet(skill1CooldownTime, skill2CooldownTime);
 
-<<<<<<< HEAD
+        this.transform.rotation = Quaternion.Euler(0, 180, 0);
+
         // プレイヤー番号に応じて名前とステータスを設定
         for (int i = 0; i < 4; i++)
         {
@@ -301,43 +294,6 @@ public class Player : MonoBehaviour
                 return;
             }
         }
-        /*
-=======
-        this.transform.rotation = Quaternion.Euler(0, 180, 0);
-
->>>>>>> feature-animation-Soramiyagi
-        if (exist[0] == false)
-        {
-            this.name = "Player1";
-            playerNum = 1;
-            statusScript.FirstSet(playerNum);
-            return;
-        }
-
-        if (exist[1] == false)
-        {
-            this.name = "Player2";
-            playerNum = 2;
-            statusScript.FirstSet(playerNum);
-            return;
-        }
-
-        if (exist[2] == false)
-        {
-            this.name = "Player3";
-            playerNum = 3;
-            statusScript.FirstSet(playerNum);
-            return;
-        }
-
-        if (exist[3] == false)
-        {
-            this.name = "Player4";
-            playerNum = 4;
-            statusScript.FirstSet(playerNum);
-            return;
-        }
-        */
     }
 
     // 移動メソッド
@@ -380,7 +336,6 @@ public class Player : MonoBehaviour
                 if (Skill1.started && canUseSkill1 == true)
                 {
                     // 押した時
-                    
                     if (R_Stick_Inclination > 0)
                     {
                         this.transform.rotation = Quaternion.Euler(0, -R_angle + 90, 0);
@@ -388,10 +343,7 @@ public class Player : MonoBehaviour
 
                     Skill1Push();
                     skill1InputStop = true;
-<<<<<<< HEAD
-=======
                     StartCoroutine(Skill1InputManager());
->>>>>>> feature-animation-Soramiyagi
                 }
             }
         }
@@ -412,15 +364,10 @@ public class Player : MonoBehaviour
                 if (Skill2.started && canUseSkill2 == true)
                 {
                     //押した時
-<<<<<<< HEAD
-                    
                     if (R_Stick_Inclination > 0)
                     {
                         this.transform.rotation = Quaternion.Euler(0, -R_angle + 90, 0);
                     }
-
-=======
->>>>>>> feature-animation-Soramiyagi
                     Skill2Push();
                     skill2InputStop = true;
                     StartCoroutine(Skill2InputManager());
@@ -470,10 +417,6 @@ public class Player : MonoBehaviour
     }
 
     // スキル1のアニメ中の処理
-<<<<<<< HEAD
-=======
-    // pushがtrueなら押されたとき、pushがfalseなら離されたとき
->>>>>>> feature-animation-Soramiyagi
     protected virtual IEnumerator Skill1DuringAnima()
     {
         duringAnima = true;
@@ -487,10 +430,6 @@ public class Player : MonoBehaviour
     }
 
     // スキル2のアニメ中の処理
-<<<<<<< HEAD
-=======
-    // pushがtrueなら押されたとき、pushがfalseなら離されたとき
->>>>>>> feature-animation-Soramiyagi
     protected virtual IEnumerator Skill2DuringAnima()
     {
         duringAnima = true;
@@ -508,15 +447,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-<<<<<<< HEAD
-            jumpInterval = 0.1f;
-            StartCoroutine(JumpInterval());
-=======
             if (jumpInterval == false)
             {
                 isGrounded = true;
             }
->>>>>>> feature-animation-Soramiyagi
         }
         else if (collision.gameObject.CompareTag("DeadLine"))
         {
@@ -575,25 +509,10 @@ public class Player : MonoBehaviour
             systemStop = false;
         }
     }
-<<<<<<< HEAD
-    private IEnumerator JumpInterval()
-    {
-        while (jumpInterval > 0)
-        {
-            jumpInterval -= Time.deltaTime;
-            yield return null;
-        }
-
-        if(jumpInterval <= 0)
-        {
-            isGrounded = true;
-        }
-=======
 
     private IEnumerator JumpIntervalCountStart()
     {
         yield return new WaitForSeconds(0.25f); // 指定した秒数待機
         jumpInterval = false;
->>>>>>> feature-animation-Soramiyagi
     }
 }

@@ -12,12 +12,9 @@ public class OriginalData : Player
     protected override float Skill1CooldownTime { get; set; } = 4.0f; // スキル1のクールダウン
     protected override float Skill2CooldownTime { get; set; } = 9.0f; // スキル2のクールダウン
 
-<<<<<<< HEAD
-=======
     // プレハブを生成するための変数
     private GameObject spawnedPrefab; // 生成されたプレハブの参照
 
->>>>>>> feature-animation-Soramiyagi
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -56,8 +53,6 @@ public class OriginalData : Player
         Skill2PushCheck = true;
         */
     }
-<<<<<<< HEAD
-=======
 
     // 1秒後にプレハブを削除するためのコルーチン
     private IEnumerator DestroyPrefabAfterDelay(float delay)
@@ -69,5 +64,4 @@ public class OriginalData : Player
 
         }
     }
->>>>>>> feature-animation-Soramiyagi
 }

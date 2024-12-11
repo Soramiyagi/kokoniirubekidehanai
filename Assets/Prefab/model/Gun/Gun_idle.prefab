@@ -453,8 +453,9 @@ MonoBehaviour:
   characterName: DefaultCharacter
   BulletPoint: {fileID: 7058460125265915957}
   Bind: {fileID: 868433061580353680, guid: a0f4e70dc78812c4093c76f0945ebab0, type: 3}
-  Gun_FixSphere: {fileID: 417174588831832090, guid: 4a4a6533d1a36f342b50626a48bfa435, type: 3}
+  Gun_FixSphere: {fileID: 417174588831832090, guid: 845b3f6f25f895248b9b6f137d86e34e, type: 3}
   particleSystem: {fileID: 6917204045848586755}
+  skill1InstantiateInterval: 0
 --- !u!114 &3841769465888054518
 MonoBehaviour:
   m_ObjectHideFlags: 0
