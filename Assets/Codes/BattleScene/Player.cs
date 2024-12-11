@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private GameObject FixSphere;
+
     //視覚情報関連
     private LineRenderer lineRenderer;
 
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
 
     protected bool isGrounded;
     protected Rigidbody rb;
+    protected Collider col;
 
     // スキル1とスキル2のクールダウン時間 (フィールドをシリアライズ)
     [SerializeField] private float skill1CooldownTime = 5.0f;
@@ -29,9 +32,7 @@ public class Player : MonoBehaviour
 
     //スキル使用時のアニメーション中に操作を受け付けなくなる時間
     [SerializeField] private float skill1AT_Push = 1.0f;
-    [SerializeField] private float skill1AT_Release = 1.0f;
     [SerializeField] private float skill2AT_Push = 1.0f;
-    [SerializeField] private float skill2AT_Release = 1.0f;
     protected bool duringAnima = false;
 
     //Lスティックの座標を表す
@@ -62,12 +63,22 @@ public class Player : MonoBehaviour
     public float floatTime_Set = 0;
     private float floatTime = 0;
 
-    //  バインド弾に当たった時の拘束時間
+    // バインド弾に当たった時の拘束時間
     public float bindTime_Set = 0;
     private float bindTime = 0;
 
     //連続で死ぬことを防ぐため
     private float deathInterval = 0;
+
+    //連続でジャンプすることを防ぐため
+    private bool jumpInterval = false;
+
+    //連続の入力を防ぐため
+    private bool skill1InputStop = false;
+    private bool skill2InputStop = false;
+
+    private float L_Stick_Inclination;
+    private float R_Stick_Inclination;
 
     //ステータス用
     [SerializeField] private GameObject statusObj;
@@ -127,22 +138,24 @@ public class Player : MonoBehaviour
         {
             if (L_Stick.ReadValue<Vector2>() == Vector2.zero)
             {
-                speed = 0;
+                L_Stick_Inclination = 0;
             }
 
             if (R_Stick.ReadValue<Vector2>() == Vector2.zero)
             {
+                R_Stick_Inclination = 0;
                 RS_Input = Vector2.zero;
             }
 
             if (L_Stick.ReadValue<Vector2>() != Vector2.zero)
             {
-                speed = speedTemp;
+                L_Stick_Inclination = 1;
                 LS_Input = L_Stick.ReadValue<Vector2>();
             }
 
             if (R_Stick.ReadValue<Vector2>() != Vector2.zero)
             {
+                R_Stick_Inclination = 1;
                 RS_Input = R_Stick.ReadValue<Vector2>();
             }
 
@@ -171,9 +184,11 @@ public class Player : MonoBehaviour
             L_angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
             R_angle = Mathf.Atan2(R_direction.z, R_direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
 
-            Quaternion targetRotation = Quaternion.Euler(0, -L_angle + 90, 0);
-            this.transform.rotation = targetRotation;
-
+            if (speed > 0)
+            {
+                Quaternion targetRotation = Quaternion.Euler(0, -L_angle + 90, 0);
+                this.transform.rotation = targetRotation;
+            }
 
             lineRenderer.SetPosition(0, this.transform.position);
             lineRenderer.SetPosition(1, this.transform.position + pointC * 5);
@@ -193,6 +208,8 @@ public class Player : MonoBehaviour
                     speed = speedTemp;
                     canUseSkill1 = true;
                     canUseSkill2 = true;
+                    rb.useGravity = true;
+                    col.enabled = true;
                 }
             }
 
@@ -221,6 +238,7 @@ public class Player : MonoBehaviour
 
         lineRenderer = this.GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
 
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
         // 名前が一致するオブジェクトが存在するかチェック
@@ -262,6 +280,8 @@ public class Player : MonoBehaviour
         gaugeScript = GaugeObj.GetComponent<Gauge>();
         gaugeScript.FirstSet(skill1CooldownTime, skill2CooldownTime);
 
+        this.transform.rotation = Quaternion.Euler(0, 180, 0);
+
         if (exist[0] == false)
         {
             this.name = "Player1";
@@ -301,7 +321,7 @@ public class Player : MonoBehaviour
         if (canMoveInput == true)
         {
             Vector3 movement = new Vector3(LS_Horizontal, 0.0f, LS_Vertical);
-            transform.Translate(movement * Speed * Time.deltaTime, Space.World); // Speedを使用
+            transform.Translate(movement * Speed * L_Stick_Inclination * Time.deltaTime, Space.World); // Speedを使用
         }
     }
 
@@ -314,12 +334,11 @@ public class Player : MonoBehaviour
             {
                 rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse); // JumpForceを使用
                 isGrounded = false;
+                jumpInterval = true;
+                StartCoroutine(JumpIntervalCountStart());
             }
         }
     }
-
-    private bool skill1InputStop = false;
-    private bool skill2InputStop = false;
 
     //Skill1処理
     public void OnSkill1(InputAction.CallbackContext Skill1)
@@ -328,19 +347,17 @@ public class Player : MonoBehaviour
         {
             if (canMoveInput == true)
             {
+                if (R_Stick_Inclination > 0)
+                {
+                    this.transform.rotation = Quaternion.Euler(0, -R_angle + 90, 0);
+                }
+
                 if (Skill1.started && canUseSkill1 == true)
                 {
                     // 押した時
                     Skill1Push();
-                    StartCoroutine(Skill1InputManager());
                     skill1InputStop = true;
-                }
-                else if (Skill1.canceled && canUseSkill1 == true)
-                {
-                    // 離した時
-                    Skill1Release();
                     StartCoroutine(Skill1InputManager());
-                    skill1InputStop = true;
                 }
             }
         }
@@ -353,19 +370,15 @@ public class Player : MonoBehaviour
         {
             if (canMoveInput == true)
             {
+                if (R_Stick_Inclination > 0)
+                {
+                    this.transform.rotation = Quaternion.Euler(0, -R_angle + 90, 0);
+                }
+
                 if (Skill2.started && canUseSkill2 == true)
                 {
                     //押した時
-                    Debug.Log("AAA");
                     Skill2Push();
-                    skill2InputStop = true;
-                    StartCoroutine(Skill2InputManager());
-                }
-                else if (Skill2.canceled && canUseSkill2 == true)
-                {
-                    //離した時
-                    Debug.Log("BBB");
-                    Skill2Release();
                     skill2InputStop = true;
                     StartCoroutine(Skill2InputManager());
                 }
@@ -378,18 +391,8 @@ public class Player : MonoBehaviour
     {
     }
 
-    // スキル1が離された時の処理
-    protected virtual void Skill1Release()
-    {
-    }
-
     // スキル2が押された時の処理
     protected virtual void Skill2Push()
-    {
-    }
-
-    // スキル2が離された時の処理
-    protected virtual void Skill2Release()
     {
     }
 
@@ -425,20 +428,13 @@ public class Player : MonoBehaviour
 
     // スキル1のアニメ中の処理
     // pushがtrueなら押されたとき、pushがfalseなら離されたとき
-    protected virtual IEnumerator Skill1DuringAnima(bool push)
+    protected virtual IEnumerator Skill1DuringAnima()
     {
         duringAnima = true;
 
         speed = 0;
 
-        if (push == true)
-        {
-            yield return new WaitForSeconds(skill1AT_Push);
-        }
-        else if (push == false)
-        {
-            yield return new WaitForSeconds(skill1AT_Release);
-        }
+        yield return new WaitForSeconds(skill1AT_Push);
 
         duringAnima = false;
         speed = speedTemp;
@@ -446,20 +442,13 @@ public class Player : MonoBehaviour
 
     // スキル2のアニメ中の処理
     // pushがtrueなら押されたとき、pushがfalseなら離されたとき
-    protected virtual IEnumerator Skill2DuringAnima(bool push)
+    protected virtual IEnumerator Skill2DuringAnima()
     {
         duringAnima = true;
 
         speed = 0;
 
-        if (push == true)
-        {
-            yield return new WaitForSeconds(skill2AT_Push);
-        }
-        else if (push == false)
-        {
-            yield return new WaitForSeconds(skill2AT_Release);
-        }
+        yield return new WaitForSeconds(skill2AT_Push);
 
         duringAnima = false;
         speed = speedTemp;
@@ -470,7 +459,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true;
+            if (jumpInterval == false)
+            {
+                isGrounded = true;
+            }
         }
         else if (collision.gameObject.CompareTag("DeadLine"))
         {
@@ -487,8 +479,12 @@ public class Player : MonoBehaviour
 
                 gaugeScript.SkillGaugeReset();
 
+                Instantiate(FixSphere, this.transform.position, Quaternion.identity);
+
                 if (stock >= 1)
                 {
+                    rb.useGravity = false;
+                    col.enabled = false;
                     bindTime = 0;
                     duringAnima = false;
                     canUseSkill1 = true;
@@ -524,5 +520,11 @@ public class Player : MonoBehaviour
         {
             systemStop = false;
         }
+    }
+
+    private IEnumerator JumpIntervalCountStart()
+    {
+        yield return new WaitForSeconds(0.25f); // 指定した秒数待機
+        jumpInterval = false;
     }
 }

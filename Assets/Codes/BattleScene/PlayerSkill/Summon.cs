@@ -69,19 +69,8 @@ public class Summon : Player
 
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
-        StartCoroutine(Skill1DuringAnima(true));
+        StartCoroutine(Skill1DuringAnima());
 
-    }
-
-    // スキル1を離したときの処理をオーバーライド
-    protected override void Skill1Release()
-    {
-        /*
-        発動タイミングが離したときなら使おう
-        canUseSkill1 = false;
-        StartCoroutine(Skill1Cooldown());
-        StartCoroutine(Skill1DuringAnima(false));
-        */
     }
 
     // スキル2が押された時の処理をオーバーライド
@@ -101,19 +90,8 @@ public class Summon : Player
         canUseSkill2 = false;
         PlayParticles();
         StartCoroutine(Skill2Cooldown());
-        StartCoroutine(Skill2DuringAnima(true));
+        StartCoroutine(Skill2DuringAnima());
         StartCoroutine(DestroyPrefabAfterDelay(6f));
-    }
-
-    // スキル2を離したときの処理をオーバーライド
-    protected override void Skill2Release()
-    {
-        /*
-        発動タイミングが離したときなら使おう
-        canUseSkill2 = false;
-        StartCoroutine(Skill2Cooldown());
-        StartCoroutine(Skill2DuringAnima(false));
-        */
     }
 
     // パーティクルを再生するメソッド

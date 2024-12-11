@@ -511,17 +511,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba9eb0833daae9478576e2470a79d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FixSphere: {fileID: 417174588831832090, guid: 8bacbc68d1208884e8bbc99b584bef62, type: 3}
   stock: 3
   speed: 2.5
   jumpForce: 5
   skill1CooldownTime: 5
-  skill2CooldownTime: 15
+  skill2CooldownTime: 20
   skill1AT_Push: 0.5
-  skill1AT_Release: 0
   skill2AT_Push: 0
-  skill2AT_Release: 0
   floatTime_Set: 4
-  bindTime_Set: 1
+  bindTime_Set: 1.5
   statusObj: {fileID: 3577742063162212954, guid: 4a5ab18ae8d24234a9c86c82a517c80f, type: 3}
   GaugeObj: {fileID: 5147316311580350692}
   characterName: DefaultCharacter

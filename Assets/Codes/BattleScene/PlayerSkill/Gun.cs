@@ -6,15 +6,13 @@ public class Gun : Player
 {
     public string characterName = "DefaultCharacter";
 
-    [SerializeField] private GameObject Shaft, BulletPoint, Bind, FixSphere;
+    [SerializeField] private GameObject BulletPoint, Bind, Gun_FixSphere;
    
 
     public ParticleSystem particleSystem;
     private Animator animator;//アニメーションをGetComponentする変数
     private Vector3 previousPosition;
     private float movementThreshold = 0.001f;
-    private bool Skill1Delay = false;
-    private bool Skill2Delay = false;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -26,8 +24,6 @@ public class Gun : Player
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
-        Shaft.transform.rotation = Quaternion.Euler(0.0f, 90 - R_angle, 0.0f);
 
         float distanceMoved = Vector3.Distance(transform.position, previousPosition);
 
@@ -42,45 +38,23 @@ public class Gun : Player
             animator.SetBool("walking", false);
           
         }
-        if (Skill1Delay)//skill1の使用
-        {
-            
-            Instantiate(Bind, BulletPoint.transform.position, Quaternion.Euler(0f, 90 - R_angle, 0f));
-
-            canUseSkill1 = false;
-            Skill1Delay=false;
-            StartCoroutine(Skill1Cooldown());
-            StartCoroutine(Skill1DuringAnima(true));
-       
-        }
         previousPosition = transform.position;
-        Debug.Log(Skill1Delay);
-
-
     }
 
     // スキル1が押された時の処理をオーバーライド
     protected override void Skill1Push()
     {
         animator.SetTrigger("skill1");
-        
+
         /*
         発動タイミングが押したときなら使おう
         */
-       
+
         StartCoroutine(Skill1DelaySystem(0.2f));
 
-    }
-
-    // スキル1を離したときの処理をオーバーライド
-    protected override void Skill1Release()
-    {
-        /*
-        発動タイミングが離したときなら使おう
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
-        StartCoroutine(Skill1DuringAnima(false));
-        */
+        StartCoroutine(Skill1DuringAnima());
     }
 
     // スキル2が押された時の処理をオーバーライド
@@ -90,36 +64,21 @@ public class Gun : Player
         発動タイミングが押したときなら使おう
         */
         animator.SetTrigger("skill2");
-       
 
-        if (Skill2Delay)
-        {
-            Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
 
-            Instantiate(FixSphere, this.transform.position, Quaternion.identity);
+        Instantiate(Gun_FixSphere, this.transform.position, Quaternion.identity);
 
-            // プレイヤーの位置にパーティクルを生成して再生
-            ParticleSystem particleInstance = Instantiate(particleSystem, this.transform.position, Quaternion.identity);
-            particleInstance.Play();
+        // プレイヤーの位置にパーティクルを生成して再生
+        ParticleSystem particleInstance = Instantiate(particleSystem, this.transform.position, Quaternion.identity);
+        particleInstance.Play();
 
-            canUseSkill2 = false;
-            StartCoroutine(Skill2Cooldown());
-            StartCoroutine(Skill2DuringAnima(true));
-
-            // 一定時間後にパーティクルを停止・削除
-            StartCoroutine(DestroyParticleAfterDelay(particleInstance, 1f));
-        }
-    }
-
-    // スキル2を離したときの処理をオーバーライド
-    protected override void Skill2Release()
-    {
-        /*
-        発動タイミングが離したときなら使おう
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
-        StartCoroutine(Skill2DuringAnima(false));
-        */
+        StartCoroutine(Skill2DuringAnima());
+
+        // 一定時間後にパーティクルを停止・削除
+        StartCoroutine(DestroyParticleAfterDelay(particleInstance, 1f));
     }
 
     // パーティクルを再生するメソッド
@@ -130,8 +89,6 @@ public class Gun : Player
             particleSystem.Play();
         }
     }
-
-
 
     private IEnumerator DestroyParticleAfterDelay(ParticleSystem particleInstance, float delay)
     {
@@ -146,11 +103,10 @@ public class Gun : Player
     {
         yield return new WaitForSeconds(delay);
         
-        Skill1Delay = true;
+        Instantiate(Bind, BulletPoint.transform.position, Quaternion.Euler(0f, 90 - R_angle, 0f));
     }
-    private IEnumerator Skill2DelaySystem(bool Skill2Delay, float delay)
+    private IEnumerator Skill2DelaySystem(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Skill2Delay = true;
     }
 }

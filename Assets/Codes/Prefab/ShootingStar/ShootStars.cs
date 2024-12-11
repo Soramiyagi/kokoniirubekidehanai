@@ -20,17 +20,6 @@ public class ShootStars : MonoBehaviour
         middlePos = MiddlePoint.transform.position;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void FixedUpdate()
     {
         t += Time.deltaTime * speed;
@@ -43,7 +32,7 @@ public class ShootStars : MonoBehaviour
         {
             // t‚ð1.0‚ÉƒNƒ‰ƒ“ƒv‚µ‚È‚¢
 
-            if (t >= 1.25f)
+            if (t >= 1.5f)
             {
                 this.gameObject.SetActive(false);
             }

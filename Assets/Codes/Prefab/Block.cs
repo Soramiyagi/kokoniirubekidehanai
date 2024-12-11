@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    private bool countDown;     //ブロックが落ちるまでのカウントを開始するフラグ
     private float time;         //ブロックが消えるまでの時間
     private float scale;
 
@@ -15,6 +13,8 @@ public class Block : MonoBehaviour
     [SerializeField] private Material safety, caution, danger;
     new Renderer renderer;
 
+    private Coroutine countdownCoroutine; // コルーチンの参照
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,63 +23,35 @@ public class Block : MonoBehaviour
         StateReset();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void FixedUpdate()
-    {
-        if (countDown == true)
-        {
-            if (time >= 0)
-            {
-                time = time - Time.deltaTime;
-            }
-            else
-            {
-                renderer.material = danger;
-
-                if (scale > 0)
-                {
-                    scale = scale - Time.deltaTime * 0.5f;
-                    if (scale <= 0)
-                    {
-                        scale = 0;
-                        countDown = false;
-                        boxCol.isTrigger = true;
-                    }
-                }
-
-                this.transform.localScale = new Vector3(scale, scale, scale);
-            }
-        }
-    }
-
     void StateReset()
     {
-        countDown = false;
         time = timeSet;
         scale = 1;
         this.transform.localScale = new Vector3(scale, scale, scale);
         boxCol.isTrigger = false;
         renderer.material = safety;
+
+        // コルーチンが実行中であれば停止
+        if (countdownCoroutine != null)
+        {
+            StopCoroutine(countdownCoroutine);
+            countdownCoroutine = null; // コルーチンの参照をクリア
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))//Playerが床に接触すると一定時間経過後に床が落ちる
+        if (collision.gameObject.CompareTag("Player")) // Playerが床に接触すると一定時間経過後に床が落ちる
         {
-            if (countDown == false)
+            if (countdownCoroutine == null) // コルーチンが実行中でない場合のみ開始
             {
-                countDown = true;
+                countdownCoroutine = StartCoroutine(Countdown()); // コルーチンを開始
                 renderer.material = caution;
             }
         }
-        else if (collision.gameObject.CompareTag("Break"))//Breakのコリジョン接触が起きた瞬間に床が落ちる
+        else if (collision.gameObject.CompareTag("Break")) // Breakのコリジョン接触が起きた瞬間に床が落ちる
         {
-            countDown = true;
+            countdownCoroutine = StartCoroutine(Countdown()); // コルーチンを開始
             time = 0;
             renderer.material = danger;
         }
@@ -89,21 +61,52 @@ public class Block : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("CountStart"))
         {
-            if (countDown == false)
+            if (countdownCoroutine == null) // コルーチンが実行中でない場合のみ開始
             {
-                countDown = true;
+                countdownCoroutine = StartCoroutine(Countdown()); // コルーチンを開始
                 renderer.material = caution;
             }
         }
         else if (other.gameObject.CompareTag("Break"))
         {
-            countDown = true;
-            time = 0;
-            renderer.material = danger;
+            if (countdownCoroutine == null) // コルーチンが実行中でない場合のみ開始
+            {
+                countdownCoroutine = StartCoroutine(Countdown()); // コルーチンを開始
+                time = 0;
+                renderer.material = danger;
+            }
         }
         else if (other.gameObject.CompareTag("Fix"))
         {
             StateReset();
         }
+    }
+
+    private IEnumerator Countdown()
+    {
+        while (time >= 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+
+        renderer.material = danger;
+
+        while (scale > 0)
+        {
+            scale -= Time.deltaTime * 0.75f;
+
+            if (scale <= 0)
+            {
+                scale = 0;
+                boxCol.isTrigger = true;
+            }
+
+            this.transform.localScale = new Vector3(scale, scale, scale);
+            yield return null;
+        }
+
+        // コルーチン終了時に参照をクリア
+        countdownCoroutine = null;
     }
 }
