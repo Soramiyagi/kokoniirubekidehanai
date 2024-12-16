@@ -42,6 +42,19 @@ public class Gun : Player
         previousPosition = transform.position;
     }
 
+
+    protected override void jumping()
+    {
+
+        animator.SetTrigger("jumping");
+    }
+
+    protected override void Landing()
+    {
+
+        animator.SetTrigger("Landing");
+    }
+
     // スキル1が押された時の処理をオーバーライド
     protected override void Skill1Push()
     {
