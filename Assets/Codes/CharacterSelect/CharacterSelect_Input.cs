@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 
 public class CharacterSelect_Input : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI num_text, c_text;
+    [SerializeField] private Image image;
+    [SerializeField] private Sprite sprite0, sprite1, sprite2, sprite3, sprite4;
+    [SerializeField] private GameObject SELECTED_Obj;
 
     public int maxNum = 0;  //総キャラクターの数
     public float interval_set;  //入力のインターバル
@@ -30,14 +33,13 @@ public class CharacterSelect_Input : MonoBehaviour
         interval = interval_set;
         MenuSelectInput = Vector2.zero;
 
-        c_text.text = "0";
-
         L_Stick = GetComponent<PlayerInput>().actions["MenuSelect_LStick"];
         D_Pad = GetComponent<PlayerInput>().actions["MenuSelect_DPad"];
 
         CSI = GameObject.Find("PlayerInputManager").GetComponent<CharacterSelect_InputManager>();
 
-        NameSet();
+        NameSet(); 
+        UpdateCharacterImage();
     }
 
     void Update()
@@ -69,7 +71,7 @@ public class CharacterSelect_Input : MonoBehaviour
                 {
                     select = select + 1;
                     interval = interval_set;
-                    c_text.SetText(select.ToString());
+                    UpdateCharacterImage();
                 }
             }
             else if (MenuSelectInput.x < -L_StickDeadzone)
@@ -78,9 +80,33 @@ public class CharacterSelect_Input : MonoBehaviour
                 {
                     select = select - 1;
                     interval = interval_set;
-                    c_text.SetText(select.ToString());
+                    UpdateCharacterImage();
                 }
             }
+        }
+    }
+
+    private void UpdateCharacterImage()
+    {
+        if(select == 0)
+        {
+            image.sprite = sprite0;
+        }
+        else if (select == 1)
+        {
+            image.sprite = sprite1;
+        }
+        else if (select == 2)
+        {
+            image.sprite = sprite2;
+        }
+        else if (select == 3)
+        {
+            image.sprite = sprite3;
+        }
+        else if (select == 4)
+        {
+            image.sprite = sprite4;
         }
     }
 
@@ -92,7 +118,8 @@ public class CharacterSelect_Input : MonoBehaviour
             {
                 //押した時
                 canInput = false;
-                CSI.Ready();
+                SELECTED_Obj.SetActive(true);
+                CSI.Ready(this.name, select);
             }
         }
     }
@@ -105,8 +132,17 @@ public class CharacterSelect_Input : MonoBehaviour
             {
                 //押した時
                 canInput = true;
+                SELECTED_Obj.SetActive(false);
                 CSI.Unready();
             }
+        }
+    }
+
+    public void OnaStart(InputAction.CallbackContext Start)
+    {
+        if (Start.started)
+        {
+            CSI.GameStart();
         }
     }
 
@@ -144,33 +180,25 @@ public class CharacterSelect_Input : MonoBehaviour
 
         if(exist[0] == false)
         {
-            num_text.SetText("P1");
             this.name = "Player1";
-            CSI.c_text[0] = c_text;
             return;
         }
 
         if (exist[1] == false)
         {
-            num_text.SetText("P2");
             this.name = "Player2";
-            CSI.c_text[1] = c_text;
             return;
         }
 
         if (exist[2] == false)
         {
-            num_text.SetText("P3");
             this.name = "Player3";
-            CSI.c_text[2] = c_text;
             return;
         }
 
         if (exist[3] == false)
         {
-            num_text.SetText("P4");
             this.name = "Player4";
-            CSI.c_text[3] = c_text;
             return;
         }
     }
@@ -190,6 +218,5 @@ public class CharacterSelect_Input : MonoBehaviour
 
         select = - 1;
         canInput = true;
-        c_text.SetText(select.ToString());
     }
 }

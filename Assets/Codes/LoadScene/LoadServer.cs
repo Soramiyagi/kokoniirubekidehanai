@@ -16,6 +16,10 @@ public class LoadServer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (Time.timeScale == 0f)
+        {
+            Time.timeScale = 1.0f;
+        }
         sceneName = LoadRequest.nextSceneName;
 
         if (!string.IsNullOrEmpty(sceneName))

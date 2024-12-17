@@ -45,7 +45,13 @@ public class Dash : Player
 
                 dashTime += dashSpeed * Time.deltaTime;
 
-                this.transform.position = Vector3.Lerp(currentPos, endPos, dashTime);
+                if (-2 <= this.transform.position.x && this.transform.position.x <= 22)
+                {
+                    if (-2 <= this.transform.position.z && this.transform.position.z <= 22)
+                    {
+                        this.transform.position = Vector3.Lerp(currentPos, endPos, dashTime);
+                    }
+                }
             }
             else if (dashTime >= 1)
             {

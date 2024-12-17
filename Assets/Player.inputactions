@@ -49,6 +49,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Start",
+                    "type": "Button",
+                    "id": "b51b55d8-6c7f-476c-bc6e-22054f98d7f0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Decision",
+                    "type": "Button",
+                    "id": "3331d7a0-8e5d-47ad-95b3-cfa108ca5ea0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -120,12 +138,45 @@
                 },
                 {
                     "name": "",
+                    "id": "acf07a47-3b5a-4c23-9808-234982177b50",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "L_Stick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "75bc28dd-96d6-4528-a2c3-362d4f616298",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "R_Stick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "74cf7670-b228-4f74-80ca-4364a1446b77",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c8708232-4417-46ff-9100-c041a0a792ac",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Decision",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -166,6 +217,15 @@
                     "name": "Cancel",
                     "type": "Button",
                     "id": "d412f612-4437-4cac-a950-e6542074a978",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Start",
+                    "type": "Button",
+                    "id": "ded9e4ee-1953-49f8-9c24-aa69d9039675",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -214,6 +274,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MenuSelect_DPad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "11480347-ef06-4db6-a465-bfebbeabef63",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

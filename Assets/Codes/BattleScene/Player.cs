@@ -95,6 +95,9 @@ public class Player : MonoBehaviour
     //ゲームの進行による操作不能フラグ
     protected bool systemStop = true;
 
+    //Pause画面を動かせるかどうかのフラグ
+    private bool pauseControl = false;
+
     // プロパティでフィールドを操作
     protected virtual float Speed
     {
@@ -165,6 +168,18 @@ public class Player : MonoBehaviour
 
             RS_Horizontal = RS_Input.x;
             RS_Vertical = RS_Input.y;
+        }
+
+        if(pauseControl == true)
+        {
+            if(L_Stick.ReadValue<Vector2>().y > 0)
+            {
+                gameManager.MenuControl(0);
+            }
+            else if (L_Stick.ReadValue<Vector2>().y < 0)
+            {
+                gameManager.MenuControl(1);
+            }
         }
     }
 
@@ -291,6 +306,7 @@ public class Player : MonoBehaviour
                 this.name = "Player" + (i + 1);
                 playerNum = i + 1;
                 statusScript.FirstSet(playerNum);
+                gameManager.Join();
                 return;
             }
         }
@@ -302,7 +318,13 @@ public class Player : MonoBehaviour
         if (canMoveInput == true)
         {
             Vector3 movement = new Vector3(LS_Horizontal, 0.0f, LS_Vertical);
-            transform.Translate(movement * Speed * L_Stick_Inclination * Time.deltaTime, Space.World); // Speedを使用
+            Vector3 newPosition = transform.position + movement * Speed * L_Stick_Inclination * Time.deltaTime;
+
+            // 移動範囲を制限
+            newPosition.x = Mathf.Clamp(newPosition.x, -2, 22);
+            newPosition.z = Mathf.Clamp(newPosition.z, -2, 22);
+
+            transform.position = newPosition;
         }
     }
 
@@ -371,6 +393,48 @@ public class Player : MonoBehaviour
                     Skill2Push();
                     skill2InputStop = true;
                     StartCoroutine(Skill2InputManager());
+                }
+            }
+        }
+    }
+
+    public void OnStart(InputAction.CallbackContext Start)
+    {
+        if (canMoveInput == true)
+        {
+            if (Start.started)
+            {
+                if (Time.timeScale != 0f)
+                {
+                    gameManager.MenuControl(0);
+                    gameManager.MenuDisplay(false);
+                    pauseControl = true;
+                    Time.timeScale = 0f;
+                }
+                else if(Time.timeScale == 0f && pauseControl == true)
+                {
+                    gameManager.MenuDisplay(true);
+                    pauseControl = false;
+                    Time.timeScale = 1f;
+                }
+            }
+        }
+    }
+
+    public void OnDecision(InputAction.CallbackContext Decision)
+    {
+        if (Decision.started)
+        {
+            if (Time.timeScale == 0f && pauseControl == true)
+            {
+                int result = 0;
+                result = gameManager.MenuControl(2);
+
+                if (result == 1)
+                {
+                    gameManager.MenuDisplay(true);
+                    pauseControl = false;
+                    Time.timeScale = 1f;
                 }
             }
         }
@@ -481,7 +545,7 @@ public class Player : MonoBehaviour
                 }
                 else if (stock < 1)
                 {
-                    gameManager.Retire(playerNum);
+                    gameManager.Retire(playerNum - 1);
                     Destroy(this.gameObject);
                 }
             }
