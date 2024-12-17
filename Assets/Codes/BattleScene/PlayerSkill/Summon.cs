@@ -94,6 +94,16 @@ public class Summon : Player
         StartCoroutine(DestroyPrefabAfterDelay(6f));
     }
 
+    protected override void jumping()
+    {
+        animator.SetTrigger("jumping");
+    }
+
+    protected override void Landing()
+    {
+        animator.SetTrigger("Landing");
+    }
+
     // パーティクルを再生するメソッド
     public void PlayParticles()
     {

@@ -339,6 +339,7 @@ public class Player : MonoBehaviour
                 isGrounded = false;
                 jumpInterval = true;
                 StartCoroutine(JumpIntervalCountStart());
+                jumping();
             }
         }
     }
@@ -449,6 +450,14 @@ public class Player : MonoBehaviour
     protected virtual void Skill2Push()
     {
     }
+    
+     protected virtual void jumping()
+    {
+    }
+
+    protected virtual void Landing()
+    {
+    }
 
     // スキル1の多重入力の防止
     protected virtual IEnumerator Skill1InputManager()
@@ -463,6 +472,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         skill2InputStop = false;
     }
+
 
     // スキル1の入力
     protected virtual IEnumerator Skill1Cooldown()
@@ -514,6 +524,7 @@ public class Player : MonoBehaviour
             if (jumpInterval == false)
             {
                 isGrounded = true;
+                Landing();
             }
         }
         else if (collision.gameObject.CompareTag("DeadLine"))
