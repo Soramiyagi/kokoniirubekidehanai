@@ -452,7 +452,7 @@ MonoBehaviour:
   GaugeObj: {fileID: 2278660223572180265}
   characterName: DefaultCharacter
   BulletPoint: {fileID: 7058460125265915957}
-  Bind: {fileID: 868433061580353680, guid: a0f4e70dc78812c4093c76f0945ebab0, type: 3}
+  Bind: {fileID: 7942339591212626156, guid: 44cc04c51b7549c4b946ca2476a06206, type: 3}
   Gun_FixSphere: {fileID: 417174588831832090, guid: 845b3f6f25f895248b9b6f137d86e34e, type: 3}
   particleSystem: {fileID: 6917204045848586755}
   skill1InstantiateInterval: 0

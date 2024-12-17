@@ -552,7 +552,7 @@ MonoBehaviour:
   speed: 2.5
   jumpForce: 5
   skill1CooldownTime: 5
-  skill2CooldownTime: 20
+  skill2CooldownTime: 30
   skill1AT_Push: 0.5
   skill2AT_Push: 0
   floatTime_Set: 4
@@ -561,7 +561,7 @@ MonoBehaviour:
   GaugeObj: {fileID: 5147316311580350692}
   characterName: DefaultCharacter
   wanderer: {fileID: 9167075172612231293, guid: 045b165f8a9db7d428610f341988e95c, type: 3}
-  skill2_ET_Set: 6
+  skill2_ET_Set: 4
   particleSystem: {fileID: 4430611505374802387}
 --- !u!120 &6997580946837410240
 LineRenderer:

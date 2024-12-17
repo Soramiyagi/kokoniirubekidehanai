@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67eb5e525ecf90d409afc792221689f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeSet: 5
+  timeSet: 3
   safety: {fileID: 2100000, guid: c5b5663c91ca47543b7713ee548c730b, type: 2}
   caution: {fileID: 2100000, guid: 0f212456d14182942a6f38cf7485ec86, type: 2}
   danger: {fileID: 2100000, guid: a71191cd78f38b542b5dc7a1f059728c, type: 2}
