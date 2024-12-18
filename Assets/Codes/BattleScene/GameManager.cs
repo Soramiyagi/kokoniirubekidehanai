@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject PauseMenu, SelectCursor1, SelectCursor2;
-    [SerializeField] private GameObject LoadClient_ToCharacterSelect;
+    [SerializeField] private GameObject LoadClient_ToCharacterSelect, LoadClient_ToResultScaene;
     [SerializeField] private GameObject Timer, FirstStopGrounds, CountdownObj;
     private Timer timerScript;
     private FirstStopGrounds FSGsScript;
@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Winner_Save.winnerPlayer = -1;
+
         for (int i = 0; i < 4; i++)
         {
             restPlayer[i] = false;
@@ -76,19 +78,22 @@ public class GameManager : MonoBehaviour
 
     public void Finish()
     {
-        int winner = -1;
-
         for (int i = 0; i < 4; i++)
         {
             if (restPlayer[i] == true)
             {
-                winner = i;
+                Winner_Save.winnerPlayer = i;
             }
         }
 
-        //winner‚ª0‚È‚çplayer1‚ÌŸ—˜
+        Debug.Log(Winner_Save.winnerPlayer);
 
         //ƒQ[ƒ€I—¹‚Ìˆ—
+        LoadClient_ToResultScaene.GetComponent<LoadClient>().LoadStart();
+    }
+
+    public void TimeOver()
+    {
         LoadClient_ToCharacterSelect.GetComponent<LoadClient>().LoadStart();
     }
 

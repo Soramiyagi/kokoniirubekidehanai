@@ -40,6 +40,6 @@ public class Timer : MonoBehaviour
 
     void TimeLimit()
     {
-        gameManager.Finish();
+        gameManager.TimeOver();
     }
 }
