@@ -8,7 +8,9 @@ public class Gun : Player
 
     [SerializeField] private GameObject BulletPoint, Bind, Gun_FixSphere;
 
-    public ParticleSystem particleSystem;
+    public ParticleSystem particleSystem; 
+    public ParticleSystem bindParticleSystem;
+
     private Animator animator;//アニメーションをGetComponentする変数
     private Vector3 previousPosition;
     private float movementThreshold = 0.001f;
@@ -54,7 +56,16 @@ public class Gun : Player
 
         animator.SetTrigger("Landing");
     }
+    protected override void Binding()
+    {
+        if (bindParticleSystem != null)
+        {
+            bindParticleSystem.Play();
+        }
 
+        StartCoroutine(bindParticleDelay());
+    }
+    //
     // スキル1が押された時の処理をオーバーライド
     protected override void Skill1Push()
     {
@@ -128,5 +139,12 @@ public class Gun : Player
     private IEnumerator Skill2DelaySystem(float delay)
     {
         yield return new WaitForSeconds(delay);
+    }
+    private IEnumerator bindParticleDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+        bindParticleSystem.Stop();
+        bindParticleSystem.Clear();
+
     }
 }

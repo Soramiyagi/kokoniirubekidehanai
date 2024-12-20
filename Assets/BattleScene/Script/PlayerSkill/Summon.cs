@@ -15,6 +15,7 @@ public class Summon : Player
     private float downStop = 0;
 
     public ParticleSystem particleSystem;
+    public ParticleSystem bindParticleSystem;
     private Vector3 previousPosition;
     private Animator animator;//アニメーションをGetComponentする変数
     private float movementThreshold = 0.001f;
@@ -55,7 +56,15 @@ public class Summon : Player
         }
         previousPosition = transform.position;
     }
+    protected override void Binding()
+    {
+        if (bindParticleSystem != null)
+        {
+            bindParticleSystem.Play();
+        }
 
+        StartCoroutine(bindParticleDelay());
+    }
     // スキル1が押された時の処理をオーバーライド
     protected override void Skill1Push()
     {
@@ -128,5 +137,12 @@ public class Summon : Player
         yield return new WaitForSeconds(delay); // 指定した秒数待機
         StopParticles();
         animator.SetBool("skill2", false);
+    }
+    private IEnumerator bindParticleDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+        bindParticleSystem.Stop();
+        bindParticleSystem.Clear();
+
     }
 }

@@ -10,6 +10,8 @@ public class Bomb : Player
 
     public ParticleSystem skill1ParticleSystem;
     public ParticleSystem skill2ParticleSystem;
+    public ParticleSystem bindParticleSystem;
+
 
     // プレハブを生成するための変数
     public GameObject skill1Prehub; // スキル1のプレハブ
@@ -74,7 +76,15 @@ public class Bomb : Player
         
         animator.SetTrigger("Landing");
     }
+    protected override void Binding()
+    {
+        if (bindParticleSystem != null)
+        {
+            bindParticleSystem.Play();
+        }
 
+        StartCoroutine(bindParticleDelay());
+    }
     protected override void Skill1Push()
     {
         //walkingをtureにする        
@@ -179,5 +189,12 @@ public class Bomb : Player
             skill2ParticleSystem.transform.SetParent(transform, true); // プレイヤーの子オブジェクトに戻す
             skill2ParticleSystem.transform.localPosition = Vector3.zero; // 元の位置に戻す（必要に応じて調整）
         }
+    }
+    private IEnumerator bindParticleDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+        bindParticleSystem.Stop();
+        bindParticleSystem.Clear();
+
     }
 }

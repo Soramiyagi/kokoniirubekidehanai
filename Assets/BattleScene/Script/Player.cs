@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     //スキル使用時のアニメーション中に操作を受け付けなくなる時間
     [SerializeField] private float skill1AT_Push = 1.0f;
     [SerializeField] private float skill2AT_Push = 1.0f;
+    private float jumpPush = 0.7f;
     protected bool duringAnima = false;
 
     //Lスティックの座標を表す
@@ -56,6 +57,7 @@ public class Player : MonoBehaviour
     //スキルを使用する際にみるフラグ
     protected bool canUseSkill1 = true;
     protected bool canUseSkill2 = true;
+    protected bool canJump = true;
 
     //一時的に入力禁止にしたい際に使用するフラグ
     protected bool canMoveInput = false;
@@ -76,6 +78,8 @@ public class Player : MonoBehaviour
 
     //連続でジャンプすることを防ぐため
     private bool jumpInterval = false;
+    //ジャンプしているかを確認
+    private bool isJumping = false;
 
     //連続の入力を防ぐため
     private bool skill1InputStop = false;
@@ -206,8 +210,8 @@ public class Player : MonoBehaviour
                 this.transform.rotation = targetRotation;
             }
 
-            lineRenderer.SetPosition(0, this.transform.position);
-            lineRenderer.SetPosition(1, this.transform.position + pointC * 5);
+            lineRenderer.SetPosition(0, this.transform.position + new Vector3(0, 0.5f, 0));
+            lineRenderer.SetPosition(1,this.transform.position + pointC * 5 + new Vector3(0, 0.5f, 0));
 
             if (floatTime > 0)
             {
@@ -331,7 +335,7 @@ public class Player : MonoBehaviour
     // Jump処理
     public void OnJump(InputAction.CallbackContext Jump)
     {
-        if (canMoveInput == true)
+        if (canMoveInput&&canJump)
         {
             if (Jump.started && isGrounded)
             {
@@ -340,6 +344,8 @@ public class Player : MonoBehaviour
                 jumpInterval = true;
                 StartCoroutine(JumpIntervalCountStart());
                 jumping();
+                isJumping = true;
+                canJump = false;
             }
         }
     }
@@ -349,9 +355,9 @@ public class Player : MonoBehaviour
     {
         if (skill1InputStop == false)
         {
-            if (canMoveInput == true)
+            if (canMoveInput)
             {
-                if (Skill1.started && canUseSkill1 == true)
+                if (Skill1.started && canUseSkill1)
                 {
                     // 押した時
                     if (R_Stick_Inclination > 0)
@@ -449,6 +455,11 @@ public class Player : MonoBehaviour
     {
     }
 
+    protected virtual void Binding()
+    {
+
+    }
+
     // スキル1の多重入力の防止
     protected virtual IEnumerator Skill1InputManager()
     {
@@ -486,9 +497,9 @@ public class Player : MonoBehaviour
         duringAnima = true;
 
         speed = 0;
-
+        canJump = false;
         yield return new WaitForSeconds(skill1AT_Push);
-
+        canJump = true;
         duringAnima = false;
         speed = speedTemp;
     }
@@ -499,11 +510,23 @@ public class Player : MonoBehaviour
         duringAnima = true;
 
         speed = 0;
-
+        canJump = false;
         yield return new WaitForSeconds(skill2AT_Push);
-
+        canJump = true;
         duringAnima = false;
         speed = speedTemp;
+    }
+    protected virtual IEnumerator JumpDuringAnima()
+    {
+
+
+
+   
+        yield return new WaitForSeconds(jumpPush);
+        Debug.Log("aaaaa");
+        canJump = true;
+        
+        
     }
 
     // 何かに接触したときに呼ばれる
@@ -515,6 +538,12 @@ public class Player : MonoBehaviour
             {
                 isGrounded = true;
                 Landing();
+                if (isJumping)
+                {
+                    
+                    StartCoroutine(JumpDuringAnima());
+                    isJumping = false;
+                }
             }
         }
         else if (collision.gameObject.CompareTag("DeadLine"))
@@ -563,6 +592,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Bind"))
         {
             bindTime = bindTime_Set;
+            Binding();
         }
     }
 

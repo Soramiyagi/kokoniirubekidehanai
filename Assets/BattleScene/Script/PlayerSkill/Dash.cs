@@ -17,6 +17,7 @@ public class Dash : Player
     public ParticleSystem skill1ParticleSystem;
     public ParticleSystem skill2ParticleSystem;
     public ParticleSystem skill2ParticleSystem2;
+    public ParticleSystem bindParticleSystem;
 
     private float dashTime = 1;
 
@@ -104,6 +105,15 @@ public class Dash : Player
 
         animator.SetTrigger("Landing");
     }
+    protected override void Binding()
+    {
+        if (bindParticleSystem != null)
+        {
+            bindParticleSystem.Play();
+        }
+
+        StartCoroutine(bindParticleDelay());
+    }
     // スキル1が押された時の処理をオーバーライド
     protected override void Skill1Push()
     {
@@ -189,6 +199,13 @@ public class Dash : Player
     {
         yield return null;
         skill2Flag = false;
+    }
+    private IEnumerator bindParticleDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+        bindParticleSystem.Stop();
+        bindParticleSystem.Clear();
+
     }
 
 }

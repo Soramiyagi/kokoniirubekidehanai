@@ -14,6 +14,7 @@ public class ShootingStar : Player
     private Animator animator;//アニメーションをGetComponentする変数
     private float movementThreshold = 0.001f;
     private Vector3 previousPosition;
+    public ParticleSystem bindParticleSystem;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -54,6 +55,15 @@ public class ShootingStar : Player
 
         animator.SetTrigger("Landing");
     }
+    protected override void Binding()
+    {
+        if (bindParticleSystem != null)
+        {
+            bindParticleSystem.Play();
+        }
+
+        StartCoroutine(bindParticleDelay());
+    }
     // スキル1が押された時の処理をオーバーライド
     protected override void Skill1Push()
     {
@@ -80,5 +90,12 @@ public class ShootingStar : Player
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
         StartCoroutine(Skill2DuringAnima());
+    }
+    private IEnumerator bindParticleDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+        bindParticleSystem.Stop();
+        bindParticleSystem.Clear();
+
     }
 }
