@@ -14,15 +14,15 @@ public class TextManager : MonoBehaviour
         {
             Text1.SetActive(true);
         }
-        else if (Winner_Save.winnerPlayer == 2)
+        else if (Winner_Save.winnerPlayer == 1)
         {
             Text2.SetActive(true);
         }
-        else if (Winner_Save.winnerPlayer == 3)
+        else if (Winner_Save.winnerPlayer == 2)
         {
             Text3.SetActive(true);
         }
-        else if (Winner_Save.winnerPlayer == 4)
+        else if (Winner_Save.winnerPlayer == 3)
         {
             Text4.SetActive(true);
         }

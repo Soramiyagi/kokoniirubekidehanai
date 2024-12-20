@@ -5,7 +5,11 @@ using UnityEngine.InputSystem;
 
 public class ResultController : MonoBehaviour
 {
+    [SerializeField] GameObject LoadCliant_ToTitle;
     private bool canInput = false;
+
+    //ëΩèdì«Ç›çûÇ›ñhé~
+    private bool loadStart = false;
 
     public void InputEnable()
     {
@@ -40,8 +44,11 @@ public class ResultController : MonoBehaviour
     {
         if (Start.started)
         {
-            //âüÇµÇΩéû
-            Debug.Log("Start");
+            if (loadStart == false)
+            {
+                LoadCliant_ToTitle.GetComponent<LoadClient>().LoadStart();
+                loadStart = true;
+            }
         }
     }
 }

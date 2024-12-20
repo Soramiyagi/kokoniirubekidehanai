@@ -5,11 +5,11 @@ using UnityEngine.InputSystem;
 
 public class TitleController : MonoBehaviour
 {
-    [SerializeField] GameObject HowTo, Encyclopedia;
+    [SerializeField] GameObject HowTo, Encyclopedia, LoadCliant_ToCharacterSelect;
     [SerializeField] MenuImageController MIC_Script;
     [SerializeField] HowToPageController HTPC_Script;
     [SerializeField] EncyclopediaPageController EPC_Script;
-
+    
     public float interval_set;  //入力のインターバル
     public float L_StickDeadzone;
     private float interval;
@@ -22,6 +22,9 @@ public class TitleController : MonoBehaviour
     //メニュー項目の番号
     //1・開始　2・遊び方　3・図鑑
     private int menu = 0;
+
+    //多重読み込み防止
+    private bool loadStart = false;
 
     // Start is called before the first frame update
     void Start()
@@ -121,7 +124,11 @@ public class TitleController : MonoBehaviour
 
         if(menu == 0)
         {
-            Debug.Log("Start");
+            if (loadStart == false)
+            {
+                LoadCliant_ToCharacterSelect.GetComponent<LoadClient>().LoadStart();
+                loadStart = true;
+            }
         }
         else if (menu == 1)
         {

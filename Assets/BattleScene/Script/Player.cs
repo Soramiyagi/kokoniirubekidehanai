@@ -518,15 +518,8 @@ public class Player : MonoBehaviour
     }
     protected virtual IEnumerator JumpDuringAnima()
     {
-
-
-
-   
         yield return new WaitForSeconds(jumpPush);
-        Debug.Log("aaaaa");
         canJump = true;
-        
-        
     }
 
     // ‰½‚©‚ÉÚG‚µ‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚é

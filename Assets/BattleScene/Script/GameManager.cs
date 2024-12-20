@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject PauseMenu, SelectCursor1, SelectCursor2;
-    [SerializeField] private GameObject LoadClient_ToCharacterSelect, LoadClient_ToResultScaene;
+    [SerializeField] private GameObject LoadClient_ToResult, LoadClient_ToTitle;
     [SerializeField] private GameObject Timer, FirstStopGrounds, CountdownObj;
     private Timer timerScript;
     private FirstStopGrounds FSGsScript;
@@ -87,12 +87,12 @@ public class GameManager : MonoBehaviour
         }
 
         //ÉQÅ[ÉÄèIóπÇÃèàóù
-        LoadClient_ToResultScaene.GetComponent<LoadClient>().LoadStart();
+        LoadClient_ToResult.GetComponent<LoadClient>().LoadStart();
     }
 
     public void TimeOver()
     {
-        LoadClient_ToCharacterSelect.GetComponent<LoadClient>().LoadStart();
+        LoadClient_ToTitle.GetComponent<LoadClient>().LoadStart();
     }
 
     public void MenuDisplay(bool state)
@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator LoadSceneCoroutine()
     {
         yield return new WaitForSecondsRealtime(0.25f);
-        LoadClient_ToCharacterSelect.GetComponent<LoadClient>().LoadStart();
+        LoadClient_ToTitle.GetComponent<LoadClient>().LoadStart();
     }
 
     private IEnumerator PauseControlWait()

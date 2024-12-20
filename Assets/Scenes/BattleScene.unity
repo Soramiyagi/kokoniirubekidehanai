@@ -5775,12 +5775,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3113020602348163289, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: m_Name
-      value: LoadClient_ToCharacterSelect
+      value: LoadClient_ToTitle
       objectReference: {fileID: 0}
     - target: {fileID: 9005676575217478143, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: NextScene
       value: 
-      objectReference: {fileID: 102900000, guid: 08bf7c8ad52b01747907d68175094853, type: 3}
+      objectReference: {fileID: 102900000, guid: b666c9b06f2bf18418f09b288c140bd8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29630,8 +29630,8 @@ MonoBehaviour:
   PauseMenu: {fileID: 1230588807}
   SelectCursor1: {fileID: 575680158}
   SelectCursor2: {fileID: 1604979512}
-  LoadClient_ToCharacterSelect: {fileID: 167354230}
-  LoadClient_ToResultScaene: {fileID: 1413776621}
+  LoadClient_ToResult: {fileID: 1413776621}
+  LoadClient_ToTitle: {fileID: 167354230}
   Timer: {fileID: 6754101125768414808, guid: 566bca466169dde4e9353274f52bf3bc, type: 3}
   FirstStopGrounds: {fileID: 1939339004967795403, guid: 0af1f48ee81e2d3409c81b470659a1b9, type: 3}
   CountdownObj: {fileID: 3059395394103666547, guid: 255ed1a70b84cd540be819865d977b36, type: 3}
@@ -30300,7 +30300,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044552807}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
