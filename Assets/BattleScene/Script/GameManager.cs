@@ -86,8 +86,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        Debug.Log(Winner_Save.winnerPlayer);
-
         //ƒQ[ƒ€I—¹‚Ìˆ—
         LoadClient_ToResultScaene.GetComponent<LoadClient>().LoadStart();
     }
