@@ -5,19 +5,28 @@ using UnityEngine.InputSystem;
 
 public class TitleController : MonoBehaviour
 {
+    [SerializeField] GameObject HowTo, Encyclopedia;
+    [SerializeField] MenuImageController MIC_Script;
+    [SerializeField] HowToPageController HTPC_Script;
+    [SerializeField] EncyclopediaPageController EPC_Script;
+
     public float interval_set;  //入力のインターバル
     public float L_StickDeadzone;
     private float interval;
     private Vector2 MenuSelectInput;
-    private bool canInput;
+    private bool canInput_menu;
 
     private InputAction L_Stick;
     private InputAction D_Pad;
 
+    //メニュー項目の番号
+    //1・開始　2・遊び方　3・図鑑
+    private int menu = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        canInput = true;
+        canInput_menu = true;
         interval = interval_set;
         MenuSelectInput = Vector2.zero;
 
@@ -46,15 +55,55 @@ public class TitleController : MonoBehaviour
             MenuSelectInput = D_Pad.ReadValue<Vector2>();
         }
 
-        if (canInput == true && interval <= 0)
+        if (canInput_menu == true && interval <= 0)
         {
             if (MenuSelectInput.x > L_StickDeadzone)
             {
-                interval = interval_set;
+                if (menu <= 1)
+                {
+                    menu++;
+                    MIC_Script.ScreenUpdate(menu);
+                    interval = interval_set;
+                }
             }
             else if (MenuSelectInput.x < -L_StickDeadzone)
             {
-                interval = interval_set;
+                if (menu >= 1)
+                {
+                    menu--;
+                    MIC_Script.ScreenUpdate(menu);
+                    interval = interval_set;
+                }
+
+            }
+        }
+        else if(canInput_menu == false && interval <= 0)
+        {
+            if (menu == 1)
+            {
+                if (MenuSelectInput.x > L_StickDeadzone)
+                {
+                    HTPC_Script.NextPage();
+                    interval = interval_set;
+                }
+                else if (MenuSelectInput.x < -L_StickDeadzone)
+                {
+                    HTPC_Script.BackPage();
+                    interval = interval_set;
+                }
+            }
+            else if (menu == 2)
+            {
+                if (MenuSelectInput.x > L_StickDeadzone)
+                {
+                    EPC_Script.NextPage();
+                    interval = interval_set;
+                }
+                else if (MenuSelectInput.x < -L_StickDeadzone)
+                {
+                    EPC_Script.BackPage();
+                    interval = interval_set;
+                }
             }
 
         }
@@ -62,34 +111,42 @@ public class TitleController : MonoBehaviour
 
     public void OnDecision(InputAction.CallbackContext Decision)
     {
-        if (canInput == true)
+        if (canInput_menu == true)
         {
             if (Decision.started)
             {
-                //押した時
-                Debug.Log("Decision");
+                canInput_menu = false;
             }
+        }
+
+        if(menu == 0)
+        {
+            Debug.Log("Start");
+        }
+        else if (menu == 1)
+        {
+            HowTo.SetActive(true);
+        }
+        else if (menu == 2)
+        {
+            Encyclopedia.SetActive(true);
         }
     }
 
     public void OnCancel(InputAction.CallbackContext Cancel)
     {
-        if (canInput == true)
+        if (canInput_menu == false)
         {
             if (Cancel.started)
             {
-                //押した時
-                Debug.Log("Cancel");
+                canInput_menu = true;
+                HowTo.SetActive(false);
+                Encyclopedia.SetActive(false);
             }
         }
     }
 
     public void OnaStart(InputAction.CallbackContext Start)
     {
-        if (Start.started)
-        {
-            //押した時
-            Debug.Log("Start");
-        }
     }
 }
