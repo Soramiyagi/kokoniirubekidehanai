@@ -83,7 +83,7 @@ public class Load_BattleScene : MonoBehaviour
                     }
 
                     targetObj[i] = instantiatedObject.gameObject;
-                    yield return new WaitForSeconds(0.01f);
+                    yield return null;
                 }
             }
         }

@@ -20,8 +20,8 @@ public class TitleController : MonoBehaviour
     private InputAction D_Pad;
 
     //メニュー項目の番号
-    //1・開始　2・遊び方　3・図鑑
-    private int menu = 0;
+    //0遊び方　1・開始　2・図鑑
+    private int menu = 1;
 
     //多重読み込み防止
     private bool loadStart = false;
@@ -82,7 +82,7 @@ public class TitleController : MonoBehaviour
         }
         else if(canInput_menu == false && interval <= 0)
         {
-            if (menu == 1)
+            if (menu == 0)
             {
                 if (MenuSelectInput.x > L_StickDeadzone)
                 {
@@ -122,17 +122,18 @@ public class TitleController : MonoBehaviour
             }
         }
 
-        if(menu == 0)
+
+        if (menu == 0)
+        {
+            HowTo.SetActive(true);
+        }
+        else if (menu == 1)
         {
             if (loadStart == false)
             {
                 LoadCliant_ToCharacterSelect.GetComponent<LoadClient>().LoadStart();
                 loadStart = true;
             }
-        }
-        else if (menu == 1)
-        {
-            HowTo.SetActive(true);
         }
         else if (menu == 2)
         {

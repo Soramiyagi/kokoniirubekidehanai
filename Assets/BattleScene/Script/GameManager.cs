@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
 
     public void TimeOver()
     {
-        LoadClient_ToTitle.GetComponent<LoadClient>().LoadStart();
+        LoadClient_ToResult.GetComponent<LoadClient>().LoadStart();
     }
 
     public void MenuDisplay(bool state)

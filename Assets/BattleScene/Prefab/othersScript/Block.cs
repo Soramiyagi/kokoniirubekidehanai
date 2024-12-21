@@ -57,6 +57,24 @@ public class Block : MonoBehaviour
         }
     }
 
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player")) // Playerが床に接触すると一定時間経過後に床が落ちる
+        {
+            if (countdownCoroutine == null) // コルーチンが実行中でない場合のみ開始
+            {
+                countdownCoroutine = StartCoroutine(Countdown()); // コルーチンを開始
+                renderer.material = caution;
+            }
+        }
+        else if (collision.gameObject.CompareTag("Break")) // Breakのコリジョン接触が起きた瞬間に床が落ちる
+        {
+            countdownCoroutine = StartCoroutine(Countdown()); // コルーチンを開始
+            time = 0;
+            renderer.material = danger;
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("CountStart"))

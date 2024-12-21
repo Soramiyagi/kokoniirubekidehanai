@@ -11,7 +11,7 @@ public class MenuImageController : MonoBehaviour
 
     void Start()
     {
-        ScreenUpdate(0);
+        ScreenUpdate(1);
     }
 
     public void ScreenUpdate(int menu)

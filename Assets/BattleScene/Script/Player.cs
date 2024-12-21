@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 public class Player : MonoBehaviour
 {
@@ -67,7 +68,7 @@ public class Player : MonoBehaviour
 
     //リスポーン後に浮いている時間
     public float floatTime_Set = 0;
-    private float floatTime = 0;
+    protected float floatTime = 0;
 
     // バインド弾に当たった時の拘束時間
     public float bindTime_Set = 0;
@@ -174,9 +175,9 @@ public class Player : MonoBehaviour
             RS_Vertical = RS_Input.y;
         }
 
-        if(pauseControl == true)
+        if (pauseControl == true)
         {
-            if(L_Stick.ReadValue<Vector2>().y > 0)
+            if (L_Stick.ReadValue<Vector2>().y > 0)
             {
                 gameManager.MenuControl(0);
             }
@@ -211,7 +212,7 @@ public class Player : MonoBehaviour
             }
 
             lineRenderer.SetPosition(0, this.transform.position + new Vector3(0, 0.5f, 0));
-            lineRenderer.SetPosition(1,this.transform.position + pointC * 5 + new Vector3(0, 0.5f, 0));
+            lineRenderer.SetPosition(1, this.transform.position + pointC * 5 + new Vector3(0, 0.5f, 0));
 
             if (floatTime > 0)
             {
@@ -286,7 +287,7 @@ public class Player : MonoBehaviour
             }
             else if (obj.name == "Player4")
             {
-                exist[3] = true;
+                exist[3] = true; 
             }
             else if (obj.name == "GameManager")
             {
@@ -311,9 +312,20 @@ public class Player : MonoBehaviour
                 playerNum = i + 1;
                 statusScript.FirstSet(playerNum);
                 gameManager.Join();
+                StartCoroutine(DeviceSet(CharacterSelect_Save.joinedDevices[i]));
                 return;
             }
         }
+    }
+
+    protected IEnumerator DeviceSet(InputDevice device)
+    {
+        yield return new WaitForSeconds(1);
+        PlayerInput playerInput = this.GetComponent<PlayerInput>();
+        InputUser user = playerInput.user;
+        user.UnpairDevices(); // 既存のデバイスを解除
+        InputUser.PerformPairingWithDevice(device, user);
+        playerInput.enabled = true; // PlayerInputを有効化
     }
 
     // 移動メソッド

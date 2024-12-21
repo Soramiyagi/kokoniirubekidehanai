@@ -65,8 +65,6 @@ public class Dash : Player
                 }
             }
 
-
-
             if (skill2_ET > 0)
             {
                 skill2_ET = skill2_ET - Time.deltaTime;
@@ -75,6 +73,14 @@ public class Dash : Player
             {
                 clones.SetActive(false);
                 C_extendCollider.SetActive(false);
+            }
+
+            if (floatTime > 0)
+            {
+                {
+                    clones.SetActive(false);
+                    C_extendCollider.SetActive(false);
+                }
             }
         }
         float distanceMoved = Vector3.Distance(transform.position, previousPosition);
@@ -205,7 +211,5 @@ public class Dash : Player
         yield return new WaitForSeconds(1.5f);
         bindParticleSystem.Stop();
         bindParticleSystem.Clear();
-
     }
-
 }

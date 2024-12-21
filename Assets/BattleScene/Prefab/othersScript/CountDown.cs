@@ -15,7 +15,7 @@ public class CountDown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        time = 3.5f;
+        time = 3.55f;
         ex_time = 0.5f;
 
         if (canvasRectTransform != null)
@@ -24,6 +24,7 @@ public class CountDown : MonoBehaviour
             canvasRectTransform.sizeDelta = new Vector2(800, 600);
             canvasRectTransform.pivot = new Vector2(0.5f, 0.5f);
         }
+        CountDownText.enabled = false;
     }
 
     void FixedUpdate()
@@ -34,6 +35,15 @@ public class CountDown : MonoBehaviour
             if (time > 1)
             {
                 CountDownText.text = time.ToString("F0");
+
+                if (time >= 3.5f)
+                {
+                    CountDownText.enabled = false;
+                }
+                else 
+                {
+                    CountDownText.enabled = true;
+                }
             }
         }
         else if (time <= 0)

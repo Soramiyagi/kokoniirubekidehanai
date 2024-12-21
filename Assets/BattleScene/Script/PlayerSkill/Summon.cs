@@ -29,20 +29,24 @@ public class Summon : Player
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
-        if (skill2_ET > 0)
+        
+        if (floatTime <= 0)
         {
-            skill2_ET -= Time.deltaTime;
+            if (skill2_ET > 0)
+            {
+                skill2_ET -= Time.deltaTime;
 
-            float Pos_X = this.transform.position.x;
-            float Pos_Z = this.transform.position.z;
+                float Pos_X = this.transform.position.x;
+                float Pos_Z = this.transform.position.z;
 
-            this.transform.position = new Vector3(Pos_X, downStop, Pos_Z);
+                this.transform.position = new Vector3(Pos_X, downStop, Pos_Z);
+            }
+            else
+            {
+                rb.useGravity = true;
+            }
         }
-        else
-        {
-            rb.useGravity = true;
-        }
+
         float distanceMoved = Vector3.Distance(transform.position, previousPosition);
 
         // ˆÚ“®‹——£‚ªè‡’l‚ð’´‚¦‚½‚çwalking‚ðtrue‚É‚·‚é
