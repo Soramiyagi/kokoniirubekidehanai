@@ -966,6 +966,18 @@ PrefabInstance:
       propertyPath: NextScene
       value: 
       objectReference: {fileID: 102900000, guid: 08bf7c8ad52b01747907d68175094853, type: 3}
+    - target: {fileID: 9005676575217478143, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005676575217478143, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: nextSceneName
+      value: CharacterSelect
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005676575217478143, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: nextSceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 08bf7c8ad52b01747907d68175094853, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

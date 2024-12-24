@@ -1,23 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.SceneManagement;
-
-/*
-LoadClientからLoadSceneにあるLoadServerへ、遷移したいシーン名を送る
-LoadRquestをClientから送信して、Serverで受け取る感じのイメージ
- */
 
 public class LoadClient : MonoBehaviour
 {
-    [SerializeField] private SceneAsset NextScene;
-    private string nextSceneName;
-
-    void Start()
-    {
-        nextSceneName = NextScene.name;
-    }
+    [SerializeField] private string nextSceneName; // シーン名を直接入力
 
     public void LoadStart()
     {
@@ -25,3 +13,5 @@ public class LoadClient : MonoBehaviour
         SceneManager.LoadScene("LoadScene");
     }
 }
+
+
