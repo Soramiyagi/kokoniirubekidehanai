@@ -9,6 +9,8 @@ public class Block : MonoBehaviour
     public float timeSet = 0;
     private BoxCollider boxCol;
 
+    private bool revival = true;
+
     //マテリアル関連
     [SerializeField] private Material safety, caution, danger;
     new Renderer renderer;
@@ -93,7 +95,25 @@ public class Block : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Fix"))
         {
-            StateReset();
+            if (revival == true)
+            {
+                StateReset();
+            }
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("CautionArea"))
+        {
+            if (revival == true)
+            {
+                revival = false;
+
+                countdownCoroutine = StartCoroutine(Countdown()); // コルーチンを開始
+                time = 0;
+                renderer.material = danger;
+            }
         }
     }
 

@@ -6,6 +6,7 @@ using TMPro;
 public class Status : MonoBehaviour
 {
     [SerializeField] private GameObject StatusFrame, Stock1, Stock2, Stock3;
+    [SerializeField] private GameObject Icon_1P, Icon_2P, Icon_3P, Icon_4P;
     [SerializeField] private TextMeshProUGUI name;
     [SerializeField] private RectTransform canvasRectTransform;
 
@@ -27,21 +28,25 @@ public class Status : MonoBehaviour
         if (playerNum == 1)
         {
             name.text = "Player1";
+            Icon_1P.SetActive(true);
             StatusFrame.transform.position = new Vector3(-310, 140, 0);
         }
         else if (playerNum == 2)
         {
             name.text = "Player2";
+            Icon_2P.SetActive(true);
             StatusFrame.transform.position = new Vector3(310, 140, 0);
         }
         else if (playerNum == 3)
         {
             name.text = "Player3";
+            Icon_3P.SetActive(true);
             StatusFrame.transform.position = new Vector3(-310, -180, 0);
         }
         else if (playerNum == 4)
         {
             name.text = "Player4";
+            Icon_4P.SetActive(true);
             StatusFrame.transform.position = new Vector3(310, -180, 0);
         }
     }

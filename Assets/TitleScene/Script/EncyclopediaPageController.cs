@@ -5,6 +5,7 @@ using UnityEngine;
 public class EncyclopediaPageController : MonoBehaviour
 {
     [SerializeField] private GameObject[] pageObj = new GameObject[0];
+    [SerializeField] private GameObject leftObj, rightObj;
 
     private int minPage = 0;
     private int maxPage = 0;
@@ -21,6 +22,7 @@ public class EncyclopediaPageController : MonoBehaviour
     {
         page = 0;
         ScreenUpdate(0);
+        CursolCheck();
     }
 
     public void NextPage()
@@ -30,6 +32,7 @@ public class EncyclopediaPageController : MonoBehaviour
             page++;
             ScreenUpdate(page);
         }
+        CursolCheck();
     }
 
     public void BackPage()
@@ -39,6 +42,7 @@ public class EncyclopediaPageController : MonoBehaviour
             page--;
             ScreenUpdate(page);
         }
+        CursolCheck();
     }
 
     void ScreenUpdate(int page)
@@ -49,5 +53,24 @@ public class EncyclopediaPageController : MonoBehaviour
         }
 
         pageObj[page].SetActive(true);
+    }
+
+    void CursolCheck()
+    {
+        if (page == minPage)
+        {
+            leftObj.SetActive(false);
+            rightObj.SetActive(true);
+        }
+        else if (page == maxPage - 1)
+        {
+            leftObj.SetActive(true);
+            rightObj.SetActive(false);
+        }
+        else
+        {
+            leftObj.SetActive(true);
+            rightObj.SetActive(true);
+        }
     }
 }

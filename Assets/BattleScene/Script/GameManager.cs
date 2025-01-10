@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject PauseMenu, SelectCursor1, SelectCursor2;
     [SerializeField] private GameObject LoadClient_ToResult, LoadClient_ToTitle;
     [SerializeField] private GameObject Timer, FirstStopGrounds, CountdownObj;
+    [SerializeField] private GameObject TIMEUP, GAMESET;
+    [SerializeField] private CautionArea CA_Script;
     private Timer timerScript;
     private FirstStopGrounds FSGsScript;
     private CountDown countDownScript;
@@ -86,13 +88,14 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        //ゲーム終了の処理
-        LoadClient_ToResult.GetComponent<LoadClient>().LoadStart();
+        GAMESET.SetActive(true);
+        StartCoroutine(UnscaledCountdown(3));
     }
 
     public void TimeOver()
     {
-        LoadClient_ToResult.GetComponent<LoadClient>().LoadStart();
+        TIMEUP.SetActive(true);
+        StartCoroutine(UnscaledCountdown(3));
     }
 
     public void MenuDisplay(bool state)
@@ -146,6 +149,26 @@ public class GameManager : MonoBehaviour
         return 0;
     }
 
+    public void FirstCautionAreaReady()
+    {
+        CA_Script.FirstCautionAreaReady();
+    }
+
+    public void SecondCautionAreaReady()
+    {
+        CA_Script.SecondCautionAreaReady();
+    }
+
+    public void FirstCautionAreaON()
+    {
+        CA_Script.FirstCautionAreaON();
+    }
+
+    public void SecondCautionAreaON()
+    {
+        CA_Script.SecondCautionAreaON();
+    }
+
     private IEnumerator LoadSceneCoroutine()
     {
         yield return new WaitForSecondsRealtime(0.25f);
@@ -156,5 +179,16 @@ public class GameManager : MonoBehaviour
     { 
         yield return new WaitForSecondsRealtime(0.3f);
         pauseControl = true;
+    }
+
+    private IEnumerator UnscaledCountdown(float duration)
+    {
+        timerScript.TimerHide();
+        Time.timeScale = 0;
+
+        yield return new WaitForSecondsRealtime(duration);
+        
+        //ゲーム終了の処理
+        LoadClient_ToResult.GetComponent<LoadClient>().LoadStart();
     }
 }

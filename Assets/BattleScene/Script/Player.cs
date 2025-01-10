@@ -6,6 +6,8 @@ using UnityEngine.InputSystem.Users;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private GameObject Icons;
+    [SerializeField] private GameObject[] Icon = new GameObject[4];
     [SerializeField] private GameObject FixSphere;
 
     //éãäoèÓïÒä÷òA
@@ -250,6 +252,7 @@ public class Player : MonoBehaviour
             }
 
             GaugeObj.transform.rotation = Quaternion.Euler(new Vector3(90, 0, 0));
+            Icons.transform.rotation = Quaternion.Euler(new Vector3(45, 0, 0));
         }
     }
 
@@ -310,6 +313,7 @@ public class Player : MonoBehaviour
             {
                 this.name = "Player" + (i + 1);
                 playerNum = i + 1;
+                Icon[i].SetActive(true);
                 statusScript.FirstSet(playerNum);
                 gameManager.Join();
                 StartCoroutine(DeviceSet(CharacterSelect_Save.joinedDevices[i]));
