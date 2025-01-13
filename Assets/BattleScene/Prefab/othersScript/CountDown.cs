@@ -11,12 +11,14 @@ public class CountDown : MonoBehaviour
 
     private float time;
     private float ex_time;
+    private int preTime; // 前フレームの整数時間を記録
 
     // Start is called before the first frame update
     void Start()
     {
         time = 3.55f;
         ex_time = 0.5f;
+        preTime = Mathf.CeilToInt(time); // 初期化時の整数時間
 
         if (canvasRectTransform != null)
         {
@@ -32,6 +34,16 @@ public class CountDown : MonoBehaviour
         if (time > 0)
         {
             time -= Time.deltaTime;
+
+            int currentTime = Mathf.CeilToInt(time); // 現在の整数時間
+
+            // タイムが変わった場合にSFXを再生
+            if (currentTime != preTime && currentTime > 0)
+            {
+                AudioManager.Instance.PlaySFX("CountDown");
+                preTime = currentTime; // 前フレームの時間を更新
+            }
+
             if (time > 1)
             {
                 CountDownText.text = time.ToString("F0");
@@ -40,7 +52,7 @@ public class CountDown : MonoBehaviour
                 {
                     CountDownText.enabled = false;
                 }
-                else 
+                else
                 {
                     CountDownText.enabled = true;
                 }
@@ -51,6 +63,8 @@ public class CountDown : MonoBehaviour
             gameManager.GameStart();
             CountDownText.fontSize = 200f;
             CountDownText.text = "GO!!";
+            AudioManager.Instance.PlaySFX("GameStart");
+            
 
             if (ex_time > 0)
             {
@@ -63,3 +77,4 @@ public class CountDown : MonoBehaviour
         }
     }
 }
+

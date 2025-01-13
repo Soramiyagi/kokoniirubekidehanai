@@ -9,9 +9,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject Timer, FirstStopGrounds, CountdownObj;
     [SerializeField] private GameObject TIMEUP, GAMESET;
     [SerializeField] private CautionArea CA_Script;
+    [SerializeField] private AudioClip mainBGM; // 再生したいBGMをインスペクターで指定
     private Timer timerScript;
     private FirstStopGrounds FSGsScript;
     private CountDown countDownScript;
+    private AudioManager audioManager;
 
     //ゲームに参加している人数
     private int joinPlayerNum = 0;
@@ -76,6 +78,10 @@ public class GameManager : MonoBehaviour
     {
         timerScript.TimerStart();
         FSGsScript.FSG_Delete();
+        AudioManager.Instance.PlayBGM(mainBGM);
+
+
+
     }
 
     public void Finish()
