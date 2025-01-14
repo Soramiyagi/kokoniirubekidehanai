@@ -17,7 +17,7 @@ public class CountDown : MonoBehaviour
     void Start()
     {
         time = 3.55f;
-        ex_time = 0.5f;
+        ex_time = 1f;
         preTime = Mathf.CeilToInt(time); // ‰Šú‰»‚Ì®”ŠÔ
 
         if (canvasRectTransform != null)

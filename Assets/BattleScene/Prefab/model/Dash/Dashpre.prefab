@@ -427,7 +427,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2038400410366373315}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -605,7 +605,7 @@ MonoBehaviour:
   FixSphere: {fileID: 417174588831832090, guid: 8bacbc68d1208884e8bbc99b584bef62, type: 3}
   stock: 3
   speed: 2.5
-  jumpForce: 5
+  jumpForce: 10
   skill1CooldownTime: 1.5
   skill2CooldownTime: 10
   skill1AT_Push: 0
@@ -749,13 +749,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1657899651809261433}
     m_Modifications:
+    - target: {fileID: 4391237163920084754, guid: 848b07c88490f8e449bcb299cdc7694c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6275778668094053778, guid: 848b07c88490f8e449bcb299cdc7694c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6275778668094053778, guid: 848b07c88490f8e449bcb299cdc7694c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 6275778668094053778, guid: 848b07c88490f8e449bcb299cdc7694c, type: 3}
       propertyPath: m_LocalPosition.z

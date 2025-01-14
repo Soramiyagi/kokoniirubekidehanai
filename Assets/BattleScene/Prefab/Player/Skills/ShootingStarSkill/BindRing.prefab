@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  effectRange: 0
+  effectRange: 1
 --- !u!1 &4066959957912216757
 GameObject:
   m_ObjectHideFlags: 0

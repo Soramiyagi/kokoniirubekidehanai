@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9223184024010843292}
   m_Layer: 0
   m_Name: Bullet2
-  m_TagString: Untagged
+  m_TagString: Bind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2320810957998354456}
@@ -218,9 +218,9 @@ MonoBehaviour:
   Bullet2: {fileID: 2373693416360360057}
   Bullet1trail: {fileID: 7897363176196949896}
   Bullet2trail: {fileID: 9223184024010843292}
-  speed: 5
-  frequency: 0.75
-  magnitude: 1.5
+  speed: 8
+  frequency: 1
+  magnitude: 0.75
 --- !u!1 &8400787562704243948
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 7897363176196949896}
   m_Layer: 0
   m_Name: Bullet1
-  m_TagString: Untagged
+  m_TagString: Bind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -249,7 +249,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9147503710222410843}

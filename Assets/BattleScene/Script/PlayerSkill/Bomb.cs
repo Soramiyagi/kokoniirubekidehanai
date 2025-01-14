@@ -67,13 +67,13 @@ public class Bomb : Player
 
     protected override void jumping()
     {
-      
+
         animator.SetTrigger("jumping");
     }
 
     protected override void Landing()
     {
-        
+
         animator.SetTrigger("Landing");
     }
     protected override void Binding()
@@ -160,7 +160,7 @@ public class Bomb : Player
         }
     }
 
-    private IEnumerator Skill1DestroyPrefabAndParticlesAfterDelay(float delay,float delay2)
+    private IEnumerator Skill1DestroyPrefabAndParticlesAfterDelay(float delay, float delay2)
     {
         yield return new WaitForSeconds(delay); // 指定した秒数待機
         Skill1Preview.SetActive(false);
@@ -174,7 +174,7 @@ public class Bomb : Player
     }
 
     // 1秒後にプレハブを削除するためのコルーチン
-    private IEnumerator Skill2DestroyPrefabAndParticlesAfterDelay(float delay,float delay2)
+    private IEnumerator Skill2DestroyPrefabAndParticlesAfterDelay(float delay, float delay2)
     {
         yield return new WaitForSeconds(delay); // 指定した秒数待機
         if (spawnedPrefab != null)
@@ -190,11 +190,19 @@ public class Bomb : Player
             skill2ParticleSystem.transform.localPosition = Vector3.zero; // 元の位置に戻す（必要に応じて調整）
         }
     }
+
     private IEnumerator bindParticleDelay()
     {
         yield return new WaitForSeconds(1.5f);
         bindParticleSystem.Stop();
         bindParticleSystem.Clear();
+    }
 
+    private void OnDestroy()
+    {
+        if (spawnedPrefab != null)
+        {
+            Destroy(spawnedPrefab);
+        }
     }
 }

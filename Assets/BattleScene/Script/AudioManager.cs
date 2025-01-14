@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // シーンをまたいでも破棄されない
+           // DontDestroyOnLoad(gameObject); // シーンをまたいでも破棄されない
         }
         else
         {

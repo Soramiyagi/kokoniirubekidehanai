@@ -231,17 +231,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4923651973138189442, guid: 011955affca0c1e48b275d84264935dc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6002850471756522266, guid: 011955affca0c1e48b275d84264935dc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6002850471756522266, guid: 011955affca0c1e48b275d84264935dc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6002850471756522266, guid: 011955affca0c1e48b275d84264935dc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002850471756522266, guid: 011955affca0c1e48b275d84264935dc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6523300441962261863, guid: 011955affca0c1e48b275d84264935dc, type: 3}
       propertyPath: m_Enabled
@@ -293,15 +301,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8485607347592587808, guid: 011955affca0c1e48b275d84264935dc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.25
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8485607347592587808, guid: 011955affca0c1e48b275d84264935dc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8485607347592587808, guid: 011955affca0c1e48b275d84264935dc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.5
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 8799339704388179799, guid: 011955affca0c1e48b275d84264935dc, type: 3}
       propertyPath: m_LocalPosition.x

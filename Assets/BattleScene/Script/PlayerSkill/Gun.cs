@@ -136,10 +136,12 @@ public class Gun : Player
         Bind.transform.rotation = Quaternion.Euler(0f, 90 - R_angle, 0f);
         Bind.SetActive(true);
     }
+
     private IEnumerator Skill2DelaySystem(float delay)
     {
         yield return new WaitForSeconds(delay);
     }
+
     private IEnumerator bindParticleDelay()
     {
         yield return new WaitForSeconds(1.5f);

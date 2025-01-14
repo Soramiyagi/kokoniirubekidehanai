@@ -471,7 +471,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1290676142643906499, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1290676142643906499, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
       propertyPath: m_LocalScale.y
@@ -479,7 +479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1290676142643906499, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1290676142643906499, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -491,7 +491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1290676142643906499, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1290676142643906499, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -792,7 +792,7 @@ MonoBehaviour:
   statusObj: {fileID: 3577742063162212954, guid: 4a5ab18ae8d24234a9c86c82a517c80f, type: 3}
   GaugeObj: {fileID: 1357406829745270987}
   characterName: DefaultCharacter
-  Skill1Preview: {fileID: 8695393513866463213, guid: c8da98bb30fa00c488dd4fb547dead8c, type: 3}
+  Skill1Preview: {fileID: 2055813674933742094}
   skill1ParticleSystem: {fileID: 5881670821714347212}
   skill2ParticleSystem: {fileID: 4095062359118654535}
   bindParticleSystem: {fileID: 0}
