@@ -29,6 +29,7 @@ public class HowToPageController : MonoBehaviour
         {
             page++;
             ScreenUpdate(page);
+            AudioManager.Instance.PlaySFX("page");
         }
     }
 
@@ -38,6 +39,7 @@ public class HowToPageController : MonoBehaviour
         {
             page--;
             ScreenUpdate(page);
+            AudioManager.Instance.PlaySFX("page");
         }
     }
 

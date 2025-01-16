@@ -49,10 +49,9 @@ public class AudioManager : MonoBehaviour
         }
         Debug.LogWarning($"Sound effect '{clipName}' not found!");
     }
-
-
-// BGM‚Ì‰¹—Ê‚ğ•ÏX‚·‚é
-public void SetBGMVolume(float volume)
+    
+    // BGM‚Ì‰¹—Ê‚ğ•ÏX‚·‚é
+    public void SetBGMVolume(float volume)
     {
         bgmSource.volume = Mathf.Clamp01(volume); // 0`1‚É§ŒÀ
     }

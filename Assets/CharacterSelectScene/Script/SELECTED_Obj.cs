@@ -12,6 +12,7 @@ public class SELECTED_Obj : MonoBehaviour
     {
         // 初期スケールを設定
         transform.localScale = startScale;
+
         // コルーチンを開始
         StartCoroutine(ScaleDownCoroutine());
     }

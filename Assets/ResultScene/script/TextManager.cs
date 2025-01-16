@@ -11,6 +11,8 @@ public class TextManager : MonoBehaviour
         if (Winner_Save.winnerPlayer == -1)
         {
             NoWinnerText.SetActive(true);
+
+            AudioManager.Instance.PlaySFX("do-n");
         }
         else
         {
@@ -34,6 +36,7 @@ public class TextManager : MonoBehaviour
             }
 
             WinText.SetActive(true);
+            AudioManager.Instance.PlaySFX("winner");
         }
 
         BackText.SetActive(true);

@@ -67,6 +67,7 @@ public class TitleController : MonoBehaviour
                     menu++;
                     MIC_Script.ScreenUpdate(menu);
                     interval = interval_set;
+                    AudioManager.Instance.PlaySFX("select");
                 }
             }
             else if (MenuSelectInput.x < -L_StickDeadzone)
@@ -76,6 +77,7 @@ public class TitleController : MonoBehaviour
                     menu--;
                     MIC_Script.ScreenUpdate(menu);
                     interval = interval_set;
+                    AudioManager.Instance.PlaySFX("select");
                 }
 
             }
@@ -126,18 +128,20 @@ public class TitleController : MonoBehaviour
         if (menu == 0)
         {
             HowTo.SetActive(true);
+            AudioManager.Instance.PlaySFX("decision");
         }
         else if (menu == 1)
         {
             if (loadStart == false)
             {
-                LoadCliant_ToCharacterSelect.GetComponent<LoadClient>().LoadStart();
-                loadStart = true;
+                StartCoroutine(Delay(1.25f));
+                AudioManager.Instance.PlaySFX("decision");
             }
         }
         else if (menu == 2)
         {
             Encyclopedia.SetActive(true);
+            AudioManager.Instance.PlaySFX("decision");
         }
     }
 
@@ -150,11 +154,17 @@ public class TitleController : MonoBehaviour
                 canInput_menu = true;
                 HowTo.SetActive(false);
                 Encyclopedia.SetActive(false);
+                AudioManager.Instance.PlaySFX("cancel");
             }
         }
     }
 
-    public void OnaStart(InputAction.CallbackContext Start)
+    IEnumerator Delay(float time)
     {
+        // éwíËÇµÇΩïbêîÇæÇØèàóùÇë“ÇøÇ‹Ç∑ÅB(Ç±Ç±Ç≈ÇÕ1.0ïb)
+        yield return new WaitForSeconds(time);
+
+        LoadCliant_ToCharacterSelect.GetComponent<LoadClient>().LoadStart();
+        loadStart = true;
     }
 }

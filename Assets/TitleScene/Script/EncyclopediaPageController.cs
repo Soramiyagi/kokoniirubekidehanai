@@ -11,6 +11,8 @@ public class EncyclopediaPageController : MonoBehaviour
     private int maxPage = 0;
     private int page = 0;
 
+    private 
+
     void Start()
     {
         minPage = 0;
@@ -31,6 +33,7 @@ public class EncyclopediaPageController : MonoBehaviour
         {
             page++;
             ScreenUpdate(page);
+            AudioManager.Instance.PlaySFX("page");
         }
         CursolCheck();
     }
@@ -41,6 +44,7 @@ public class EncyclopediaPageController : MonoBehaviour
         {
             page--;
             ScreenUpdate(page);
+            AudioManager.Instance.PlaySFX("page");
         }
         CursolCheck();
     }

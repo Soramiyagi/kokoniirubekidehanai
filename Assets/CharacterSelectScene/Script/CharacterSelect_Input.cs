@@ -28,6 +28,8 @@ public class CharacterSelect_Input : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.Instance.PlaySFX("decision");
+
         select = 0;    //-1‚ÍƒLƒƒƒ‰–³‚µ
         canInput = true;
         interval = interval_set;
@@ -72,6 +74,8 @@ public class CharacterSelect_Input : MonoBehaviour
                     select = select + 1;
                     interval = interval_set;
                     UpdateCharacterImage();
+
+                    AudioManager.Instance.PlaySFX("page");
                 }
             }
             else if (MenuSelectInput.x < -L_StickDeadzone)
@@ -81,6 +85,8 @@ public class CharacterSelect_Input : MonoBehaviour
                     select = select - 1;
                     interval = interval_set;
                     UpdateCharacterImage();
+
+                    AudioManager.Instance.PlaySFX("page");
                 }
             }
         }
@@ -119,7 +125,8 @@ public class CharacterSelect_Input : MonoBehaviour
                 //‰Ÿ‚µ‚½Žž
                 canInput = false;
                 SELECTED_Obj.SetActive(true);
-                CSI.Ready(this.name, select);
+                CSI.Ready(this.name, select); 
+                AudioManager.Instance.PlaySFX("selected");
             }
         }
     }
@@ -134,6 +141,7 @@ public class CharacterSelect_Input : MonoBehaviour
                 canInput = true;
                 SELECTED_Obj.SetActive(false);
                 CSI.Unready();
+                AudioManager.Instance.PlaySFX("cancel");
             }
         }
     }
