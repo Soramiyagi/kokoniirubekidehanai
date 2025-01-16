@@ -76,6 +76,8 @@ public class ShootingStar : Player
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
         StartCoroutine(Skill1DuringAnima());
+
+        PlaySoundEffect(SE[1]);
     }
 
     // スキル2が押された時の処理をオーバーライド
@@ -90,12 +92,13 @@ public class ShootingStar : Player
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
         StartCoroutine(Skill2DuringAnima());
+
+        PlaySoundEffect(SE[2]);
     }
     private IEnumerator bindParticleDelay()
     {
         yield return new WaitForSeconds(1.5f);
         bindParticleSystem.Stop();
         bindParticleSystem.Clear();
-
     }
 }

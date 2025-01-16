@@ -89,29 +89,6 @@ public class CharacterSelect_InputManager : MonoBehaviour
         }
     }
 
-    public void LostEvent_A()
-    {
-        //準備未完了状態のデバイスが消えたら
-        playerNum--;
-
-        if (playerNum <= readyNum)
-        {
-            SceneChange();
-        }
-    }
-
-    public void LostEvent_B()
-    {
-        //準備完了状態のデバイスが消えたら
-        playerNum--;
-        readyNum--;
-
-        if (playerNum <= readyNum)
-        {
-            SceneChange();
-        }
-    }
-
     private void SceneChange()
     {
         for (int i = 0; i < 4; i++)

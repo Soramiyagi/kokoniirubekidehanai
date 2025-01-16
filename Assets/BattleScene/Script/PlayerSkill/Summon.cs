@@ -84,6 +84,8 @@ public class Summon : Player
         StartCoroutine(Skill1Cooldown());
         StartCoroutine(Skill1DuringAnima());
 
+        PlaySoundEffect(SE[1]);
+
     }
 
     // スキル2が押された時の処理をオーバーライド
@@ -104,6 +106,7 @@ public class Summon : Player
         PlayParticles();
         StartCoroutine(Skill2Cooldown());
         StartCoroutine(Skill2DuringAnima());
+        PlaySoundEffect(SE[2]);
         StartCoroutine(DestroyPrefabAfterDelay(6f));
     }
 

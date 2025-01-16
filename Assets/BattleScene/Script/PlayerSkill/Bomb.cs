@@ -7,7 +7,6 @@ public class Bomb : Player
     public string characterName = "DefaultCharacter";
 
     [SerializeField] private GameObject Skill1Preview;
-
     public ParticleSystem skill1ParticleSystem;
     public ParticleSystem skill2ParticleSystem;
     public ParticleSystem bindParticleSystem;
@@ -101,6 +100,8 @@ public class Bomb : Player
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
         StartCoroutine(Skill1DuringAnima());
+
+        PlaySoundEffect(SE[1]);
     }
 
     // スキル2が押されている間の処理をオーバーライド
@@ -157,6 +158,8 @@ public class Bomb : Player
             canUseSkill2 = false;
             StartCoroutine(Skill2Cooldown());
             StartCoroutine(Skill2DuringAnima());
+
+            PlaySoundEffect(SE[2]);
         }
     }
 

@@ -318,7 +318,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6463353908843708909}
         m_TargetAssemblyTypeName: CharacterSelect_Input, Assembly-CSharp
-        m_MethodName: OnaStart
+        m_MethodName: OnStart
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

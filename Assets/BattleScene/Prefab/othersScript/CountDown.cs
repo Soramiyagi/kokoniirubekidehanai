@@ -64,7 +64,7 @@ public class CountDown : MonoBehaviour
             CountDownText.fontSize = 200f;
             CountDownText.text = "GO!!";
             AudioManager.Instance.PlaySFX("GameStart");
-            
+
 
             if (ex_time > 0)
             {

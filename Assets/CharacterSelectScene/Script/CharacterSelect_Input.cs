@@ -146,7 +146,7 @@ public class CharacterSelect_Input : MonoBehaviour
         }
     }
 
-    public void OnaStart(InputAction.CallbackContext Start)
+    public void OnStart(InputAction.CallbackContext Start)
     {
         if (Start.started)
         {
@@ -209,22 +209,5 @@ public class CharacterSelect_Input : MonoBehaviour
             this.name = "Player4";
             return;
         }
-    }
-
-    public void DeviceLost()
-    {
-        // Ú‘±‚ªØ‚ê‚½‚Ìˆ—
-
-        if(canInput == true)
-        {
-            CSI.LostEvent_A();
-        }
-        else if (canInput == false)
-        {
-            CSI.LostEvent_B();
-        }
-
-        select = - 1;
-        canInput = true;
     }
 }

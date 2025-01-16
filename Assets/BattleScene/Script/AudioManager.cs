@@ -61,6 +61,12 @@ public class AudioManager : MonoBehaviour
     {
         sfxSource.volume = Mathf.Clamp01(volume); // 0～1に制限
     }
+
+    // 効果音の音量をデフォルトに戻す
+    public void SetSFXVolumeDefault()
+    {
+        sfxSource.volume = Mathf.Clamp01(1); // 0～1に制限
+    }
 }
 
 

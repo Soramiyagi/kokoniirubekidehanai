@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject Icons;
     [SerializeField] private GameObject[] Icon = new GameObject[4];
     [SerializeField] private GameObject FixSphere;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] protected AudioClip[] SE = new AudioClip[0];
 
     //視覚情報関連
     private LineRenderer lineRenderer;
@@ -570,6 +572,8 @@ public class Player : MonoBehaviour
 
                 gaugeScript.SkillGaugeReset();
 
+
+                PlaySoundEffect(SE[0]);
                 Instantiate(FixSphere, this.transform.position, Quaternion.identity);
 
                 if (stock >= 1)
@@ -618,5 +622,17 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(0.25f); // 指定した秒数待機
         jumpInterval = false;
+    }
+
+    protected void PlaySoundEffect(AudioClip se)
+    {
+        if (se != null)
+        {
+            audioSource.PlayOneShot(se);
+        }
+        else
+        {
+            Debug.LogWarning("音が設定されていません！");
+        }
     }
 }

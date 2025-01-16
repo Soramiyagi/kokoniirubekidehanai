@@ -146,6 +146,8 @@ public class Dash : Player
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
         StartCoroutine(Skill1DuringAnima());
+
+        PlaySoundEffect(SE[1]);
     }
 
     // スキル2が押された時の処理をオーバーライド
@@ -166,6 +168,8 @@ public class Dash : Player
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
         StartCoroutine(Skill2DuringAnima());
+
+        PlaySoundEffect(SE[2]);
     }
 
     private IEnumerator skill1DestroyPrefabAfterDelay(float delay)
@@ -175,8 +179,6 @@ public class Dash : Player
         {
             skill1ParticleSystem.Stop();
             skill1ParticleSystem.Clear();
-     
-
         }
     }
 
