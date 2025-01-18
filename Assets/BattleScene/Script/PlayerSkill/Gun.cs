@@ -56,16 +56,31 @@ public class Gun : Player
 
         animator.SetTrigger("Landing");
     }
-    protected override void Binding()
+    
+    protected override void Binding(bool super)
     {
-        if (bindParticleSystem != null)
+        if (super == true)
         {
-            bindParticleSystem.Play();
-        }
+            if (bindParticleSystem != null)
+            {
+                bindParticleSystem.startColor = Color.red;
+                bindParticleSystem.Play();
+            }
 
-        StartCoroutine(bindParticleDelay());
+            StartCoroutine(bindParticleDelay(2.5f));
+        }
+        else
+        {
+            if (bindParticleSystem != null)
+            {
+                bindParticleSystem.startColor = Color.blue;
+                bindParticleSystem.Play();
+            }
+
+            StartCoroutine(bindParticleDelay(1.5f));
+        }
     }
-    //
+
     // スキル1が押された時の処理をオーバーライド
     protected override void Skill1Push()
     {
@@ -146,9 +161,9 @@ public class Gun : Player
         yield return new WaitForSeconds(delay);
     }
 
-    private IEnumerator bindParticleDelay()
+    private IEnumerator bindParticleDelay(float time)
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(time);
         bindParticleSystem.Stop();
         bindParticleSystem.Clear();
 

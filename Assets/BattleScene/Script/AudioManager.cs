@@ -36,6 +36,16 @@ public class AudioManager : MonoBehaviour
         bgmSource.Stop();
     }
 
+    public void PauseBGM() 
+    {
+        bgmSource.Pause(); 
+    }
+
+    public void ResumeBGM() 
+    {
+        bgmSource.UnPause(); 
+    }
+
     // 効果音を再生（名前で指定）
     public void PlaySFX(string clipName)
     {

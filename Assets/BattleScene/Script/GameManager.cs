@@ -79,9 +79,6 @@ public class GameManager : MonoBehaviour
         timerScript.TimerStart();
         FSGsScript.FSG_Delete();
         AudioManager.Instance.PlayBGM(mainBGM);
-
-
-
     }
 
     public void Finish()
@@ -108,12 +105,14 @@ public class GameManager : MonoBehaviour
     {
         if (state == false)
         {
+            AudioManager.Instance.PauseBGM();
             pauseControl = false;
             StartCoroutine(PauseControlWait());
             PauseMenu.SetActive(true);
         }
         else if (state == true)
         {
+            AudioManager.Instance.ResumeBGM();
             PauseMenu.SetActive(false);
         }
     }

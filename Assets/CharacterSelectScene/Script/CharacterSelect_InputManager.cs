@@ -6,7 +6,7 @@ using TMPro;
 
 public class CharacterSelect_InputManager : MonoBehaviour
 {
-    [SerializeField] private GameObject LoadClient, ReadyObj;
+    [SerializeField] private GameObject LoadClient_ToBattleScene, LoadClient_ToTitleScene, ReadyObj;
 
     private int playerNum;
     private int readyNum;
@@ -89,6 +89,11 @@ public class CharacterSelect_InputManager : MonoBehaviour
         }
     }
 
+    public void BackToTitle()
+    {
+        LoadClient_ToTitleScene.GetComponent<LoadClient>().LoadStart();
+    }
+
     private void SceneChange()
     {
         for (int i = 0; i < 4; i++)
@@ -96,6 +101,6 @@ public class CharacterSelect_InputManager : MonoBehaviour
             CharacterSelect_Save.characterIndex[i] = playerChoice[i];
         }
 
-        LoadClient.GetComponent<LoadClient>().LoadStart();
+        LoadClient_ToBattleScene.GetComponent<LoadClient>().LoadStart();
     }
 }

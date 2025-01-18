@@ -76,6 +76,7 @@ public class Player : MonoBehaviour
 
     // ƒoƒCƒ“ƒh’e‚É“–‚½‚Á‚½‚ÌS‘©ŠÔ
     public float bindTime_Set = 0;
+    public float superBindTime_Set = 0;
     private float bindTime = 0;
 
     //˜A‘±‚Å€‚Ê‚±‚Æ‚ğ–h‚®‚½‚ß
@@ -473,7 +474,7 @@ public class Player : MonoBehaviour
     {
     }
 
-    protected virtual void Binding()
+    protected virtual void Binding(bool super)
     {
 
     }
@@ -593,10 +594,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (collision.gameObject.CompareTag("Bind"))
-        {
-            bindTime = bindTime_Set;
-        }
     }
 
     // ‰½‚©‚ÉÚG‚µ‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚é
@@ -605,7 +602,12 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Bind"))
         {
             bindTime = bindTime_Set;
-            Binding();
+            Binding(false);
+        }
+        else if (other.gameObject.CompareTag("SuperBind"))
+        {
+            bindTime = superBindTime_Set;
+            Binding(true);
         }
     }
 

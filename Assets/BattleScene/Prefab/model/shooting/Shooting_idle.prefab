@@ -624,6 +624,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3331d7a0-8e5d-47ad-95b3-cfa108ca5ea0
     m_ActionName: Action/Decision[/DualShock4GamepadHID/buttonEast,/XInputControllerWindows/buttonEast,/SwitchProControllerHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fda9d827-900f-4d1c-9e33-58ee4e2ca8dd
+    m_ActionName: UI/Select[/DualShock4GamepadHID/select,/SwitchProControllerHID/select,/SwitchProControllerHID1/select]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Action
@@ -790,7 +794,7 @@ MonoBehaviour:
   FixSphere: {fileID: 417174588831832090, guid: 8bacbc68d1208884e8bbc99b584bef62, type: 3}
   audioSource: {fileID: -4173592466357839313}
   SE:
-  - {fileID: 8300000, guid: 29316dfe5554eee4eb3c563f30eca0e1, type: 3}
+  - {fileID: 8300000, guid: c3bddb6d1a8d0d84c8637517eb511968, type: 3}
   - {fileID: 8300000, guid: 830152c7af391e5408a86e1da51bdc37, type: 3}
   - {fileID: 8300000, guid: 29316dfe5554eee4eb3c563f30eca0e1, type: 3}
   stock: 3
@@ -802,6 +806,7 @@ MonoBehaviour:
   skill2AT_Push: 0.5
   floatTime_Set: 4
   bindTime_Set: 1.5
+  superBindTime_Set: 2.25
   statusObj: {fileID: 3577742063162212954, guid: 4a5ab18ae8d24234a9c86c82a517c80f, type: 3}
   GaugeObj: {fileID: 7215185773010422828}
   characterName: DefaultCharacter

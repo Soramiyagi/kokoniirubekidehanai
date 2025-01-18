@@ -468,7 +468,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2373693416360360057, guid: 44cc04c51b7549c4b946ca2476a06206, type: 3}
       propertyPath: m_TagString
-      value: Bind
+      value: SuperBind
       objectReference: {fileID: 0}
     - target: {fileID: 6731730547031431760, guid: 44cc04c51b7549c4b946ca2476a06206, type: 3}
       propertyPath: m_LocalPosition.x
@@ -520,7 +520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8400787562704243948, guid: 44cc04c51b7549c4b946ca2476a06206, type: 3}
       propertyPath: m_TagString
-      value: Bind
+      value: SuperBind
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -732,18 +732,19 @@ MonoBehaviour:
   FixSphere: {fileID: 417174588831832090, guid: 8bacbc68d1208884e8bbc99b584bef62, type: 3}
   audioSource: {fileID: 1930858673934198141}
   SE:
+  - {fileID: 8300000, guid: c3bddb6d1a8d0d84c8637517eb511968, type: 3}
   - {fileID: 8300000, guid: 2740ad90fd33ebf4e891d2fa7155d287, type: 3}
-  - {fileID: 8300000, guid: 2740ad90fd33ebf4e891d2fa7155d287, type: 3}
-  - {fileID: 8300000, guid: 2740ad90fd33ebf4e891d2fa7155d287, type: 3}
+  - {fileID: 8300000, guid: c3bddb6d1a8d0d84c8637517eb511968, type: 3}
   stock: 3
   speed: 2.5
   jumpForce: 10
-  skill1CooldownTime: 5
+  skill1CooldownTime: 1
   skill2CooldownTime: 20
   skill1AT_Push: 0.25
   skill2AT_Push: 0.25
   floatTime_Set: 4
   bindTime_Set: 1.5
+  superBindTime_Set: 2.25
   statusObj: {fileID: 3577742063162212954, guid: 4a5ab18ae8d24234a9c86c82a517c80f, type: 3}
   GaugeObj: {fileID: 2278660223572180265}
   characterName: DefaultCharacter
@@ -752,7 +753,7 @@ MonoBehaviour:
   Gun_FixSphere: {fileID: 417174588831832090, guid: 845b3f6f25f895248b9b6f137d86e34e, type: 3}
   particleSystem: {fileID: 6917204045848586755}
   bindParticleSystem: {fileID: 7302240534280009059}
-  skill1InstantiateInterval: 0
+  skill1InstantiateInterval: 0.1
 --- !u!114 &3841769465888054518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -886,6 +887,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3331d7a0-8e5d-47ad-95b3-cfa108ca5ea0
     m_ActionName: Action/Decision[/DualShock4GamepadHID/buttonEast,/XInputControllerWindows/buttonEast,/SwitchProControllerHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fda9d827-900f-4d1c-9e33-58ee4e2ca8dd
+    m_ActionName: UI/Select[/DualShock4GamepadHID/select,/SwitchProControllerHID/select,/SwitchProControllerHID1/select]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Action

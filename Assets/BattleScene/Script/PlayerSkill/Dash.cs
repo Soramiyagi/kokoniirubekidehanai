@@ -111,15 +111,31 @@ public class Dash : Player
 
         animator.SetTrigger("Landing");
     }
-    protected override void Binding()
-    {
-        if (bindParticleSystem != null)
-        {
-            bindParticleSystem.Play();
-        }
 
-        StartCoroutine(bindParticleDelay());
+    protected override void Binding(bool super)
+    {
+        if (super == true)
+        {
+            if (bindParticleSystem != null)
+            {
+                bindParticleSystem.startColor = Color.red;
+                bindParticleSystem.Play();
+            }
+
+            StartCoroutine(bindParticleDelay(2.5f));
+        }
+        else
+        {
+            if (bindParticleSystem != null)
+            {
+                bindParticleSystem.startColor = Color.blue;
+                bindParticleSystem.Play();
+            }
+
+            StartCoroutine(bindParticleDelay(1.5f));
+        }
     }
+
     // スキル1が押された時の処理をオーバーライド
     protected override void Skill1Push()
     {
@@ -208,9 +224,9 @@ public class Dash : Player
         yield return null;
         skill2Flag = false;
     }
-    private IEnumerator bindParticleDelay()
+    private IEnumerator bindParticleDelay(float time)
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(time);
         bindParticleSystem.Stop();
         bindParticleSystem.Clear();
     }

@@ -154,6 +154,14 @@ public class CharacterSelect_Input : MonoBehaviour
         }
     }
 
+    public void OnSelect(InputAction.CallbackContext Select)
+    {
+        if (Select.started)
+        {
+            CSI.BackToTitle();
+        }
+    }
+
     void NameSet()
     {
         GameObject[] allObjects = FindObjectsOfType<GameObject>();

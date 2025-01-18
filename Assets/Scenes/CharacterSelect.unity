@@ -256,6 +256,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 143178}
   m_CullTransparentMesh: 1
+--- !u!1 &9587991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3113020602348163289, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+  m_PrefabInstance: {fileID: 715541543}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &229250878
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,7 +556,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23864365b8e6a7a4ab40fcd56af498b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadClient: {fileID: 634354710}
+  LoadClient_ToBattleScene: {fileID: 634354710}
+  LoadClient_ToTitleScene: {fileID: 9587991}
   ReadyObj: {fileID: 859764200}
 --- !u!114 &500294804
 MonoBehaviour:
@@ -664,6 +670,71 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3113020602348163289, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
   m_PrefabInstance: {fileID: 4541161761630765477}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &715541543
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1867545727511739264, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867545727511739264, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867545727511739264, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867545727511739264, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867545727511739264, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867545727511739264, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867545727511739264, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867545727511739264, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867545727511739264, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867545727511739264, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3113020602348163289, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: m_Name
+      value: LoadClient_ToTitleScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005676575217478143, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: nextSceneName
+      value: TitleScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005676575217478143, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
+      propertyPath: nextSceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
 --- !u!1 &843336271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,9 +1267,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 988cb6c404be18344a099681b1f5cb75, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.45
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1844,7 +1915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3113020602348163289, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: m_Name
-      value: LoadClient
+      value: LoadClient_ToBattleScene
       objectReference: {fileID: 0}
     - target: {fileID: 9005676575217478143, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: nextSceneName
@@ -1869,5 +1940,6 @@ SceneRoots:
   - {fileID: 2007896900}
   - {fileID: 1990316553}
   - {fileID: 4541161761630765477}
+  - {fileID: 715541543}
   - {fileID: 843336274}
   - {fileID: 1777178647}

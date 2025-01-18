@@ -780,8 +780,10 @@ MonoBehaviour:
   - {fileID: 8721423394945788125}
   - {fileID: 7482195591859928789}
   FixSphere: {fileID: 0}
+  audioSource: {fileID: 0}
+  SE: []
   stock: 3
-  speed: 2
+  speed: 2.5
   jumpForce: 5
   skill1CooldownTime: 5
   skill2CooldownTime: 7
@@ -789,6 +791,7 @@ MonoBehaviour:
   skill2AT_Push: 1
   floatTime_Set: 4
   bindTime_Set: 1.5
+  superBindTime_Set: 2.25
   statusObj: {fileID: 3577742063162212954, guid: 4a5ab18ae8d24234a9c86c82a517c80f, type: 3}
   GaugeObj: {fileID: 1357406829745270987}
   characterName: DefaultCharacter
