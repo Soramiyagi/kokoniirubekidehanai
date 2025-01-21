@@ -123,7 +123,7 @@ public class Summon : Player
         StartCoroutine(Skill2Cooldown());
         StartCoroutine(Skill2DuringAnima());
         PlaySoundEffect(SE[2]);
-        StartCoroutine(DestroyPrefabAfterDelay(6f));
+        StartCoroutine(DestroyPrefabAfterDelay(5.5f));
     }
 
     protected override void jumping()

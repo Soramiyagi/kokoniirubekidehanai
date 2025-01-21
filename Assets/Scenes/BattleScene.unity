@@ -26927,7 +26927,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
@@ -27023,7 +27023,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
@@ -27124,7 +27124,7 @@ MonoBehaviour:
   sfxSource: {fileID: 868264525}
   soundEffects:
   - {fileID: 8300000, guid: b41cb19f03c075540b9f92669bd98ac7, type: 3}
-  - {fileID: 8300000, guid: 718fc82676961e4479cd218e51a1103b, type: 3}
+  - {fileID: 8300000, guid: 6eb37231e54a0994fb1eece8a4bbbe08, type: 3}
 --- !u!4 &868264528
 Transform:
   m_ObjectHideFlags: 0
