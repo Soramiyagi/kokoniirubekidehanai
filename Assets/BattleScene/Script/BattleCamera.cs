@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BattleCamera : MonoBehaviour
 {
-    [SerializeField] private GameObject BackGround;
+    [SerializeField] private GameObject backGround;
 
     //対象（プレイヤーキャラ）
     private GameObject[] targetObj = new GameObject[4];
@@ -58,7 +58,7 @@ public class BattleCamera : MonoBehaviour
         centerPoint = CenterPoint_Calculation(targetObj);
         Offset_Set(); 
         this.transform.position = new Vector3(pos_x + offset_x, pos_y + offset_y, pos_z + offset_z) + centerPoint;
-        BackGround.SetActive(false);
+        backGround.SetActive(false);
     }
 
     //中心点の算出(全てのキャラの座標の中の一番上下左右のポイントの中心点)

@@ -262,14 +262,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a8119d521743e40bf1422f846f0134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstGround1: {fileID: 8292688855760510040}
-  FirstGround2: {fileID: 4454326988533068971}
-  FirstGround3: {fileID: 8272242126665840627}
-  FirstGround4: {fileID: 4219826111958676923}
-  SystemStopBreak1: {fileID: 830564764253838597}
-  SystemStopBreak2: {fileID: 8662102761054938792}
-  SystemStopBreak3: {fileID: 1940624011600119542}
-  SystemStopBreak4: {fileID: 1317022359150657501}
+  firstGround1: {fileID: 8292688855760510040}
+  firstGround2: {fileID: 4454326988533068971}
+  firstGround3: {fileID: 8272242126665840627}
+  firstGround4: {fileID: 4219826111958676923}
+  systemStopBreak1: {fileID: 830564764253838597}
+  systemStopBreak2: {fileID: 8662102761054938792}
+  systemStopBreak3: {fileID: 1940624011600119542}
+  systemStopBreak4: {fileID: 1317022359150657501}
 --- !u!1 &1940624011600119542
 GameObject:
   m_ObjectHideFlags: 0

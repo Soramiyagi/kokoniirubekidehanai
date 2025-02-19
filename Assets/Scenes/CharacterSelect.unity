@@ -179,7 +179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PleasePressButton
+  m_text: Please Press Start Button
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -556,9 +556,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23864365b8e6a7a4ab40fcd56af498b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadClient_ToBattleScene: {fileID: 634354710}
-  LoadClient_ToTitleScene: {fileID: 9587991}
-  ReadyObj: {fileID: 859764200}
+  loadClientToBattleScene: {fileID: 634354710}
+  loadClientToTitleScene: {fileID: 9587991}
+  readyObj: {fileID: 859764200}
 --- !u!114 &500294804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,7 +720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3113020602348163289, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: m_Name
-      value: LoadClient_ToTitleScene
+      value: LoadClientToTitleScene
       objectReference: {fileID: 0}
     - target: {fileID: 9005676575217478143, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: nextSceneName
@@ -1915,7 +1915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3113020602348163289, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: m_Name
-      value: LoadClient_ToBattleScene
+      value: LoadClientToBattleScene
       objectReference: {fileID: 0}
     - target: {fileID: 9005676575217478143, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: nextSceneName

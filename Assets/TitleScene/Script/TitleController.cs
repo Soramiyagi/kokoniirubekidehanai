@@ -5,16 +5,16 @@ using UnityEngine.InputSystem;
 
 public class TitleController : MonoBehaviour
 {
-    [SerializeField] GameObject HowTo, Encyclopedia, LoadCliant_ToCharacterSelect;
-    [SerializeField] MenuImageController MIC_Script;
-    [SerializeField] HowToPageController HTPC_Script;
-    [SerializeField] EncyclopediaPageController EPC_Script;
+    [SerializeField] GameObject HowTo, encyclopedia, loadCliantToCharacterSelect;
+    [SerializeField] MenuImageController micScript;
+    [SerializeField] HowToPageController htpcScript;
+    [SerializeField] EncyclopediaPageController epcScript;
     
-    public float interval_set;  //入力のインターバル
-    public float L_StickDeadzone;
+    public float intervalSet;  //入力のインターバル
+    public float lstickDeadzone;
     private float interval;
-    private Vector2 MenuSelectInput;
-    private bool canInput_menu;
+    private Vector2 menuSelectInput;
+    private bool canInputMenu;
 
     private InputAction L_Stick;
     private InputAction D_Pad;
@@ -29,9 +29,9 @@ public class TitleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        canInput_menu = true;
-        interval = interval_set;
-        MenuSelectInput = Vector2.zero;
+        canInputMenu = true;
+        interval = intervalSet;
+        menuSelectInput = Vector2.zero;
 
         L_Stick = GetComponent<PlayerInput>().actions["MenuSelect_LStick"];
         D_Pad = GetComponent<PlayerInput>().actions["MenuSelect_DPad"];
@@ -46,68 +46,68 @@ public class TitleController : MonoBehaviour
 
         if (L_Stick.ReadValue<Vector2>() == Vector2.zero || D_Pad.ReadValue<Vector2>() == Vector2.zero)
         {
-            MenuSelectInput = Vector2.zero;
+            menuSelectInput = Vector2.zero;
         }
 
         if (L_Stick.ReadValue<Vector2>() != Vector2.zero)
         {
-            MenuSelectInput = L_Stick.ReadValue<Vector2>();
+            menuSelectInput = L_Stick.ReadValue<Vector2>();
         }
         else if (D_Pad.ReadValue<Vector2>() != Vector2.zero)
         {
-            MenuSelectInput = D_Pad.ReadValue<Vector2>();
+            menuSelectInput = D_Pad.ReadValue<Vector2>();
         }
 
-        if (canInput_menu == true && interval <= 0)
+        if (canInputMenu == true && interval <= 0)
         {
-            if (MenuSelectInput.x > L_StickDeadzone)
+            if (menuSelectInput.x > lstickDeadzone)
             {
                 if (menu <= 1)
                 {
                     menu++;
-                    MIC_Script.ScreenUpdate(menu);
-                    interval = interval_set;
-                    AudioManager.Instance.PlaySFX("select");
+                    micScript.ScreenUpdate(menu);
+                    interval = intervalSet;
+                    AudioManager.Instance.PlaySFX("select_se");
                 }
             }
-            else if (MenuSelectInput.x < -L_StickDeadzone)
+            else if (menuSelectInput.x < -lstickDeadzone)
             {
                 if (menu >= 1)
                 {
                     menu--;
-                    MIC_Script.ScreenUpdate(menu);
-                    interval = interval_set;
-                    AudioManager.Instance.PlaySFX("select");
+                    micScript.ScreenUpdate(menu);
+                    interval = intervalSet;
+                    AudioManager.Instance.PlaySFX("select_se");
                 }
 
             }
         }
-        else if(canInput_menu == false && interval <= 0)
+        else if(canInputMenu == false && interval <= 0)
         {
             if (menu == 0)
             {
-                if (MenuSelectInput.x > L_StickDeadzone)
+                if (menuSelectInput.x > lstickDeadzone)
                 {
-                    HTPC_Script.NextPage();
-                    interval = interval_set;
+                    htpcScript.NextPage();
+                    interval = intervalSet;
                 }
-                else if (MenuSelectInput.x < -L_StickDeadzone)
+                else if (menuSelectInput.x < -lstickDeadzone)
                 {
-                    HTPC_Script.BackPage();
-                    interval = interval_set;
+                    htpcScript.BackPage();
+                    interval = intervalSet;
                 }
             }
             else if (menu == 2)
             {
-                if (MenuSelectInput.x > L_StickDeadzone)
+                if (menuSelectInput.x > lstickDeadzone)
                 {
-                    EPC_Script.NextPage();
-                    interval = interval_set;
+                    epcScript.NextPage();
+                    interval = intervalSet;
                 }
-                else if (MenuSelectInput.x < -L_StickDeadzone)
+                else if (menuSelectInput.x < -lstickDeadzone)
                 {
-                    EPC_Script.BackPage();
-                    interval = interval_set;
+                    epcScript.BackPage();
+                    interval = intervalSet;
                 }
             }
 
@@ -116,11 +116,11 @@ public class TitleController : MonoBehaviour
 
     public void OnDecision(InputAction.CallbackContext Decision)
     {
-        if (canInput_menu == true)
+        if (canInputMenu == true)
         {
             if (Decision.started)
             {
-                canInput_menu = false;
+                canInputMenu = false;
             }
         }
 
@@ -128,33 +128,33 @@ public class TitleController : MonoBehaviour
         if (menu == 0)
         {
             HowTo.SetActive(true);
-            AudioManager.Instance.PlaySFX("decision");
+            AudioManager.Instance.PlaySFX("decision_se");
         }
         else if (menu == 1)
         {
             if (loadStart == false)
             {
                 StartCoroutine(Delay(1.25f));
-                AudioManager.Instance.PlaySFX("decision");
+                AudioManager.Instance.PlaySFX("decision_se");
             }
         }
         else if (menu == 2)
         {
-            Encyclopedia.SetActive(true);
-            AudioManager.Instance.PlaySFX("decision");
+            encyclopedia.SetActive(true);
+            AudioManager.Instance.PlaySFX("decision_se");
         }
     }
 
     public void OnCancel(InputAction.CallbackContext Cancel)
     {
-        if (canInput_menu == false)
+        if (canInputMenu == false)
         {
             if (Cancel.started)
             {
-                canInput_menu = true;
+                canInputMenu = true;
                 HowTo.SetActive(false);
-                Encyclopedia.SetActive(false);
-                AudioManager.Instance.PlaySFX("cancel");
+                encyclopedia.SetActive(false);
+                AudioManager.Instance.PlaySFX("cancel_se");
             }
         }
     }
@@ -164,7 +164,7 @@ public class TitleController : MonoBehaviour
         // 指定した秒数だけ処理を待ちます。(ここでは1.0秒)
         yield return new WaitForSeconds(time);
 
-        LoadCliant_ToCharacterSelect.GetComponent<LoadClient>().LoadStart();
+        loadCliantToCharacterSelect.GetComponent<LoadClient>().LoadStart();
         loadStart = true;
     }
 }

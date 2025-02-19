@@ -115,8 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e04a247d54888ae45a7449760ce9156e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimerObj: {fileID: 7937477086268975773}
-  TimeText: {fileID: 554925609901440031}
+  timerObj: {fileID: 7937477086268975773}
+  timeText: {fileID: 554925609901440031}
   firstCautionReadyTime: 120
   secondCautionReadyTime: 60
   firstCautionOnTime: 110

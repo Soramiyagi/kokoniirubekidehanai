@@ -10,7 +10,7 @@ public class ShootingStar : Player
     public GameObject prefab; // プレハブの参照をインスペクタで設定
     private GameObject spawnedPrefab; // 生成されたプレハブの参照
 
-    private ShootingStar_SkillManager SSS;
+    private ShootingStarSkillManager sss;
     private Animator animator;//アニメーションをGetComponentする変数
     private float movementThreshold = 0.001f;
     private Vector3 previousPosition;
@@ -20,7 +20,7 @@ public class ShootingStar : Player
     protected override void Start()
     {
         base.Start();
-        SSS = this.GetComponent<ShootingStar_SkillManager>();
+        sss = this.GetComponent<ShootingStarSkillManager>();
         animator = GetComponent<Animator>();
     }
 
@@ -44,7 +44,7 @@ public class ShootingStar : Player
         previousPosition = transform.position;
 
     }
-    protected override void jumping()
+    protected override void Jumping()
     {
 
         animator.SetTrigger("jumping");
@@ -66,7 +66,7 @@ public class ShootingStar : Player
                 bindParticleSystem.Play();
             }
 
-            StartCoroutine(bindParticleDelay(2.5f));
+            StartCoroutine(BindParticleDelay(2.5f));
         }
         else
         {
@@ -76,7 +76,7 @@ public class ShootingStar : Player
                 bindParticleSystem.Play();
             }
 
-            StartCoroutine(bindParticleDelay(1.5f));
+            StartCoroutine(BindParticleDelay(1.5f));
         }
     }
 
@@ -87,7 +87,7 @@ public class ShootingStar : Player
         発動タイミングが押したときなら使おう
         */
         animator.SetTrigger("skill1");
-        SSS.UseSkill1();
+        sss.UseSkill1();
 
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
@@ -103,7 +103,7 @@ public class ShootingStar : Player
         発動タイミングが押したときなら使おう
         */
         animator.SetTrigger("skill2");
-        SSS.UseSkill2();
+        sss.UseSkill2();
 
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
@@ -112,7 +112,7 @@ public class ShootingStar : Player
         PlaySoundEffect(SE[2]);
     }
 
-    private IEnumerator bindParticleDelay(float time)
+    private IEnumerator BindParticleDelay(float time)
     {
         yield return new WaitForSeconds(time);
         bindParticleSystem.Stop();

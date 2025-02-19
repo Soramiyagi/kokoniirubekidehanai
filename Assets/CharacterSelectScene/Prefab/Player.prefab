@@ -361,10 +361,10 @@ MonoBehaviour:
   sprite2: {fileID: 21300000, guid: 61d2418a80ccb384ead5c39256c65b78, type: 3}
   sprite3: {fileID: 21300000, guid: 95e727482987a8f4b81bf62e1a24aaaf, type: 3}
   sprite4: {fileID: 21300000, guid: b06031eec853ed849be13d901776ee5d, type: 3}
-  SELECTED_Obj: {fileID: 7420868088576840493}
+  selectedObj: {fileID: 7420868088576840493}
   maxNum: 5
   interval_set: 0.2
-  L_StickDeadzone: 0.3
+  lstickDeadzone: 0.3
 --- !u!1 &5976631137599954011
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +503,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1042110372814048169, guid: abe88477c550d6c45b4249ebefb0f07e, type: 3}
       propertyPath: m_Name
-      value: SELECTED_Obj
+      value: SelectedObj
       objectReference: {fileID: 0}
     - target: {fileID: 1042110372814048169, guid: abe88477c550d6c45b4249ebefb0f07e, type: 3}
       propertyPath: m_IsActive

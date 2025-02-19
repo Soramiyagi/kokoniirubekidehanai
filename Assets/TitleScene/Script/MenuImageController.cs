@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MenuImageController : MonoBehaviour
 {
-    [SerializeField] private GameObject[] Item = new GameObject[3];
+    [SerializeField] private GameObject[] item = new GameObject[3];
 
-    private Vector3 NormalScale = new Vector3(1f, 1f, 1f);
-    private Vector3 ZoomScale = new Vector3(1.5f, 1.5f, 1.5f);
+    private Vector3 normalScale = new Vector3(1f, 1f, 1f);
+    private Vector3 zoomScale = new Vector3(1.5f, 1.5f, 1.5f);
 
     void Start()
     {
@@ -16,10 +16,10 @@ public class MenuImageController : MonoBehaviour
 
     public void ScreenUpdate(int menu)
     {
-        Item[0].transform.localScale = NormalScale;
-        Item[1].transform.localScale = NormalScale;
-        Item[2].transform.localScale = NormalScale;
+        item[0].transform.localScale = normalScale;
+        item[1].transform.localScale = normalScale;
+        item[2].transform.localScale = normalScale;
 
-        Item[menu].transform.localScale = ZoomScale;
+        item[menu].transform.localScale = zoomScale;
     }
 }

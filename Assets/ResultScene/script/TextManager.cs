@@ -4,41 +4,41 @@ using UnityEngine;
 
 public class TextManager : MonoBehaviour
 {
-    [SerializeField] private GameObject PlayerText, Text1, Text2, Text3, Text4, WinText, BackText, NoWinnerText;
+    [SerializeField] private GameObject playerText, text1, text2, text3, text4, winText, backText, noWinnerText;
 
     public void ActiveTextImage()
     {
-        if (Winner_Save.winnerPlayer == -1)
+        if (WinnerSave.winnerPlayer == -1)
         {
-            NoWinnerText.SetActive(true);
+            noWinnerText.SetActive(true);
 
-            AudioManager.Instance.PlaySFX("do-n");
+            AudioManager.Instance.PlaySFX("don_se");
         }
         else
         {
-            PlayerText.SetActive(true);
+            playerText.SetActive(true);
 
-            if (Winner_Save.winnerPlayer == 0)
+            if (WinnerSave.winnerPlayer == 0)
             {
-                Text1.SetActive(true);
+                text1.SetActive(true);
             }
-            else if (Winner_Save.winnerPlayer == 1)
+            else if (WinnerSave.winnerPlayer == 1)
             {
-                Text2.SetActive(true);
+                text2.SetActive(true);
             }
-            else if (Winner_Save.winnerPlayer == 2)
+            else if (WinnerSave.winnerPlayer == 2)
             {
-                Text3.SetActive(true);
+                text3.SetActive(true);
             }
-            else if (Winner_Save.winnerPlayer == 3)
+            else if (WinnerSave.winnerPlayer == 3)
             {
-                Text4.SetActive(true);
+                text4.SetActive(true);
             }
 
-            WinText.SetActive(true);
-            AudioManager.Instance.PlaySFX("winner");
+            winText.SetActive(true);
+            AudioManager.Instance.PlaySFX("winner_se");
         }
 
-        BackText.SetActive(true);
+        backText.SetActive(true);
     }
 }

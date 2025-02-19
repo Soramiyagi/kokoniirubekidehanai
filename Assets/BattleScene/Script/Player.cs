@@ -6,9 +6,9 @@ using UnityEngine.InputSystem.Users;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private GameObject Icons;
-    [SerializeField] private GameObject[] Icon = new GameObject[4];
-    [SerializeField] private GameObject FixSphere;
+    [SerializeField] private GameObject icons;
+    [SerializeField] private GameObject[] icon = new GameObject[4];
+    [SerializeField] private GameObject fixSphere;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] protected AudioClip[] SE = new AudioClip[0];
 
@@ -28,8 +28,8 @@ public class Player : MonoBehaviour
     private float speedTemp = 0;
 
     //Lスティックを傾けているかどうか
-    private int L_Stick_Inclination = 0;
-    private int R_Stick_Inclination = 0;
+    private int leftStickInclination = 0;
+    private int rightStickInclination = 0;
 
     protected bool isGrounded;
     protected Rigidbody rb;
@@ -40,24 +40,24 @@ public class Player : MonoBehaviour
     [SerializeField] private float skill2CooldownTime = 7.0f;
 
     //スキル使用時のアニメーション中に操作を受け付けなくなる時間
-    [SerializeField] private float skill1AT_Push = 1.0f;
-    [SerializeField] private float skill2AT_Push = 1.0f;
+    [SerializeField] private float skill1AnimaTimePush = 1.0f;
+    [SerializeField] private float skill2AnimaTimePush = 1.0f;
     private float jumpPush = 0.7f;
     protected bool duringAnima = false;
 
     //Lスティックの座標を表す
-    protected Vector2 LS_Input;
-    protected float LS_Horizontal, LS_Vertical;
+    protected Vector2 leftStickInput;
+    protected float leftStickHorizontal, leftStickVertical;
     //Rスティックの座標を表す
-    protected Vector2 RS_Input;
-    protected float RS_Horizontal, RS_Vertical;
+    protected Vector2 rightStickInput;
+    protected float rightStickHorizontal, rightStickVertical;
 
     //向きを出すためのもの
     private Vector3 pointA = new Vector3(0, 0, 0);  //自身の位置
     private Vector3 pointB = new Vector3(0, 0, 0);  //Lスティックの座標
     private Vector3 pointC = new Vector3(0, 0, 0);  //Rスティックの座標
-    protected float L_angle = 0;
-    protected float R_angle = 0;
+    protected float leftAngle = 0;
+    protected float rightAngle = 0;
 
     //スキルを使用する際にみるフラグ
     protected bool canUseSkill1 = true;
@@ -71,12 +71,12 @@ public class Player : MonoBehaviour
     private InputAction R_Stick;
 
     //リスポーン後に浮いている時間
-    public float floatTime_Set = 0;
+    public float floatTimeSet = 0;
     protected float floatTime = 0;
 
     // バインド弾に当たった時の拘束時間
-    public float bindTime_Set = 0;
-    public float superBindTime_Set = 0;
+    public float bindTimeSet = 0;
+    public float superbindTimeSet = 0;
     private float bindTime = 0;
 
     //連続で死ぬことを防ぐため
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
     private GameManager gameManager;
 
     //スキルのゲージ
-    [SerializeField] private GameObject GaugeObj;
+    [SerializeField] private GameObject gaugeObj;
     private Gauge gaugeScript;
 
     //ゲームの進行による操作不能フラグ
@@ -136,8 +136,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        LS_Input = Vector2.zero;
-        RS_Input = Vector2.zero;
+        leftStickInput = Vector2.zero;
+        rightStickInput = Vector2.zero;
 
         L_Stick = GetComponent<PlayerInput>().actions["L_Stick"];
         R_Stick = GetComponent<PlayerInput>().actions["R_Stick"];
@@ -152,32 +152,32 @@ public class Player : MonoBehaviour
         {
             if (L_Stick.ReadValue<Vector2>() == Vector2.zero)
             {
-                L_Stick_Inclination = 0;
+                leftStickInclination = 0;
             }
 
             if (R_Stick.ReadValue<Vector2>() == Vector2.zero)
             {
-                R_Stick_Inclination = 0;
-                RS_Input = Vector2.zero;
+                rightStickInclination = 0;
+                rightStickInput = Vector2.zero;
             }
 
             if (L_Stick.ReadValue<Vector2>() != Vector2.zero)
             {
-                L_Stick_Inclination = 1;
-                LS_Input = L_Stick.ReadValue<Vector2>();
+                leftStickInclination = 1;
+                leftStickInput = L_Stick.ReadValue<Vector2>();
             }
 
             if (R_Stick.ReadValue<Vector2>() != Vector2.zero)
             {
-                R_Stick_Inclination = 1;
-                RS_Input = R_Stick.ReadValue<Vector2>();
+                rightStickInclination = 1;
+                rightStickInput = R_Stick.ReadValue<Vector2>();
             }
 
-            LS_Horizontal = LS_Input.x;
-            LS_Vertical = LS_Input.y;
+            leftStickHorizontal = leftStickInput.x;
+            leftStickVertical = leftStickInput.y;
 
-            RS_Horizontal = RS_Input.x;
-            RS_Vertical = RS_Input.y;
+            rightStickHorizontal = rightStickInput.x;
+            rightStickVertical = rightStickInput.y;
         }
 
         if (pauseControl == true)
@@ -201,18 +201,18 @@ public class Player : MonoBehaviour
             HandleMovement();
 
             //向き計算
-            pointB = new Vector3(LS_Horizontal, 0, LS_Vertical);
-            pointC = new Vector3(RS_Horizontal, 0, RS_Vertical);
+            pointB = new Vector3(leftStickHorizontal, 0, leftStickVertical);
+            pointC = new Vector3(rightStickHorizontal, 0, rightStickVertical);
             // ベクトルの計算
             Vector3 direction = pointB - pointA;
             Vector3 R_direction = pointC - pointA;
             // 角度を計算
-            L_angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
-            R_angle = Mathf.Atan2(R_direction.z, R_direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
+            leftAngle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
+            rightAngle = Mathf.Atan2(R_direction.z, R_direction.x) * Mathf.Rad2Deg; // Z軸を使って角度を計算
 
             if (speed > 0)
             {
-                Quaternion targetRotation = Quaternion.Euler(0, -L_angle + 90, 0);
+                Quaternion targetRotation = Quaternion.Euler(0, -leftAngle + 90, 0);
                 this.transform.rotation = targetRotation;
             }
 
@@ -228,6 +228,7 @@ public class Player : MonoBehaviour
                 transform.position = newPosition;
                 canUseSkill1 = false;
                 canUseSkill2 = false;
+                rb.velocity = Vector3.zero;
 
                 if (floatTime <= 0)
                 {
@@ -254,8 +255,8 @@ public class Player : MonoBehaviour
                 deathInterval -= Time.deltaTime;
             }
 
-            GaugeObj.transform.rotation = Quaternion.Euler(new Vector3(90, 0, 0));
-            Icons.transform.rotation = Quaternion.Euler(new Vector3(45, 0, 0));
+            gaugeObj.transform.rotation = Quaternion.Euler(new Vector3(90, 0, 0));
+            icons.transform.rotation = Quaternion.Euler(new Vector3(45, 0, 0));
         }
     }
 
@@ -304,7 +305,7 @@ public class Player : MonoBehaviour
         GameObject newObject = Instantiate(statusObj);
         statusScript = newObject.GetComponent<Status>();
 
-        gaugeScript = GaugeObj.GetComponent<Gauge>();
+        gaugeScript = gaugeObj.GetComponent<Gauge>();
         gaugeScript.FirstSet(skill1CooldownTime, skill2CooldownTime);
 
         this.transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -316,10 +317,10 @@ public class Player : MonoBehaviour
             {
                 this.name = "Player" + (i + 1);
                 playerNum = i + 1;
-                Icon[i].SetActive(true);
+                icon[i].SetActive(true);
                 statusScript.FirstSet(playerNum);
                 gameManager.Join();
-                StartCoroutine(DeviceSet(CharacterSelect_Save.joinedDevices[i]));
+                StartCoroutine(DeviceSet(CharacterSelectSave.joinedDevices[i]));
                 return;
             }
         }
@@ -340,8 +341,8 @@ public class Player : MonoBehaviour
     {
         if (canMoveInput == true)
         {
-            Vector3 movement = new Vector3(LS_Horizontal, 0.0f, LS_Vertical);
-            Vector3 newPosition = transform.position + movement * Speed * L_Stick_Inclination * Time.deltaTime;
+            Vector3 movement = new Vector3(leftStickHorizontal, 0.0f, leftStickVertical);
+            Vector3 newPosition = transform.position + movement * Speed * leftStickInclination * Time.deltaTime;
 
             // 移動範囲を制限
             newPosition.x = Mathf.Clamp(newPosition.x, -2, 22);
@@ -362,7 +363,7 @@ public class Player : MonoBehaviour
                 isGrounded = false;
                 jumpInterval = true;
                 StartCoroutine(JumpIntervalCountStart());
-                jumping();
+                Jumping();
                 isJumping = true;
                 canJump = false;
             }
@@ -379,9 +380,9 @@ public class Player : MonoBehaviour
                 if (Skill1.started && canUseSkill1)
                 {
                     // 押した時
-                    if (R_Stick_Inclination > 0)
+                    if (rightStickInclination > 0)
                     {
-                        this.transform.rotation = Quaternion.Euler(0, -R_angle + 90, 0);
+                        this.transform.rotation = Quaternion.Euler(0, -rightAngle + 90, 0);
                     }
 
                     Skill1Push();
@@ -402,9 +403,9 @@ public class Player : MonoBehaviour
                 if (Skill2.started && canUseSkill2 == true)
                 {
                     //押した時
-                    if (R_Stick_Inclination > 0)
+                    if (rightStickInclination > 0)
                     {
-                        this.transform.rotation = Quaternion.Euler(0, -R_angle + 90, 0);
+                        this.transform.rotation = Quaternion.Euler(0, -rightAngle + 90, 0);
                     }
                     Skill2Push();
                     skill2InputStop = true;
@@ -466,7 +467,7 @@ public class Player : MonoBehaviour
     {
     }
     
-     protected virtual void jumping()
+     protected virtual void Jumping()
     {
     }
 
@@ -517,7 +518,7 @@ public class Player : MonoBehaviour
 
         speed = 0;
         canJump = false;
-        yield return new WaitForSeconds(skill1AT_Push);
+        yield return new WaitForSeconds(skill1AnimaTimePush);
         canJump = true;
         duringAnima = false;
         speed = speedTemp;
@@ -530,7 +531,7 @@ public class Player : MonoBehaviour
 
         speed = 0;
         canJump = false;
-        yield return new WaitForSeconds(skill2AT_Push);
+        yield return new WaitForSeconds(skill2AnimaTimePush);
         canJump = true;
         duringAnima = false;
         speed = speedTemp;
@@ -575,17 +576,18 @@ public class Player : MonoBehaviour
 
 
                 PlaySoundEffect(SE[0]);
-                Instantiate(FixSphere, this.transform.position, Quaternion.identity);
+                Instantiate(fixSphere, this.transform.position, Quaternion.identity);
 
                 if (stock >= 1)
                 {
                     rb.useGravity = false;
+                    rb.velocity = Vector3.zero;
                     col.enabled = false;
                     bindTime = 0;
                     duringAnima = false;
                     canUseSkill1 = true;
                     canUseSkill2 = true;
-                    floatTime = floatTime_Set;
+                    floatTime = floatTimeSet;
                 }
                 else if (stock < 1)
                 {
@@ -601,12 +603,12 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bind"))
         {
-            bindTime = bindTime_Set;
+            bindTime = bindTimeSet;
             Binding(false);
         }
         else if (other.gameObject.CompareTag("SuperBind"))
         {
-            bindTime = superBindTime_Set;
+            bindTime = superbindTimeSet;
             Binding(true);
         }
     }

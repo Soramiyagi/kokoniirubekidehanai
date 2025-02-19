@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject PauseMenu, SelectCursor1, SelectCursor2;
-    [SerializeField] private GameObject LoadClient_ToResult, LoadClient_ToTitle;
-    [SerializeField] private GameObject Timer, FirstStopGrounds, CountdownObj;
-    [SerializeField] private GameObject TIMEUP, GAMESET;
-    [SerializeField] private CautionArea CA_Script;
+    [SerializeField] private GameObject pauseMenu, selectCursor1, selectCursor2;
+    [SerializeField] private GameObject loadClientToResult, loadClientToTitle;
+    [SerializeField] private GameObject timer, firstStopGrounds, countdownObj;
+    [SerializeField] private GameObject timeUp, gameSet;
+    [SerializeField] private CautionArea caScript;
     [SerializeField] private AudioClip mainBGM; // 再生したいBGMをインスペクターで指定
     private Timer timerScript;
-    private FirstStopGrounds FSGsScript;
+    private FirstStopGrounds fsgScript;
     private CountDown countDownScript;
     private AudioManager audioManager;
 
@@ -30,18 +30,18 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Winner_Save.winnerPlayer = -1;
+        WinnerSave.winnerPlayer = -1;
 
         for (int i = 0; i < 4; i++)
         {
             restPlayer[i] = false;
         }
 
-        timerScript = Instantiate(Timer, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity).GetComponent<Timer>();
+        timerScript = Instantiate(timer, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity).GetComponent<Timer>();
         timerScript.gameManager = this.GetComponent<GameManager>();
         timerScript.TimerSet(limitTime_set);
-        FSGsScript = Instantiate(FirstStopGrounds, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity).GetComponent<FirstStopGrounds>();
-        countDownScript = Instantiate(CountdownObj, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity).GetComponent<CountDown>();
+        fsgScript = Instantiate(firstStopGrounds, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity).GetComponent<FirstStopGrounds>();
+        countDownScript = Instantiate(countdownObj, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity).GetComponent<CountDown>();
         countDownScript.gameManager = this.GetComponent<GameManager>();
     }
 
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
     public void GameStart()
     {
         timerScript.TimerStart();
-        FSGsScript.FSG_Delete();
+        fsgScript.FSG_Delete();
         AudioManager.Instance.PlayBGM(mainBGM);
     }
 
@@ -87,17 +87,17 @@ public class GameManager : MonoBehaviour
         {
             if (restPlayer[i] == true)
             {
-                Winner_Save.winnerPlayer = i;
+                WinnerSave.winnerPlayer = i;
             }
         }
 
-        GAMESET.SetActive(true);
+        gameSet.SetActive(true);
         StartCoroutine(UnscaledCountdown(3));
     }
 
     public void TimeOver()
     {
-        TIMEUP.SetActive(true);
+        timeUp.SetActive(true);
         StartCoroutine(UnscaledCountdown(3));
     }
 
@@ -108,12 +108,12 @@ public class GameManager : MonoBehaviour
             AudioManager.Instance.PauseBGM();
             pauseControl = false;
             StartCoroutine(PauseControlWait());
-            PauseMenu.SetActive(true);
+            pauseMenu.SetActive(true);
         }
         else if (state == true)
         {
             AudioManager.Instance.ResumeBGM();
-            PauseMenu.SetActive(false);
+            pauseMenu.SetActive(false);
         }
     }
 
@@ -125,8 +125,8 @@ public class GameManager : MonoBehaviour
             {
                 pauseControl = false;
                 StartCoroutine(PauseControlWait());
-                SelectCursor1.SetActive(true);
-                SelectCursor2.SetActive(false);
+                selectCursor1.SetActive(true);
+                selectCursor2.SetActive(false);
             }
         }
         else if (action == 1)
@@ -135,17 +135,17 @@ public class GameManager : MonoBehaviour
             {
                 pauseControl = false;
                 StartCoroutine(PauseControlWait());
-                SelectCursor1.SetActive(false);
-                SelectCursor2.SetActive(true);
+                selectCursor1.SetActive(false);
+                selectCursor2.SetActive(true);
             }
         }
         else if (action == 2)
         {
-            if (SelectCursor1.activeSelf == true && SelectCursor2.activeSelf == false)
+            if (selectCursor1.activeSelf == true && selectCursor2.activeSelf == false)
             {
                 return 1;
             }
-            else if (SelectCursor1.activeSelf == false && SelectCursor2.activeSelf == true)
+            else if (selectCursor1.activeSelf == false && selectCursor2.activeSelf == true)
             {
                 StartCoroutine(LoadSceneCoroutine());
             }
@@ -156,28 +156,28 @@ public class GameManager : MonoBehaviour
 
     public void FirstCautionAreaReady()
     {
-        CA_Script.FirstCautionAreaReady();
+        caScript.FirstCautionAreaReady();
     }
 
     public void SecondCautionAreaReady()
     {
-        CA_Script.SecondCautionAreaReady();
+        caScript.SecondCautionAreaReady();
     }
 
     public void FirstCautionAreaON()
     {
-        CA_Script.FirstCautionAreaON();
+        caScript.FirstCautionAreaON();
     }
 
     public void SecondCautionAreaON()
     {
-        CA_Script.SecondCautionAreaON();
+        caScript.SecondCautionAreaON();
     }
 
     private IEnumerator LoadSceneCoroutine()
     {
         yield return new WaitForSecondsRealtime(0.25f);
-        LoadClient_ToTitle.GetComponent<LoadClient>().LoadStart();
+        loadClientToTitle.GetComponent<LoadClient>().LoadStart();
     }
 
     private IEnumerator PauseControlWait()
@@ -194,6 +194,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(duration);
         
         //ゲーム終了の処理
-        LoadClient_ToResult.GetComponent<LoadClient>().LoadStart();
+        loadClientToResult.GetComponent<LoadClient>().LoadStart();
     }
 }

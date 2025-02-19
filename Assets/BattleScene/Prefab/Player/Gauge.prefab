@@ -270,8 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803104a8bc2d64940bbca6ec7bec2322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Skill1Gauge: {fileID: 5255588277020169362}
-  Skill2Gauge: {fileID: 1262495968373200039}
+  skill1Gauge: {fileID: 5255588277020169362}
+  skill2Gauge: {fileID: 1262495968373200039}
 --- !u!1 &7827648109191280043
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class Gauge : MonoBehaviour
 {
-    [SerializeField] private GameObject Skill1Gauge, Skill2Gauge;
+    [SerializeField] private GameObject skill1Gauge, skill2Gauge;
     private float skill1GaugeMaxValue, skill2GaugeMaxValue;
     private Image gauge1, gauge2;
     private float skill1GaugeValue, skill2GaugeValue;
 
     void Awake()
     {
-        gauge1 = Skill1Gauge.GetComponent<Image>();
-        gauge2 = Skill2Gauge.GetComponent<Image>();
+        gauge1 = skill1Gauge.GetComponent<Image>();
+        gauge2 = skill2Gauge.GetComponent<Image>();
     }
 
     public void FirstSet(float skill1GaugeMaxValue_set, float skill2GaugeMaxValue_set)

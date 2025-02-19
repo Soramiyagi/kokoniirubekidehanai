@@ -1567,42 +1567,18 @@ MonoBehaviour:
     m_ActionId: c757a920-7e35-452f-b0ba-1a500d93ceb0
     m_ActionName: UI/MenuSelect_LStick[/DualShock4GamepadHID/leftStick]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 675042890}
-        m_TargetAssemblyTypeName: ResultController, Assembly-CSharp
-        m_MethodName: OnDecision
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: a2d936ad-9111-4098-a5e1-1d848e331ca4
     m_ActionName: UI/Decision[/DualShock4GamepadHID/buttonEast]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 675042890}
-        m_TargetAssemblyTypeName: ResultController, Assembly-CSharp
-        m_MethodName: OnCancel
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: d412f612-4437-4cac-a950-e6542074a978
     m_ActionName: UI/Cancel[/DualShock4GamepadHID/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 675042890}
         m_TargetAssemblyTypeName: ResultController, Assembly-CSharp
-        m_MethodName: OnaStart
+        m_MethodName: OnStart
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1614,6 +1590,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ded9e4ee-1953-49f8-9c24-aa69d9039675
     m_ActionName: UI/Start[/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fda9d827-900f-4d1c-9e33-58ee4e2ca8dd
+    m_ActionName: UI/Select[/SwitchProControllerHID/select,/XInputControllerWindows/select]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
@@ -1631,7 +1611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7708207cb166df42ab96bad1d616a64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadCliant_ToTitle: {fileID: 2047207337}
+  loadCliantToTitle: {fileID: 2047207337}
 --- !u!4 &675042891
 Transform:
   m_ObjectHideFlags: 0
@@ -1694,8 +1674,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4843,14 +4823,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed112bcfdb4ca74ba7f73018a31283b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerText: {fileID: 339410996}
-  Text1: {fileID: 1552016256}
-  Text2: {fileID: 1794525814}
-  Text3: {fileID: 288325340}
-  Text4: {fileID: 1470360126}
-  WinText: {fileID: 1244634589}
-  BackText: {fileID: 708272756}
-  NoWinnerText: {fileID: 19380381}
+  playerText: {fileID: 339410996}
+  text1: {fileID: 1552016256}
+  text2: {fileID: 1794525814}
+  text3: {fileID: 288325340}
+  text4: {fileID: 1470360126}
+  winText: {fileID: 1244634589}
+  backText: {fileID: 708272756}
+  noWinnerText: {fileID: 19380381}
 --- !u!1001 &1844572410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5368,7 +5348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3113020602348163289, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: m_Name
-      value: LoadClient_ToTItle
+      value: LoadClientToTItle
       objectReference: {fileID: 0}
     - target: {fileID: 9005676575217478143, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: NextScene

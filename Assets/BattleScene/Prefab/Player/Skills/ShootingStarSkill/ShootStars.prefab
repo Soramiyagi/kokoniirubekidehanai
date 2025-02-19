@@ -179,9 +179,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca028b65e65a24f488b54e8cab6b7181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPoint: {fileID: 0}
-  EndPoint: {fileID: 321677937513341886}
-  MiddlePoint: {fileID: 4068606739420186467}
+  startPoint: {fileID: 0}
+  endPoint: {fileID: 0}
+  middlePoint: {fileID: 0}
   speed: 1
 --- !u!96 &6230900118326727811
 TrailRenderer:
@@ -471,9 +471,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca028b65e65a24f488b54e8cab6b7181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPoint: {fileID: 0}
-  EndPoint: {fileID: 321677937513341886}
-  MiddlePoint: {fileID: 3095490653505080554}
+  startPoint: {fileID: 0}
+  endPoint: {fileID: 0}
+  middlePoint: {fileID: 0}
   speed: 1
 --- !u!96 &3489471427457547953
 TrailRenderer:
@@ -825,9 +825,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca028b65e65a24f488b54e8cab6b7181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPoint: {fileID: 0}
-  EndPoint: {fileID: 321677937513341886}
-  MiddlePoint: {fileID: 2941157790376885689}
+  startPoint: {fileID: 0}
+  endPoint: {fileID: 0}
+  middlePoint: {fileID: 0}
   speed: 1
 --- !u!96 &555093371604373204
 TrailRenderer:
@@ -1210,9 +1210,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca028b65e65a24f488b54e8cab6b7181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPoint: {fileID: 0}
-  EndPoint: {fileID: 321677937513341886}
-  MiddlePoint: {fileID: 5042968076778045568}
+  startPoint: {fileID: 0}
+  endPoint: {fileID: 0}
+  middlePoint: {fileID: 0}
   speed: 1
 --- !u!96 &7297079658193147566
 TrailRenderer:

@@ -254,7 +254,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a212c9e65e7476b4a948cea23f87841b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e050d30eae7eb8498a159874373579c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1087,7 +1087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3113020602348163289, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: m_Name
-      value: LoadClient_ToCharacterSelect
+      value: LoadClientToCharacterSelect
       objectReference: {fileID: 0}
     - target: {fileID: 9005676575217478143, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: NextScene
@@ -1201,7 +1201,7 @@ GameObject:
   - component: {fileID: 805337797}
   - component: {fileID: 805337796}
   m_Layer: 0
-  m_Name: FPS_Setting
+  m_Name: FpsSetting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1246,7 +1246,7 @@ GameObject:
   - component: {fileID: 946379079}
   - component: {fileID: 946379078}
   m_Layer: 5
-  m_Name: okamask
+  m_Name: Okamask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1291,7 +1291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8313a23378b6c1c4d9c9817138038d36, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 62f3a0bcb7942184f923c7e95699bbe2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1321,7 +1321,7 @@ GameObject:
   - component: {fileID: 952419392}
   - component: {fileID: 952419391}
   m_Layer: 5
-  m_Name: joy
+  m_Name: Joy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1366,7 +1366,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2569e42a68308784ab762b8e2c5eab73, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 78bcfe73282685b499da34756dcb3065, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1534,140 +1534,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 700, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1040646056
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1040646057}
-  - component: {fileID: 1040646059}
-  - component: {fileID: 1040646058}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1040646057
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040646056}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2126762680}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -530, y: -480}
-  m_SizeDelta: {x: 800, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1040646058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040646056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: 'Return to Title : B Button'
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1040646059
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040646056}
-  m_CullTransparentMesh: 1
 --- !u!1 &1083864918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,7 +1583,7 @@ GameObject:
   - component: {fileID: 1125676693}
   - component: {fileID: 1125676692}
   m_Layer: 5
-  m_Name: smith
+  m_Name: Smith
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1762,7 +1628,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8276f33db81c58d42b2bc128c21ae50c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 34dcb8cf325a51040a603a1c8ebcb74b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1829,7 +1695,7 @@ GameObject:
   - component: {fileID: 1224606987}
   - component: {fileID: 1224606986}
   m_Layer: 5
-  m_Name: abe
+  m_Name: Abe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1874,7 +1740,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1c3457f8b72aa8d4781d548c8d5b6051, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 627c8415c82cb5049b88656c5cb196c3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2090,7 +1956,7 @@ GameObject:
   - component: {fileID: 1383361769}
   - component: {fileID: 1383361768}
   m_Layer: 5
-  m_Name: selectScene
+  m_Name: SelectScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2313,21 +2179,13 @@ MonoBehaviour:
     m_ActionId: d412f612-4437-4cac-a950-e6542074a978
     m_ActionName: UI/Cancel[/DualShock4GamepadHID/buttonSouth]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1490320484}
-        m_TargetAssemblyTypeName: TitleController, Assembly-CSharp
-        m_MethodName: OnaStart
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: ded9e4ee-1953-49f8-9c24-aa69d9039675
     m_ActionName: UI/Start[/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fda9d827-900f-4d1c-9e33-58ee4e2ca8dd
+    m_ActionName: UI/Select[/SwitchProControllerHID/select,/XInputControllerWindows/select]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
@@ -2346,13 +2204,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HowTo: {fileID: 1457602332}
-  Encyclopedia: {fileID: 679944682}
-  LoadCliant_ToCharacterSelect: {fileID: 717968617}
-  MIC_Script: {fileID: 1792603878}
-  HTPC_Script: {fileID: 1457602333}
-  EPC_Script: {fileID: 679944683}
-  interval_set: 0.25
-  L_StickDeadzone: 0
+  encyclopedia: {fileID: 679944682}
+  loadCliantToCharacterSelect: {fileID: 717968617}
+  micScript: {fileID: 1792603878}
+  htpcScript: {fileID: 1457602333}
+  epcScript: {fileID: 679944683}
+  intervalSet: 0.25
+  lstickDeadzone: 0.3
 --- !u!4 &1490320485
 Transform:
   m_ObjectHideFlags: 0
@@ -2763,7 +2621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a96c220eb702a8b4a860a98d307ad1f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item:
+  item:
   - {fileID: 1083864918}
   - {fileID: 1212025774}
   - {fileID: 1693283096}
@@ -3048,7 +2906,7 @@ GameObject:
   - component: {fileID: 2104048732}
   - component: {fileID: 2104048731}
   m_Layer: 5
-  m_Name: battleScene
+  m_Name: BattleScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3150,7 +3008,6 @@ RectTransform:
   - {fileID: 1125676691}
   - {fileID: 805041057}
   - {fileID: 569231641}
-  - {fileID: 1040646057}
   m_Father: {fileID: 679944684}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

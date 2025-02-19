@@ -19,6 +19,7 @@ public class Summon : Player
     private Vector3 previousPosition;
     private Animator animator;//アニメーションをGetComponentする変数
     private float movementThreshold = 0.001f;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -38,6 +39,8 @@ public class Summon : Player
 
                 float Pos_X = this.transform.position.x;
                 float Pos_Z = this.transform.position.z;
+
+                rb.velocity = Vector3.zero;
 
                 this.transform.position = new Vector3(Pos_X, downStop, Pos_Z);
             }
@@ -71,7 +74,7 @@ public class Summon : Player
                 bindParticleSystem.Play();
             }
 
-            StartCoroutine(bindParticleDelay(2.5f));
+            StartCoroutine(BindParticleDelay(2.5f));
         }
         else
         {
@@ -81,7 +84,7 @@ public class Summon : Player
                 bindParticleSystem.Play();
             }
 
-            StartCoroutine(bindParticleDelay(1.5f));
+            StartCoroutine(BindParticleDelay(1.5f));
         }
     }
 
@@ -117,6 +120,7 @@ public class Summon : Player
         downStop = this.transform.position.y + 1f;
 
         rb.useGravity = false;
+        rb.velocity = Vector3.zero;
 
         canUseSkill2 = false;
         PlayParticles();
@@ -126,7 +130,7 @@ public class Summon : Player
         StartCoroutine(DestroyPrefabAfterDelay(5.5f));
     }
 
-    protected override void jumping()
+    protected override void Jumping()
     {
         animator.SetTrigger("jumping");
     }
@@ -162,7 +166,7 @@ public class Summon : Player
         animator.SetBool("skill2", false);
     }
 
-    private IEnumerator bindParticleDelay(float time)
+    private IEnumerator BindParticleDelay(float time)
     {
         yield return new WaitForSeconds(time);
         bindParticleSystem.Stop();

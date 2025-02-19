@@ -33,7 +33,7 @@ public class EncyclopediaPageController : MonoBehaviour
         {
             page++;
             ScreenUpdate(page);
-            AudioManager.Instance.PlaySFX("page");
+            AudioManager.Instance.PlaySFX("page_se");
         }
         CursolCheck();
     }
@@ -44,7 +44,7 @@ public class EncyclopediaPageController : MonoBehaviour
         {
             page--;
             ScreenUpdate(page);
-            AudioManager.Instance.PlaySFX("page");
+            AudioManager.Instance.PlaySFX("page_se");
         }
         CursolCheck();
     }

@@ -6,7 +6,7 @@ public class Gun : Player
 {
     public string characterName = "DefaultCharacter";
 
-    [SerializeField] private GameObject BulletPoint, Bind, Gun_FixSphere;
+    [SerializeField] private GameObject bulletPoint, bind, gunFixSphere;
 
     public ParticleSystem particleSystem; 
     public ParticleSystem bindParticleSystem;
@@ -45,7 +45,7 @@ public class Gun : Player
     }
 
 
-    protected override void jumping()
+    protected override void Jumping()
     {
 
         animator.SetTrigger("jumping");
@@ -67,7 +67,7 @@ public class Gun : Player
                 bindParticleSystem.Play();
             }
 
-            StartCoroutine(bindParticleDelay(2.5f));
+            StartCoroutine(BindParticleDelay(2.5f));
         }
         else
         {
@@ -77,7 +77,7 @@ public class Gun : Player
                 bindParticleSystem.Play();
             }
 
-            StartCoroutine(bindParticleDelay(1.5f));
+            StartCoroutine(BindParticleDelay(1.5f));
         }
     }
 
@@ -105,7 +105,7 @@ public class Gun : Player
 
         Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
 
-        Instantiate(Gun_FixSphere, this.transform.position, Quaternion.identity);
+        Instantiate(gunFixSphere, this.transform.position, Quaternion.identity);
 
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
@@ -146,14 +146,14 @@ public class Gun : Player
 
     private IEnumerator Skill1DelaySystem(float delay)
     {
-        Bind.SetActive(false);
+        bind.SetActive(false);
         yield return new WaitForSeconds(delay);
         
-        //Instantiate(Bind, BulletPoint.transform.position, Quaternion.Euler(0f, 90 - R_angle, 0f));
+        //Instantiate(bind, bulletPoint.transform.position, Quaternion.Euler(0f, 90 - rightAngle, 0f));
 
-        Bind.transform.position = BulletPoint.transform.position;
-        Bind.transform.rotation = Quaternion.Euler(0f, 90 - R_angle, 0f);
-        Bind.SetActive(true);
+        bind.transform.position = bulletPoint.transform.position;
+        bind.transform.rotation = Quaternion.Euler(0f, 90 - rightAngle, 0f);
+        bind.SetActive(true);
     }
 
     private IEnumerator Skill2DelaySystem(float delay)
@@ -161,7 +161,7 @@ public class Gun : Player
         yield return new WaitForSeconds(delay);
     }
 
-    private IEnumerator bindParticleDelay(float time)
+    private IEnumerator BindParticleDelay(float time)
     {
         yield return new WaitForSeconds(time);
         bindParticleSystem.Stop();

@@ -4,46 +4,46 @@ using UnityEngine;
 
 public class CautionArea : MonoBehaviour
 {
-    [SerializeField] private GameObject FirstArea, SecondArea;
-    [SerializeField] private GameObject F_N, F_W, F_E, F_S, S_N, S_W, S_E, S_S;
+    [SerializeField] private GameObject firstArea, secondArea;
+    [SerializeField] private GameObject firstNorth, firstWest, firstEast, firstSouth, secondNorth, secondWest, secondEast, secondSouth;
 
     public void FirstCautionAreaReady()
     {
-        FirstArea.SetActive(true);
+        firstArea.SetActive(true);
     }
 
     public void SecondCautionAreaReady()
     {
-        SecondArea.SetActive(true);
+        secondArea.SetActive(true);
     }
 
     public void FirstCautionAreaON()
     {
-        F_N.GetComponent<BoxCollider>().enabled = true;
-        F_W.GetComponent<BoxCollider>().enabled = true;
-        F_E.GetComponent<BoxCollider>().enabled = true;
-        F_S.GetComponent<BoxCollider>().enabled = true;
+        firstNorth.GetComponent<BoxCollider>().enabled = true;
+        firstWest.GetComponent<BoxCollider>().enabled = true;
+        firstEast.GetComponent<BoxCollider>().enabled = true;
+        firstSouth.GetComponent<BoxCollider>().enabled = true;
         StartCoroutine(FirstCautionAreaOFF());
     }
 
     public void SecondCautionAreaON()
     {
-        S_N.GetComponent<BoxCollider>().enabled = true;
-        S_W.GetComponent<BoxCollider>().enabled = true;
-        S_E.GetComponent<BoxCollider>().enabled = true;
-        S_S.GetComponent<BoxCollider>().enabled = true;
+        secondNorth.GetComponent<BoxCollider>().enabled = true;
+        secondWest.GetComponent<BoxCollider>().enabled = true;
+        secondEast.GetComponent<BoxCollider>().enabled = true;
+        secondSouth.GetComponent<BoxCollider>().enabled = true;
         StartCoroutine(SecondCautionAreaOFF());
     }
 
     private IEnumerator FirstCautionAreaOFF()
     {
         yield return new WaitForSeconds(0.1f);
-        FirstArea.SetActive(false);
+        firstArea.SetActive(false);
     }
 
     private IEnumerator SecondCautionAreaOFF()
     {
         yield return new WaitForSeconds(0.1f);
-        SecondArea.SetActive(false);
+        secondArea.SetActive(false);
     }
 }

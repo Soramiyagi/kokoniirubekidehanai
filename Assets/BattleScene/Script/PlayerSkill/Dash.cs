@@ -6,8 +6,8 @@ public class Dash : Player
 {
     public string characterName = "DefaultCharacter";
 
-    [SerializeField] private GameObject clones, extendCollider, C_extendCollider;
-    [SerializeField] private GameObject EndPoint;
+    [SerializeField] private GameObject clones, extendCollider, cloneExtendCollider;
+    [SerializeField] private GameObject endPoint;
 
     [HideInInspector] public bool walkingFlag = false, skill1Flag = false, skill2Flag = false;
 
@@ -22,11 +22,12 @@ public class Dash : Player
     private float dashTime = 1;
 
     //ET = EffectTime(効果時間)
-    private float skill2_ET = 0;
-    public float skill2_ET_Set = 0;
+    private float skill2EffectTime = 0;
+    public float skill2EffectTimeSet = 0;
     private Vector3 previousPosition;
     private Animator animator;//アニメーションをGetComponentする変数
     private float movementThreshold = 0.001f;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -61,25 +62,25 @@ public class Dash : Player
                     dashTime = 1.0f;
 
                     extendCollider.SetActive(false);
-                    C_extendCollider.SetActive(false);
+                    cloneExtendCollider.SetActive(false);
                 }
             }
 
-            if (skill2_ET > 0)
+            if (skill2EffectTime > 0)
             {
-                skill2_ET = skill2_ET - Time.deltaTime;
+                skill2EffectTime = skill2EffectTime - Time.deltaTime;
             }
             else
             {
                 clones.SetActive(false);
-                C_extendCollider.SetActive(false);
+                cloneExtendCollider.SetActive(false);
             }
 
             if (floatTime > 0)
             {
                 {
                     clones.SetActive(false);
-                    C_extendCollider.SetActive(false);
+                    cloneExtendCollider.SetActive(false);
                 }
             }
         }
@@ -100,7 +101,7 @@ public class Dash : Player
         previousPosition = transform.position;
     }
 
-    protected override void jumping()
+    protected override void Jumping()
     {
 
         animator.SetTrigger("jumping");
@@ -122,7 +123,7 @@ public class Dash : Player
                 bindParticleSystem.Play();
             }
 
-            StartCoroutine(bindParticleDelay(2.5f));
+            StartCoroutine(BindParticleDelay(2.5f));
         }
         else
         {
@@ -132,7 +133,7 @@ public class Dash : Player
                 bindParticleSystem.Play();
             }
 
-            StartCoroutine(bindParticleDelay(1.5f));
+            StartCoroutine(BindParticleDelay(1.5f));
         }
     }
 
@@ -149,15 +150,15 @@ public class Dash : Player
         }
         extendCollider.SetActive(true);
 
-        if (skill2_ET > 0)
+        if (skill2EffectTime > 0)
         {
-            C_extendCollider.SetActive(true);
+            cloneExtendCollider.SetActive(true);
         }
 
         currentPos = this.transform.position;
-        endPos = EndPoint.transform.position;
+        endPos = endPoint.transform.position;
 
-        StartCoroutine(skill1DestroyPrefabAfterDelay(1f));
+        StartCoroutine(Skill1DestroyPrefabAfterDelay(1f));
 
         canUseSkill1 = false;
         StartCoroutine(Skill1Cooldown());
@@ -173,13 +174,13 @@ public class Dash : Player
         skill2Flag = true;
         StartCoroutine(CloneSkill2());
         clones.SetActive(true);
-        skill2_ET = skill2_ET_Set;
+        skill2EffectTime = skill2EffectTimeSet;
         if (skill2ParticleSystem != null && skill2ParticleSystem2 != null)
         {
             skill2ParticleSystem.Play();
             skill2ParticleSystem2.Play();
         }
-        StartCoroutine(skill2DestroyPrefabAfterDelay(2f));
+        StartCoroutine(Skill2DestroyPrefabAfterDelay(2f));
 
         canUseSkill2 = false;
         StartCoroutine(Skill2Cooldown());
@@ -188,7 +189,7 @@ public class Dash : Player
         PlaySoundEffect(SE[2]);
     }
 
-    private IEnumerator skill1DestroyPrefabAfterDelay(float delay)
+    private IEnumerator Skill1DestroyPrefabAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay); // 指定した秒数待機
         if (skill1ParticleSystem != null)
@@ -198,7 +199,7 @@ public class Dash : Player
         }
     }
 
-    private IEnumerator skill2DestroyPrefabAfterDelay(float delay)
+    private IEnumerator Skill2DestroyPrefabAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay); // 指定した秒数待機
         if (skill2ParticleSystem != null)
@@ -224,7 +225,7 @@ public class Dash : Player
         yield return null;
         skill2Flag = false;
     }
-    private IEnumerator bindParticleDelay(float time)
+    private IEnumerator BindParticleDelay(float time)
     {
         yield return new WaitForSeconds(time);
         bindParticleSystem.Stop();

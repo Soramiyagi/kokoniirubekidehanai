@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootStars : MonoBehaviour
 {
-    [SerializeField] private GameObject StartPoint, EndPoint, MiddlePoint;
+    [SerializeField] private GameObject startPoint, endPoint, middlePoint;
     
     public float speed = 0; 
     private float t;
@@ -14,10 +14,10 @@ public class ShootStars : MonoBehaviour
     {
         t = 0.0f;
 
-        startPos = StartPoint.transform.position;
+        startPos = startPoint.transform.position;
         this.transform.position = startPos;
-        endPos = EndPoint.transform.position;
-        middlePos = MiddlePoint.transform.position;
+        endPos = endPoint.transform.position;
+        middlePos = middlePoint.transform.position;
     }
 
     void FixedUpdate()

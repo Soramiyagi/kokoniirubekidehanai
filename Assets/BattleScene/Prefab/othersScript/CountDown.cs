@@ -5,7 +5,7 @@ using TMPro;
 
 public class CountDown : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI CountDownText;
+    [SerializeField] private TextMeshProUGUI countDownText;
     [SerializeField] private RectTransform canvasRectTransform;
     public GameManager gameManager;
 
@@ -26,7 +26,7 @@ public class CountDown : MonoBehaviour
             canvasRectTransform.sizeDelta = new Vector2(800, 600);
             canvasRectTransform.pivot = new Vector2(0.5f, 0.5f);
         }
-        CountDownText.enabled = false;
+        countDownText.enabled = false;
     }
 
     void FixedUpdate()
@@ -40,30 +40,30 @@ public class CountDown : MonoBehaviour
             // タイムが変わった場合にSFXを再生
             if (currentTime != preTime && currentTime > 0)
             {
-                AudioManager.Instance.PlaySFX("CountDown");
+                AudioManager.Instance.PlaySFX("count_down_se");
                 preTime = currentTime; // 前フレームの時間を更新
             }
 
             if (time > 1)
             {
-                CountDownText.text = time.ToString("F0");
+                countDownText.text = time.ToString("F0");
 
                 if (time >= 3.5f)
                 {
-                    CountDownText.enabled = false;
+                    countDownText.enabled = false;
                 }
                 else
                 {
-                    CountDownText.enabled = true;
+                    countDownText.enabled = true;
                 }
             }
         }
         else if (time <= 0)
         {
             gameManager.GameStart();
-            CountDownText.fontSize = 200f;
-            CountDownText.text = "GO!!";
-            AudioManager.Instance.PlaySFX("GameStart2");
+            countDownText.fontSize = 200f;
+            countDownText.text = "GO!!";
+            AudioManager.Instance.PlaySFX("game_start2_se");
 
 
             if (ex_time > 0)

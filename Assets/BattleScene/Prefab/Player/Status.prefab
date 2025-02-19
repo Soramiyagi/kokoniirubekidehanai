@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3767984638549039475}
   - component: {fileID: 7890803758142098511}
   m_Layer: 5
-  m_Name: Icon_2P
+  m_Name: Icon2P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -266,14 +266,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c6fb798b741594a8d1ccd12a25e3a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatusFrame: {fileID: 7619624246204776861}
-  Stock1: {fileID: 7049419106736750543}
-  Stock2: {fileID: 5737875095102573298}
-  Stock3: {fileID: 8790813066470723975}
-  Icon_1P: {fileID: 7289477380716287609}
-  Icon_2P: {fileID: 140191934253285626}
-  Icon_3P: {fileID: 8941672752101221592}
-  Icon_4P: {fileID: 9110906834856807045}
+  statusFrame: {fileID: 7619624246204776861}
+  stock1: {fileID: 7049419106736750543}
+  stock2: {fileID: 5737875095102573298}
+  stock3: {fileID: 8790813066470723975}
+  icon1P: {fileID: 7289477380716287609}
+  icon2P: {fileID: 140191934253285626}
+  icon3P: {fileID: 8941672752101221592}
+  icon4P: {fileID: 9110906834856807045}
   name: {fileID: 580802114253859026}
   canvasRectTransform: {fileID: 348019275341001544}
 --- !u!1 &3706842341672549650
@@ -722,7 +722,7 @@ GameObject:
   - component: {fileID: 8074099423546475459}
   - component: {fileID: 2150898694054124615}
   m_Layer: 5
-  m_Name: Icon_1P
+  m_Name: Icon1P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -985,7 +985,7 @@ GameObject:
   - component: {fileID: 6193754597743391295}
   - component: {fileID: 5898439709249755413}
   m_Layer: 5
-  m_Name: Icon_3P
+  m_Name: Icon3P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1060,7 +1060,7 @@ GameObject:
   - component: {fileID: 5044310576938373721}
   - component: {fileID: 3362311856145387197}
   m_Layer: 5
-  m_Name: Icon_4P
+  m_Name: Icon4P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

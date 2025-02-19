@@ -68,7 +68,7 @@ public class PlayerInputManager : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            CharacterSelect_Save.joinedDevices[i] = joinedDevices[i];
+            CharacterSelectSave.joinedDevices[i] = joinedDevices[i];
         }
 
 

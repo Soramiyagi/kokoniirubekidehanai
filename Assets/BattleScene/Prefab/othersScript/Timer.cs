@@ -5,8 +5,8 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] private GameObject TimerObj;
-    [SerializeField] private TextMeshProUGUI TimeText;
+    [SerializeField] private GameObject timerObj;
+    [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private float firstCautionReadyTime, secondCautionReadyTime, firstCautionOnTime, secondCautionOnTime;
     public GameManager gameManager;
 
@@ -22,15 +22,15 @@ public class Timer : MonoBehaviour
     {
         if (timeStop == false)
         {
-            if(TimerObj.activeSelf == false);
+            if(timerObj.activeSelf == false);
             {
-                TimerObj.SetActive(true);
+                timerObj.SetActive(true);
             }
             
             if (time > 0)
             {
                 time -= Time.deltaTime;
-                TimeText.text = time.ToString("F0");
+                timeText.text = time.ToString("F0");
 
                 if(time < firstCautionReadyTime && firstCautionReady == true)
                 {
@@ -58,13 +58,13 @@ public class Timer : MonoBehaviour
             }
             else if (time <= 0)
             {
-                TimeText.text = "0";
+                timeText.text = "0";
                 TimeLimit();
             }
         }
         else
         {
-            TimerObj.SetActive(false);
+            timerObj.SetActive(false);
         }
     }
 
@@ -80,7 +80,7 @@ public class Timer : MonoBehaviour
 
     public void TimerHide()
     {
-        TimerObj.SetActive(false);
+        timerObj.SetActive(false);
     }
 
     void TimeLimit()

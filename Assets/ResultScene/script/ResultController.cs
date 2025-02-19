@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class ResultController : MonoBehaviour
 {
-    [SerializeField] GameObject LoadCliant_ToTitle;
+    [SerializeField] GameObject loadCliantToTitle;
     private bool canInput = false;
 
     //ëΩèdì«Ç›çûÇ›ñhé~
@@ -16,37 +16,13 @@ public class ResultController : MonoBehaviour
         canInput = true;
     }
 
-    public void OnDecision(InputAction.CallbackContext Decision)
-    {
-        if (canInput == true)
-        {
-            if (Decision.started)
-            {
-                //âüÇµÇΩéû
-                Debug.Log("Decision");
-            }
-        }
-    }
-
-    public void OnCancel(InputAction.CallbackContext Cancel)
-    {
-        if (canInput == true)
-        {
-            if (Cancel.started)
-            {
-                //âüÇµÇΩéû
-                Debug.Log("Cancel");
-            }
-        }
-    }
-
-    public void OnaStart(InputAction.CallbackContext Start)
+    public void OnStart(InputAction.CallbackContext Start)
     {
         if (Start.started)
         {
             if (loadStart == false)
             {
-                LoadCliant_ToTitle.GetComponent<LoadClient>().LoadStart();
+                loadCliantToTitle.GetComponent<LoadClient>().LoadStart();
                 loadStart = true;
             }
         }

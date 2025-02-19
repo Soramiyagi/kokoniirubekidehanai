@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94300aa93fcdfac4babc8eb45735504a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CountDownText: {fileID: 8615197148989695883}
+  countDownText: {fileID: 8615197148989695883}
   canvasRectTransform: {fileID: 2130692445476710332}
   gameManager: {fileID: 0}
 --- !u!1 &5320778406055350625

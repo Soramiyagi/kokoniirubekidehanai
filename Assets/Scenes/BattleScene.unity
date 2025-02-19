@@ -4912,7 +4912,7 @@ GameObject:
   - component: {fileID: 142140387}
   - component: {fileID: 142140388}
   m_Layer: 5
-  m_Name: TIME UP
+  m_Name: TimeUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4952,9 +4952,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d02374c24085cf4491f468bfcb2c96e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftText: {fileID: 1883524207}
-  RightText: {fileID: 1925771312}
-  CenterText: {fileID: 234003870}
+  leftText: {fileID: 1883524207}
+  rightText: {fileID: 1925771312}
+  centerText: {fileID: 234003870}
 --- !u!1 &142673185
 GameObject:
   m_ObjectHideFlags: 0
@@ -5864,7 +5864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3113020602348163289, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: m_Name
-      value: LoadClient_ToTitle
+      value: LoadClientToTitle
       objectReference: {fileID: 0}
     - target: {fileID: 9005676575217478143, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: NextScene
@@ -7617,7 +7617,7 @@ GameObject:
   - component: {fileID: 243411178}
   - component: {fileID: 243411181}
   m_Layer: 0
-  m_Name: Cube_S
+  m_Name: CubeSouth
   m_TagString: CautionArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15241,7 +15241,7 @@ GameObject:
   - component: {fileID: 474425310}
   - component: {fileID: 474425309}
   m_Layer: 0
-  m_Name: Wall_N
+  m_Name: WallNorth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17199,7 +17199,7 @@ GameObject:
   - component: {fileID: 571443414}
   - component: {fileID: 571443417}
   m_Layer: 0
-  m_Name: Cube_E
+  m_Name: CubeEast
   m_TagString: CautionArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18393,7 +18393,7 @@ GameObject:
   - component: {fileID: 602629601}
   - component: {fileID: 602629602}
   m_Layer: 5
-  m_Name: GAME SET
+  m_Name: GameSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21028,7 +21028,7 @@ GameObject:
   - component: {fileID: 683946333}
   - component: {fileID: 683946336}
   m_Layer: 0
-  m_Name: Cube_E
+  m_Name: CubeEast
   m_TagString: CautionArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23069,7 +23069,7 @@ GameObject:
   - component: {fileID: 748723789}
   - component: {fileID: 748723792}
   m_Layer: 0
-  m_Name: Cube_W
+  m_Name: CubeWest
   m_TagString: CautionArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29676,7 +29676,7 @@ GameObject:
   - component: {fileID: 956433450}
   - component: {fileID: 956433453}
   m_Layer: 0
-  m_Name: Cube_W
+  m_Name: CubeWest
   m_TagString: CautionArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30717,17 +30717,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c026fbc6ffc57c545951ed80a96bd06d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PauseMenu: {fileID: 1230588807}
-  SelectCursor1: {fileID: 575680158}
-  SelectCursor2: {fileID: 1604979512}
-  LoadClient_ToResult: {fileID: 1413776621}
-  LoadClient_ToTitle: {fileID: 167354230}
-  Timer: {fileID: 6754101125768414808, guid: 566bca466169dde4e9353274f52bf3bc, type: 3}
-  FirstStopGrounds: {fileID: 1939339004967795403, guid: 0af1f48ee81e2d3409c81b470659a1b9, type: 3}
-  CountdownObj: {fileID: 3059395394103666547, guid: 255ed1a70b84cd540be819865d977b36, type: 3}
-  TIMEUP: {fileID: 142140386}
-  GAMESET: {fileID: 602629600}
-  CA_Script: {fileID: 1011734781}
+  pauseMenu: {fileID: 1230588807}
+  selectCursor1: {fileID: 575680158}
+  selectCursor2: {fileID: 1604979512}
+  loadClientToResult: {fileID: 1413776621}
+  loadClientToTitle: {fileID: 167354230}
+  timer: {fileID: 6754101125768414808, guid: 566bca466169dde4e9353274f52bf3bc, type: 3}
+  firstStopGrounds: {fileID: 1939339004967795403, guid: 0af1f48ee81e2d3409c81b470659a1b9, type: 3}
+  countdownObj: {fileID: 3059395394103666547, guid: 255ed1a70b84cd540be819865d977b36, type: 3}
+  timeUp: {fileID: 142140386}
+  gameSet: {fileID: 602629600}
+  caScript: {fileID: 1011734781}
   mainBGM: {fileID: 8300000, guid: 97d918bb8683ed9488d343c18794c2f1, type: 3}
   limitTime_set: 180
 --- !u!1 &1011734779
@@ -30776,16 +30776,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6f5f4228b77d6479d3eeb316621f62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstArea: {fileID: 656706}
-  SecondArea: {fileID: 953888674}
-  F_N: {fileID: 1893140078}
-  F_W: {fileID: 956433448}
-  F_E: {fileID: 571443412}
-  F_S: {fileID: 243411176}
-  S_N: {fileID: 1714141417}
-  S_W: {fileID: 748723787}
-  S_E: {fileID: 683946331}
-  S_S: {fileID: 1699179835}
+  firstArea: {fileID: 656706}
+  secondArea: {fileID: 953888674}
+  firstNorth: {fileID: 1893140078}
+  firstWest: {fileID: 956433448}
+  firstEast: {fileID: 571443412}
+  firstSouth: {fileID: 243411176}
+  secondNorth: {fileID: 1714141417}
+  secondWest: {fileID: 748723787}
+  secondEast: {fileID: 683946331}
+  secondSouth: {fileID: 1699179835}
 --- !u!1 &1012007251
 GameObject:
   m_ObjectHideFlags: 0
@@ -31566,7 +31566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0274df508704db43b5fa820ba5c2c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackGround: {fileID: 1197171642}
+  backGround: {fileID: 1197171642}
   pos_x: 0
   pos_y: 7
   pos_z: -6
@@ -42062,7 +42062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3113020602348163289, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: m_Name
-      value: LoadClient_ToResultScaene
+      value: LoadClientToResultScaene
       objectReference: {fileID: 0}
     - target: {fileID: 9005676575217478143, guid: ead61035e9f48b543b1044598a87b9e7, type: 3}
       propertyPath: NextScene
@@ -49644,7 +49644,7 @@ GameObject:
   - component: {fileID: 1627433529}
   - component: {fileID: 1627433528}
   m_Layer: 0
-  m_Name: Wall_S
+  m_Name: WallSouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51677,7 +51677,7 @@ GameObject:
   - component: {fileID: 1699179837}
   - component: {fileID: 1699179840}
   m_Layer: 0
-  m_Name: Cube_S
+  m_Name: CubeSouth
   m_TagString: CautionArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52350,7 +52350,7 @@ GameObject:
   - component: {fileID: 1714141419}
   - component: {fileID: 1714141422}
   m_Layer: 0
-  m_Name: Cube_N
+  m_Name: CubeNorth
   m_TagString: CautionArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57547,7 +57547,7 @@ GameObject:
   - component: {fileID: 1893140080}
   - component: {fileID: 1893140083}
   m_Layer: 0
-  m_Name: Cube_N
+  m_Name: CubeNorth
   m_TagString: CautionArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63520,7 +63520,7 @@ GameObject:
   - component: {fileID: 2072268040}
   - component: {fileID: 2072268039}
   m_Layer: 0
-  m_Name: Wall_W
+  m_Name: WallWest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64091,7 +64091,7 @@ GameObject:
   - component: {fileID: 2086198115}
   - component: {fileID: 2086198114}
   m_Layer: 0
-  m_Name: Wall_E
+  m_Name: WallEast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

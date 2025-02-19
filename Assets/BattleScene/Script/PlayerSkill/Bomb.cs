@@ -6,7 +6,7 @@ public class Bomb : Player
 {
     public string characterName = "DefaultCharacter";
 
-    [SerializeField] private GameObject Skill1Preview;
+    [SerializeField] private GameObject skill1Preview;
     public ParticleSystem skill1ParticleSystem;
     public ParticleSystem skill2ParticleSystem;
     public ParticleSystem bindParticleSystem;
@@ -32,7 +32,7 @@ public class Bomb : Player
     protected override void Start()
     {
         base.Start();
-        Skill1Preview.SetActive(false);
+        skill1Preview.SetActive(false);
         animator = GetComponent<Animator>();
         previousPosition = transform.position;
         //animator.SetBool("walking", true);//walkingをtureにする
@@ -64,7 +64,7 @@ public class Bomb : Player
         previousPosition = transform.position;
     }
 
-    protected override void jumping()
+    protected override void Jumping()
     {
 
         animator.SetTrigger("jumping");
@@ -86,7 +86,7 @@ public class Bomb : Player
                 bindParticleSystem.Play();
             }
 
-            StartCoroutine(bindParticleDelay(2.5f));
+            StartCoroutine(BindParticleDelay(2.5f));
         }
         else
         {
@@ -96,7 +96,7 @@ public class Bomb : Player
                 bindParticleSystem.Play();
             }
 
-            StartCoroutine(bindParticleDelay(1.5f));
+            StartCoroutine(BindParticleDelay(1.5f));
         }
     }
 
@@ -104,7 +104,7 @@ public class Bomb : Player
     {
         //walkingをtureにする        
         animator.SetTrigger("skill1");
-        Skill1Preview.SetActive(true);
+        skill1Preview.SetActive(true);
 
         // 生成されたパーティクルインスタンスを再生
         if (skill1ParticleSystem != null)
@@ -182,8 +182,8 @@ public class Bomb : Player
     private IEnumerator Skill1DestroyPrefabAndParticlesAfterDelay(float delay, float delay2)
     {
         yield return new WaitForSeconds(delay); // 指定した秒数待機
-        Skill1Preview.SetActive(false);
-        Collider previewCollider = Skill1Preview.GetComponent<Collider>();
+        skill1Preview.SetActive(false);
+        Collider previewCollider = skill1Preview.GetComponent<Collider>();
         yield return new WaitForSeconds(delay2); // 指定した秒数待機
         if (skill1ParticleSystem != null)
         {
@@ -210,7 +210,7 @@ public class Bomb : Player
         }
     }
 
-    private IEnumerator bindParticleDelay(float time)
+    private IEnumerator BindParticleDelay(float time)
     {
         yield return new WaitForSeconds(time);
         bindParticleSystem.Stop();
