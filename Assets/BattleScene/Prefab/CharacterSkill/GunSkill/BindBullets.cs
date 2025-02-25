@@ -27,15 +27,20 @@ public class BindBullets : MonoBehaviour
         Bullet1trail.Clear();
         Bullet2trail.Clear();
         Bullet1trail.enabled = true;
-        Bullet1trail.enabled = true;
+        Bullet2trail.enabled = true;
     }
 
     void OnDisable()
     {
         Bullet1trail.enabled = false;
-        Bullet1trail.enabled = false;
+        Bullet2trail.enabled = false;
         Bullet1trail.Clear();
         Bullet2trail.Clear();
+    }
+
+    void Update()
+    {
+        gameObject.transform.rotation = Quaternion.LookRotation(direction);
     }
 
     void FixedUpdate()

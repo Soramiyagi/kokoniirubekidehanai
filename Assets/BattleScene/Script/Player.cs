@@ -136,9 +136,14 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        /*
         leftStickInput = Vector2.zero;
         rightStickInput = Vector2.zero;
-
+        */
+        
+        leftStickInput = new Vector2(0.0f, -1.0f);
+        rightStickInput = new Vector2(0.0f, -1.0f);
+        
         L_Stick = GetComponent<PlayerInput>().actions["L_Stick"];
         R_Stick = GetComponent<PlayerInput>().actions["R_Stick"];
 
@@ -355,17 +360,20 @@ public class Player : MonoBehaviour
     // Jump処理
     public void OnJump(InputAction.CallbackContext Jump)
     {
-        if (canMoveInput&&canJump)
+        if (pauseControl == false)
         {
-            if (Jump.started && isGrounded)
+            if (canMoveInput && canJump)
             {
-                rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse); // JumpForceを使用
-                isGrounded = false;
-                jumpInterval = true;
-                StartCoroutine(JumpIntervalCountStart());
-                Jumping();
-                isJumping = true;
-                canJump = false;
+                if (Jump.started && isGrounded)
+                {
+                    rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse); // JumpForceを使用
+                    isGrounded = false;
+                    jumpInterval = true;
+                    StartCoroutine(JumpIntervalCountStart());
+                    Jumping();
+                    isJumping = true;
+                    canJump = false;
+                }
             }
         }
     }
@@ -373,21 +381,20 @@ public class Player : MonoBehaviour
     //Skill1処理
     public void OnSkill1(InputAction.CallbackContext Skill1)
     {
-        if (skill1InputStop == false)
+        if (pauseControl == false)
         {
-            if (canMoveInput)
+            if (skill1InputStop == false)
             {
-                if (Skill1.started && canUseSkill1)
+                if (canMoveInput)
                 {
-                    // 押した時
-                    if (rightStickInclination > 0)
+                    if (Skill1.started && canUseSkill1)
                     {
                         this.transform.rotation = Quaternion.Euler(0, -rightAngle + 90, 0);
-                    }
 
-                    Skill1Push();
-                    skill1InputStop = true;
-                    StartCoroutine(Skill1InputManager());
+                        Skill1Push();
+                        skill1InputStop = true;
+                        StartCoroutine(Skill1InputManager());
+                    }
                 }
             }
         }
@@ -396,20 +403,18 @@ public class Player : MonoBehaviour
     //Skill2処理
     public void OnSkill2(InputAction.CallbackContext Skill2)
     {
-        if (skill2InputStop == false)
+        if (pauseControl == false)
         {
-            if (canMoveInput == true)
+            if (skill2InputStop == false)
             {
-                if (Skill2.started && canUseSkill2 == true)
+                if (canMoveInput == true)
                 {
-                    //押した時
-                    if (rightStickInclination > 0)
+                    if (Skill2.started && canUseSkill2 == true)
                     {
-                        this.transform.rotation = Quaternion.Euler(0, -rightAngle + 90, 0);
+                        Skill2Push();
+                        skill2InputStop = true;
+                        StartCoroutine(Skill2InputManager());
                     }
-                    Skill2Push();
-                    skill2InputStop = true;
-                    StartCoroutine(Skill2InputManager());
                 }
             }
         }

@@ -6,11 +6,12 @@ public class Gun : Player
 {
     public string characterName = "DefaultCharacter";
 
-    [SerializeField] private GameObject bulletPoint, bind, gunFixSphere;
+    [SerializeField] private GameObject bulletPoint, bindBullets, gunFixSphere;
 
     public ParticleSystem particleSystem; 
     public ParticleSystem bindParticleSystem;
 
+    private GameObject bind;
     private Animator animator;//アニメーションをGetComponentする変数
     private Vector3 previousPosition;
     private float movementThreshold = 0.001f;
@@ -21,6 +22,10 @@ public class Gun : Player
     {
         base.Start();
         animator = GetComponent<Animator>();
+
+        bind = Instantiate(bindBullets, this.transform.position, Quaternion.identity);
+        bind.SetActive(false);
+
         //animator.SetBool("walking", true);//walkingをtureにする
     }
 
