@@ -10,15 +10,9 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
+      
+       Instance = this;
            // DontDestroyOnLoad(gameObject); // ƒV[ƒ“‚ğ‚Ü‚½‚¢‚Å‚à”jŠü‚³‚ê‚È‚¢
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
     // BGM‚ğÄ¶‚·‚é
     public void PlayBGM(AudioClip bgm)
