@@ -9,10 +9,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] soundEffects;    // 効果音リスト
 
     private void Awake()
-    {
-      
+    {     
        Instance = this;
-           // DontDestroyOnLoad(gameObject); // シーンをまたいでも破棄されない
     }
     // BGMを再生する
     public void PlayBGM(AudioClip bgm)
